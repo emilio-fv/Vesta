@@ -134,8 +134,8 @@ const HomeHero = () => {
                 </Typography>
                 <Box
                     sx={{
-                        paddingTop: 6,
-                        marginX: '30%',
+                        paddingY: 6,
+                        marginX: { xs: '20%', md: '30%'},
                         display: 'flex',
                         justifyItems: 'center',
                         alignContent: 'center',
