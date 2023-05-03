@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import HeroImg from '../../img/hero.jpg';
 import { Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@emotion/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const HomeHero = () => {
     const theme = useTheme();
@@ -15,13 +16,7 @@ const HomeHero = () => {
     }
 
     return (
-        <Container 
-            maxWidth='false' 
-            disableGutters
-            // sx={{
-            //     position: 'relative',
-            // }}
-        >
+        <Container maxWidth='false' disableGutters>
             <Box sx={{ position: 'relative' }}>
                 {/* Image */}
                 <Box 
@@ -48,6 +43,9 @@ const HomeHero = () => {
                     }}
                 >
                     <Button 
+                        // TODO: handle click 
+                        component={RouterLink}
+                        to='/products'
                         {...buttonProps}
                         sx={{ 
                             border: '2px solid black'
@@ -56,6 +54,9 @@ const HomeHero = () => {
                         Shop Unisex
                     </Button>
                     <Button 
+                        // TODO: handle click 
+                        component={RouterLink}
+                        to='/products'
                         {...buttonProps}
                         sx={{ 
                             border: '2px solid black' 
@@ -64,6 +65,9 @@ const HomeHero = () => {
                         Shop Women
                     </Button>
                     <Button 
+                        // TODO: handle click 
+                        component={RouterLink}
+                        to='/products'
                         {...buttonProps}
                         sx={{ 
                             border: '2px solid black' 
@@ -75,6 +79,9 @@ const HomeHero = () => {
             </Box>
             {/* Category Banners */}
             <Button
+                // TODO: handle click
+                component={RouterLink}
+                to='/products'
                 sx={{ 
                     width: '100%', 
                     height: '10rem',
@@ -90,6 +97,9 @@ const HomeHero = () => {
                 Shop Unisex
             </Button>
             <Button
+                // TODO: handle click
+                component={RouterLink}
+                to='/products'
                 sx={{ 
                     width: '100%', 
                     height: '10rem',
@@ -105,6 +115,9 @@ const HomeHero = () => {
                 Shop Women
             </Button>
             <Button
+                // TODO: handle click
+                component={RouterLink}
+                to='/products'
                 sx={{ 
                     width: '100%', 
                     height: '10rem',
@@ -155,6 +168,24 @@ const HomeHero = () => {
                     </Typography>
                 </Box>
             </Box>
+            {/* Sale Banner */}
+            <Button
+                // TODO: Link to on sale products
+                component={RouterLink}
+                to='/products'
+                sx={{
+                    width: '100%',
+                    height: '10rem',
+                    backgroundColor: '#ff1a1a',
+                    color: 'black', 
+                    ':hover': {
+                        bgcolor: '#fa6055'
+                    },
+                    borderRadius: 0,
+                }}
+            >
+                Sale
+            </Button>
         </Container>
     )
 }
