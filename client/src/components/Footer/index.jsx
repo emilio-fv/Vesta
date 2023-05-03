@@ -18,7 +18,7 @@ const Footer = () => {
                 flexDirection: { xs: 'column', md: 'row' }, 
                 backgroundColor: 'black', 
                 color: 'white',
-                paddingY: 2,
+                paddingY: 6,
                 gap: 2
             }}>
             {/* Product Links */}
