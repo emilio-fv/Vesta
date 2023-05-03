@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import Tooltip from '@mui/material/Tooltip';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
@@ -117,15 +118,21 @@ const Navbar = () => {
           {/* Icons (Mobile & Desktop) */}
           <Box sx={{ flexGrow: 0 }}>
             {/* TODO: Add links to icons */}
-            <IconButton>
-              <AccountCircleIcon fontSize='small' htmlColor='#fff'/>
-            </IconButton>
-            <IconButton>
-              <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
-            </IconButton>
-            <IconButton>
-              <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
-            </IconButton>
+            <Tooltip title="Account">
+              <IconButton>
+                <AccountCircleIcon fontSize='small' htmlColor='#fff'/>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Favorites">
+              <IconButton>
+                <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Shopping Cart">
+              <IconButton>
+                <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </Container>
