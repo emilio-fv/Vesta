@@ -23,7 +23,7 @@ const HomeHero = () => {
             // }}
         >
             <Box sx={{ position: 'relative' }}>
-                {/* Hero Image */}
+                {/* Image */}
                 <Box 
                     component='img'
                     src={HeroImg}
