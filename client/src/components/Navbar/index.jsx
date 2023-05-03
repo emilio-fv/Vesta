@@ -7,45 +7,50 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
 const Navbar = () => {
-  const [anchorNav, setAnchorNav] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
-    setAnchorNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorNav(null);
+    setAnchorElNav(null);
   };
 
   return (
     <AppBar position='static'>
       <Container maxWidth='xl'>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
           {/* Logo (Desktop) */}
           <Typography 
             variant='h6'
             noWrap
             component='a'
-            // TODO: link
+            // TODO: add link to homepage
             sx={{
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
               textDecoration: 'none'
-              // fontWeight: 
             }}
           >
             VESTA
           </Typography>
-
-          {/* Links (Desktop) */}
+          {/* Menu (Mobile) */}
           <Box 
             sx={{ 
-              flexGrow: 1, 
               display: { xs: 'flex', md: 'none' },
             }}
           >
@@ -60,7 +65,7 @@ const Navbar = () => {
             </IconButton>
             <Menu
               id='menu-appbar'
-              anchorEl={anchorNav}
+              anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
@@ -70,30 +75,58 @@ const Navbar = () => {
                 vertical: 'top',
                 horizontal: 'left',
               }}
-              open={Boolean(anchorNav)}
+              open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' }
               }}
             >
-              {categories.map((category) => {
-                <Button
+              {categories.map((category) => (
+                <MenuItem
                   key={category}
                   onClick={handleCloseNavMenu}
-                  sx={{
-                    color: 'white',
-                    display: 'block',
-                  }}
                 >
-                  {category}
-                </Button>
-              })}
+                  <Typography>{category}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
-
-          {/* Links (Mobile) */}
           {/* Logo (Mobile) */}
-          {/*  */}
+          <Typography
+            noWrap
+            component="a"
+            // TODO: add link to homepage
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+            }}
+          >
+            VESTA
+          </Typography>
+          {/* Menu (Desktop) */}
+          <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+            {categories.map((category) => (
+              <Button 
+                key={category}
+                // TODO: Handle click
+                sx={{ color: 'white' }}
+              >
+                {category}
+              </Button>
+            ))}
+          </Box>
+          {/* Icons (Mobile & Desktop) */}
+          <Box sx={{ flexGrow: 0 }}>
+            {/* TODO: Add links to icons */}
+            <IconButton>
+              <AccountCircleIcon fontSize='small'/>
+            </IconButton>
+            <IconButton>
+              <FavoriteBorderRoundedIcon fontSize='small'/>
+            </IconButton>
+            <IconButton>
+              <ShoppingCartRoundedIcon fontSize='small'/>
+            </IconButton>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
