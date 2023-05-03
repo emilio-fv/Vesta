@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import Tooltip from '@mui/material/Tooltip';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@mui/material/Link';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
@@ -37,18 +37,20 @@ const Navbar = () => {
           }}
         >
           {/* Logo (Desktop) */}
-          <Typography 
+          <Link 
+            component={RouterLink} 
+            to='/' 
+            underline='none' 
             variant='h6'
             noWrap
-            component='a'
-            // TODO: add link to homepage
+            // TODO: handle link click
             sx={{
               display: { xs: 'none', md: 'flex' },
-              textDecoration: 'none'
+              color: 'white'
             }}
           >
             VESTA
-          </Typography>
+          </Link>
           {/* Menu (Mobile) */}
           <Box 
             sx={{ 
@@ -87,32 +89,47 @@ const Navbar = () => {
                   key={category}
                   onClick={handleCloseNavMenu}
                 >
-                  <Typography>{category}</Typography>
+                  <Link 
+                    onClick={() => console.log(category)}
+                    component={RouterLink}
+                    to='/products'
+                    underline='none'
+                    noWrap
+                    // TODO: handle link click
+                  >
+                    {category}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           {/* Logo (Mobile) */}
-          <Typography
+          <Link
+            component={RouterLink}
+            to='/'
             noWrap
-            component="a"
-            // TODO: add link to homepage
+            underline='none'
             sx={{
               display: { xs: 'flex', md: 'none' },
+              color: 'white'
             }}
           >
             VESTA
-          </Typography>
+          </Link>
           {/* Menu (Desktop) */}
-          <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+          <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 3 }}>
             {categories.map((category) => (
-              <Button 
+              <Link 
                 key={category}
+                component={RouterLink}
+                to='/products'
+                noWrap
+                underline='none'
                 // TODO: Handle click
                 sx={{ color: 'white' }}
               >
                 {category}
-              </Button>
+              </Link>
             ))}
           </Box>
           {/* Icons (Mobile & Desktop) */}
