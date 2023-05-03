@@ -18,57 +18,60 @@ const HomeHero = () => {
         <Container 
             maxWidth='false' 
             disableGutters
-            sx={{
-                position: 'relative',
-            }}
+            // sx={{
+            //     position: 'relative',
+            // }}
         >
-            {/* Hero Image */}
-            <Box 
-                component='img'
-                src={HeroImg}
-                sx={{
-                    maxInlineSize: '100%',
-                    blockSize: 'auto',
-                    height: '100%',
-                    width: '100%',
-                    marginBottom: -2
-                }}
-            />
-            {/* Category Buttons */}
-            <Box
-                sx={{
-                    position: 'absolute',
-                    top: { xs: '10%', sm: '15%', md: '20%', lg: '25%'},
-                    left: { xs: '15%', sm: '20%', md: '25%'},
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1rem',
-                }}
-            >
-                <Button 
-                    {...buttonProps}
-                    sx={{ 
-                        border: '2px solid black'
+            <Box sx={{ position: 'relative' }}>
+                {/* Hero Image */}
+                <Box 
+                    component='img'
+                    src={HeroImg}
+                    sx={{
+                        maxInlineSize: '100%',
+                        blockSize: 'auto',
+                        height: '100%',
+                        width: '100%',
+                        marginBottom: -2
+                    }}
+                />
+                {/* Category Buttons */}
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '30%',
+                        left: '25%',
+
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
                     }}
                 >
-                    Shop Unisex
-                </Button>
-                <Button 
-                    {...buttonProps}
-                    sx={{ 
-                        border: '2px solid black' 
-                    }}
-                >
-                    Shop Women
-                </Button>
-                <Button 
-                    {...buttonProps}
-                    sx={{ 
-                        border: '2px solid black' 
-                    }}
-                >
-                    Shop Men
-                </Button>
+                    <Button 
+                        {...buttonProps}
+                        sx={{ 
+                            border: '2px solid black'
+                        }}
+                    >
+                        Shop Unisex
+                    </Button>
+                    <Button 
+                        {...buttonProps}
+                        sx={{ 
+                            border: '2px solid black' 
+                        }}
+                    >
+                        Shop Women
+                    </Button>
+                    <Button 
+                        {...buttonProps}
+                        sx={{ 
+                            border: '2px solid black' 
+                        }}
+                    >
+                        Shop Men
+                    </Button>
+                </Box>
             </Box>
             {/* Category Banners */}
             <Button
