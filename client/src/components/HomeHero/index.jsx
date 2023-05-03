@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import HeroImg from '../../img/hero.jpg';
-import { useMediaQuery } from '@mui/material';
+import { Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@emotion/react';
 
 const HomeHero = () => {
@@ -22,6 +22,7 @@ const HomeHero = () => {
                 position: 'relative',
             }}
         >
+            {/* Hero Image */}
             <Box 
                 component='img'
                 src={HeroImg}
@@ -29,13 +30,15 @@ const HomeHero = () => {
                     maxInlineSize: '100%',
                     blockSize: 'auto',
                     height: '100%',
-                    width: '100%'
+                    width: '100%',
+                    marginBottom: -2
                 }}
             />
+            {/* Category Buttons */}
             <Box
                 sx={{
                     position: 'absolute',
-                    top: { xs: '25%', sm: '30%', md: '35%'},
+                    top: { xs: '10%', sm: '15%', md: '20%', lg: '25%'},
                     left: { xs: '15%', sm: '20%', md: '25%'},
                     display: 'flex',
                     flexDirection: 'column',
@@ -67,17 +70,88 @@ const HomeHero = () => {
                     Shop Men
                 </Button>
             </Box>
-            {/* <Box
-                sx={{
-                    marginLeft: { md: 12 },
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: { xs: 'flex-end', md: 'center'},
-                    gap: { xs: 2, md: 6 }
+            {/* Category Banners */}
+            <Button
+                sx={{ 
+                    width: '100%', 
+                    height: '10rem',
+                    backgroundColor: 'black',
+                    color: 'white',
+                    ':hover': {
+                        bgcolor: 'grey',
+                        color: 'black'
+                    },
+                    borderRadius: 0
                 }}
             >
+                Shop Unisex
+            </Button>
+            <Button
+                sx={{ 
+                    width: '100%', 
+                    height: '10rem',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    ':hover': {
+                        bgcolor: 'grey',
+                        color: 'black'
+                    },
+                    borderRadius: 0
+                }}
+            >
+                Shop Women
+            </Button>
+            <Button
+                sx={{ 
+                    width: '100%', 
+                    height: '10rem',
+                    backgroundColor: 'black',
+                    color: 'white',
+                    ':hover': {
+                        bgcolor: 'grey',
+                        color: 'black'
+                    },
+                    borderRadius: 0
+                }}
+            >
+                Shop Men
+            </Button>
+            {/* About Section */}
+            <Box 
+                sx={{
+                    paddingTop: 6,
+                }}
+            >
+                <Typography
+                    component='h3'
+                    variant='h4'
+                    align='center'
+                >
+                    About Vesta
+                </Typography>
+                <Box
+                    sx={{
+                        paddingTop: 6,
+                        marginX: '30%',
+                        display: 'flex',
+                        justifyItems: 'center',
+                        alignContent: 'center',
 
-            </Box> */}
+                    }}
+                >
+                    <Typography
+                        align='center'
+                    >
+                        Welcome to Vesta, a fashion label created by Antonio Rossi. We are a fashion brand that focuses on creating unique and stylish clothing pieces for all genders who want to express their individuality through fashion.
+                        <br/>
+                        <br/>
+                        Our brand is committed to using sustainable and eco-friendly materials in our production process to ensure that our products are not only stylish but also ethical and environmentally conscious. We believe that fashion should be accessible to everyone, which is why we offer a wide range of sizes to cater to all body types.
+                        <br/>
+                        <br/>
+                        At Vesta, we value creativity, innovation, and quality. Our clothing pieces are designed with care and attention to detail, ensuring that each piece is of the highest quality. We are passionate about fashion and believe that it has the power to change the world. We hope you enjoy exploring our collection and finding pieces that inspire you to express yourself through fashion.
+                    </Typography>
+                </Box>
+            </Box>
         </Container>
     )
 }
