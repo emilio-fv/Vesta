@@ -61,7 +61,7 @@ const Navbar = () => {
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
             >
-              <MenuIcon />
+              <MenuIcon htmlColor='#fff'/>
             </IconButton>
             <Menu
               id='menu-appbar'
@@ -118,13 +118,13 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {/* TODO: Add links to icons */}
             <IconButton>
-              <AccountCircleIcon fontSize='small'/>
+              <AccountCircleIcon fontSize='small' htmlColor='#fff'/>
             </IconButton>
             <IconButton>
-              <FavoriteBorderRoundedIcon fontSize='small'/>
+              <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
             </IconButton>
             <IconButton>
-              <ShoppingCartRoundedIcon fontSize='small'/>
+              <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
             </IconButton>
           </Box>
         </Toolbar>
