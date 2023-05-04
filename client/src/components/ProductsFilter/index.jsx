@@ -15,6 +15,21 @@ function valueText(value) {
     return `$${value}`;
 }
 
+function valueLabel(value) {
+    return `$${value}`;
+}
+
+const marks = [
+    {
+        value: 0,
+        label: '$0'
+    },
+    {
+        value: 500,
+        label: '$500'
+    }
+]
+
 const ProductFilter = () => {
     const [value, setValue] = useState([0, 500]);
     
@@ -101,6 +116,8 @@ const ProductFilter = () => {
                         onChange={handleChange}
                         valueLabelDisplay='auto'
                         getAriaValueText={valueText}
+                        valueLabelFormat={valueLabel}
+                        marks={marks}
                     />
                 </AccordionDetails>
             </Accordion>
