@@ -43,12 +43,9 @@ const ProductsDisplay = () => {
                 <Box
                     sx={{
                         flex: 3,
-                        display: { xs: 'flex', sm: 'grid' },
-                        gridTemplateColumns: { sm: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr'},
-                        justifyContent: { xs: 'center', lg: ''},
-                        alignItems: { xs: 'center', lg: ''},
-                        flexDirection: { xs: 'column'},
-                        gridGap: '25px 25px',
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr 1fr', sm: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr' },
+                        gridGap: '25px',
                     }}
                 >
                     {sampleProducts.map((product, key) => (
