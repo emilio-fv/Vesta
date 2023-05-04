@@ -8,7 +8,14 @@ import Card from '@mui/material/Card';
 
 const ProductCard = ({ product }) => {
     return (
-        <Card sx={{ width: '100%', maxWidth: '150px', padding: 0 }}>
+        <Card 
+            sx={{ 
+                // height: '200px',
+                // width: '100%', 
+                // maxWidth: '150px',
+                padding: 0,
+            }}
+        >
             <CardContent
                 sx={{
                     padding: 0,
@@ -27,7 +34,7 @@ const ProductCard = ({ product }) => {
                         padding: 1
                     }}
                 >
-                    <Typography variant='h5'>{product.name}</Typography>
+                    <Typography variant='h6'>{product.name}</Typography>
                     <Typography variant='p'>$ {parseFloat(product.price)}</Typography>
                 </Box>
             </CardContent>
@@ -41,6 +48,9 @@ const ProductCard = ({ product }) => {
                         backgroundColor: 'black',
                         color: 'white',
                         width: '100%',
+                        ':hover': {
+                            bgcolor: 'grey'
+                        }
                     }}
                 >
                     View Product
