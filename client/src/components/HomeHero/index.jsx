@@ -9,10 +9,10 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const HomeHero = () => {
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.up("md"));
+    const isSmallScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     const buttonProps = {
-        size: !isSmallScreen ? 'small' : 'medium'
+        size: !isSmallScreen ? 'small' : 'medium',
     }
 
     return (
@@ -34,9 +34,8 @@ const HomeHero = () => {
                 <Box
                     sx={{
                         position: 'absolute',
-                        top: '30%',
-                        left: '25%',
-
+                        top: { xs: '25%', sm: '35%', md: '35%'},
+                        left: { xs: '15%', sm: '20%', md: '25%'},
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '1rem',
@@ -48,7 +47,8 @@ const HomeHero = () => {
                         to='/products'
                         {...buttonProps}
                         sx={{ 
-                            border: '2px solid black'
+                            border: '2px solid black',
+                            fontSize: { xs: '.7rem', md: ''}
                         }}
                     >
                         Shop Unisex
@@ -59,7 +59,8 @@ const HomeHero = () => {
                         to='/products'
                         {...buttonProps}
                         sx={{ 
-                            border: '2px solid black' 
+                            border: '2px solid black',
+                            fontSize: { xs: '.7rem', md: ''}
                         }}
                     >
                         Shop Women
@@ -70,7 +71,8 @@ const HomeHero = () => {
                         to='/products'
                         {...buttonProps}
                         sx={{ 
-                            border: '2px solid black' 
+                            border: '2px solid black',
+                            fontSize: { xs: '.7rem', md: ''}
                         }}
                     >
                         Shop Men
