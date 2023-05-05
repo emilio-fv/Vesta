@@ -15,18 +15,51 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import Modal from '@mui/material/Modal';
 import Register from '../Register';
+import Login from '../Login';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
+// Register / Login Tabs
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  )
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 const Navbar = () => {
+  // Nav Menu (Mobile)
   const [anchorElNav, setAnchorElNav] = useState(null);
-  
-  // Account Button
-  const [accountOpen, setAccountOpen] = useState(false);
-  const handleAccountOpen = () => setAccountOpen(true);
-  const handleAccountClose = () => setAccountOpen(false);
-
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -34,6 +67,19 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  // Register / Login Tabs
+  const [value, setValue] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  }
+
+  // Account Button
+  const [accountOpen, setAccountOpen] = useState(false);
+  const handleAccountOpen = () => setAccountOpen(true);
+  const handleAccountClose = () => setAccountOpen(false);
+
+
 
   return (
     <>
@@ -63,7 +109,7 @@ const Navbar = () => {
             {/* Menu (Mobile) */}
             <Box 
               sx={{ 
-                display: { xs: 'flex', md: 'none' },
+                display: { xs: 'flex', sm: 'none' },
               }}
             >
               <IconButton
@@ -126,7 +172,7 @@ const Navbar = () => {
               VESTA
             </Link>
             {/* Menu (Desktop) */}
-            <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 3 }}>
+            <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', sm: 'flex' }, gap: 3 }}>
               {categories.map((category) => (
                 <Link 
                   key={category}
@@ -163,6 +209,7 @@ const Navbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      {/* Login / Register Modal */}
       <Modal
         open={accountOpen}
         onClose={handleAccountClose}
@@ -175,10 +222,48 @@ const Navbar = () => {
           left: '50%',
           bgcolor: 'white',
           transform: 'translate(-50%, -50%)',
-          width: 400,
-          height: 400
+          width: '50vw',
+          height: '50vh',
+
         }}>
-          <Register />
+          <Box
+            sx={{
+              width: '100%',
+              display: { xs: 'flex', md: 'none' },
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Box 
+              sx={{
+                borderBottom: 1,
+                borderColor: 'divider',
+              }}
+            > 
+              <Tabs value={value} onChange={handleTabChange} aria-label="Register and login tabs">
+                <Tab label="Register" {...a11yProps(0)} />
+                <Tab label="Login" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <Register />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Login />
+            </TabPanel>
+          </Box>
+          {/* Login/Register (Desktop) */}
+          <Box 
+            sx={{ 
+              display: { xs: 'none', md: 'flex' },
+              flexDirection: 'row',
+              height: '100%'
+            }}
+          >
+            <Register />
+            <Login />
+          </Box>
         </Box>
       </Modal>
     </>
