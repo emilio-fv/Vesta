@@ -10,9 +10,6 @@ const ProductCard = ({ product }) => {
     return (
         <Card 
             sx={{ 
-                // height: '200px',
-                // width: '100%', 
-                // maxWidth: '150px',
                 padding: 0,
             }}
         >
@@ -26,7 +23,7 @@ const ProductCard = ({ product }) => {
                     sx={{
                         width: '100%',
                         height: '150px',
-                        bored: '2px solid red'
+                        border: '2px solid red'
                     }}
                 />
                 <Box
