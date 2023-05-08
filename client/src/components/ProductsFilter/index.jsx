@@ -95,7 +95,6 @@ const ProductFilter = () => {
                         <FormControlLabel control={<Checkbox />} label="Yellow"/>
                         <FormControlLabel control={<Checkbox />} label="Orange"/>
                         <FormControlLabel control={<Checkbox />} label="Pink"/>
-                        <FormControlLabel control={<Checkbox />} label="Pink"/>
                         <FormControlLabel control={<Checkbox />} label="Red"/>
                     </FormGroup>
                 </AccordionDetails>
