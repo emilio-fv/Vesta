@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -19,7 +20,17 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TablePagination from '@mui/material/TablePagination';
-import { useTheme } from '@mui/material/styles';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -99,6 +110,11 @@ const AdminDash = () => {
         setPage(0);
     }
 
+    // New Product Modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
         <Container maxWidth='lg' sx={{ paddingY: 3 }}>
             {/* Header */}
@@ -112,7 +128,7 @@ const AdminDash = () => {
                 }}
             >
                 <Typography variant='h6'>Inventory</Typography>
-                <Button variant='contained' size='small'>Add Product</Button>
+                <Button onClick={handleOpen} variant='contained' size='small'>Add Product</Button>
             </Box>
             {/* Inventory Table */}
             <TableContainer component={Paper}>
@@ -125,7 +141,7 @@ const AdminDash = () => {
                             <TableCell>Color</TableCell>
                             <TableCell>Price</TableCell>
                             <TableCell>Quantity</TableCell>
-                            <TableCell>Description</TableCell>
+                            <TableCell sx={{ minWidth: '500px' }}>Description</TableCell>
                             <TableCell>On Sale</TableCell>
                             <TableCell>Discount</TableCell>
                             <TableCell>Featured</TableCell>
@@ -139,19 +155,18 @@ const AdminDash = () => {
                         ).map((product) => (
                             <TableRow
                                 key={product.name}
-                                // sx={{ '&:last-child td, &:last0child th': { border: 0 }}}
                             >
-                                <TableCell component='th' scope='row'>{product.name}</TableCell>
-                                <TableCell>{product.category}</TableCell>
-                                <TableCell>{product.size}</TableCell>
-                                <TableCell>{product.color}</TableCell>
-                                <TableCell>${product.price}</TableCell>
-                                <TableCell>{product.quantity}</TableCell>
+                                <TableCell align='center'>{product.name}</TableCell>
+                                <TableCell align='center'>{product.category}</TableCell>
+                                <TableCell align='center'>{product.size}</TableCell>
+                                <TableCell align='center'>{product.color}</TableCell>
+                                <TableCell align='center'>${product.price}</TableCell>
+                                <TableCell align='center'>{product.quantity}</TableCell>
                                 <TableCell>{product.description}</TableCell>
-                                <TableCell>{product.onSale ? 'yes' : 'no'}</TableCell>
-                                <TableCell>{product.onSale ? parseFloat(product.discount) : 'n/a'}</TableCell>
-                                <TableCell>{product.featured ? 'yes' : 'no'}</TableCell>
-                                <TableCell sx={{ display: 'flex', justifyContent: 'space-evenly', gap: 2 }}>
+                                <TableCell align='center'>{product.onSale ? 'yes' : 'no'}</TableCell>
+                                <TableCell align='center'>{product.onSale ? parseFloat(product.discount) : 'n/a'}</TableCell>
+                                <TableCell align='center'>{product.featured ? 'yes' : 'no'}</TableCell>
+                                <TableCell sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                                     <Button size='small' variant='outlined'>Update</Button>
                                     <Button size='small' variant='outlined'>Delete</Button>
                                 </TableCell>
@@ -186,6 +201,147 @@ const AdminDash = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
+            {/* Add Product Form */}
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="new-product-form"
+                aria-describedby="new-product-modal"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        padding: 3,
+                        gap: 3
+                    }}
+                >
+                    <Typography variant='h5'>Add Product</Typography>
+                    <form>
+                        <Box 
+                            sx={{ 
+                                display: 'flex', 
+                                justifyContent: 'center', 
+                                flexDirection: 'column', 
+                                gap: 3 
+                            }}
+                        >
+                            {/* Name */}
+                            <TextField
+                                id='name'
+                                label='Product Name'
+                                variant='outlined'
+                                placeholder='Product Name'
+                                size='small'
+                            />
+                            {/* Category */}
+                            <FormControl size='small'>
+                                <InputLabel id='category-select-label'>Category</InputLabel>
+                                <Select
+                                    labelId='category-select-label'
+                                    id='category'
+                                    // value={}
+                                    label='Category'
+                                    // onChange={}
+                                >
+                                    <MenuItem value={'Unisex'}>Unisex</MenuItem>
+                                    <MenuItem value={'Women'}>Women</MenuItem>
+                                    <MenuItem value={'Men'}>Men</MenuItem>
+                                </Select>
+                            </FormControl>
+                            {/* Size */}
+                            <FormControl size='small'>
+                                <InputLabel id='size-select-label'>Size</InputLabel>
+                                <Select
+                                    labelId='size-select-label'
+                                    id='size'
+                                    // value={}
+                                    label='Size'
+                                    // onChange={}
+                                >
+                                    <MenuItem value={'XS'}>XS</MenuItem>
+                                    <MenuItem value={'Small'}>Small</MenuItem>
+                                    <MenuItem value={'Medium'}>Medium</MenuItem>
+                                    <MenuItem value={'Large'}>Large</MenuItem>
+                                    <MenuItem value={'XL'}>XL</MenuItem>
+                                </Select>
+                            </FormControl>
+                            {/* Color */}
+                            <FormControl size='small'>
+                                <InputLabel id='color-select-label'>Color</InputLabel>
+                                <Select
+                                    labelId='color-select-label'
+                                    id='color'
+                                    // value={}
+                                    label='Size'
+                                    // onChange={}
+                                >
+                                    <MenuItem value={'Black'}>Black</MenuItem>
+                                    <MenuItem value={'Grey'}>Grey</MenuItem>
+                                    <MenuItem value={'White'}>White</MenuItem>
+                                    <MenuItem value={'Brown'}>Brown</MenuItem>
+                                    <MenuItem value={'Purple'}>Purple</MenuItem>
+                                    <MenuItem value={'Blue'}>Blue</MenuItem>
+                                    <MenuItem value={'Green'}>Green</MenuItem>
+                                    <MenuItem value={'Yellow'}>Yellow</MenuItem>
+                                    <MenuItem value={'Orange'}>Orange</MenuItem>
+                                    <MenuItem value={'Pink'}>Pink</MenuItem>
+                                    <MenuItem value={'Red'}>Red</MenuItem>
+                                </Select>
+                            </FormControl>
+                            {/* Price */}
+                            <FormControl size='small'>
+                                <InputLabel id='price-input'>Price</InputLabel>
+                                <OutlinedInput 
+                                    id='price'
+                                    label='Price'
+                                    startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+                                />
+                            </FormControl>
+                            {/* Quantity */}
+                            <TextField 
+                                id='quantity'
+                                label="Quantity"
+                                type='number'
+                                placeholder='Quantity'
+                                size='small'
+                            />
+                            {/* Description */}
+                            <TextField 
+                                id='description'
+                                label='Description'
+                                multiline
+                                rows={2}
+                                placeholder='Description'
+                            />
+                            {/* On Sale & Featured */}
+                            <FormGroup sx={{ display: 'flex', flexDirection: 'row'}}>
+                                <FormControlLabel control={<Checkbox />} label='On Sale'/>
+                                <FormControlLabel control={<Checkbox />} label='Featured'/>
+                            </FormGroup>
+                            {/* Discount */}
+                            <FormControl size='small'>
+                                <InputLabel id='discount-input'>Discount</InputLabel>
+                                <OutlinedInput 
+                                    id='discount'
+                                    label='Discount'
+                                    endAdornment={<InputAdornment position='end'>%</InputAdornment>}
+                                />
+                            </FormControl>
+                            <Button variant="contained">Add Product</Button>
+                        </Box>
+                    </form>
+                </Box>
+            </Modal>
         </Container>
     )
 }
