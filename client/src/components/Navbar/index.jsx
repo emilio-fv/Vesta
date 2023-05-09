@@ -80,7 +80,6 @@ const Navbar = () => {
   const handleAccountClose = () => setAccountOpen(false);
 
 
-
   return (
     <>
       <AppBar position='static'>
@@ -196,14 +195,19 @@ const Navbar = () => {
                 </IconButton>
               </Tooltip>
               <Tooltip title="Favorites">
-                <IconButton>
+                <IconButton >
                   <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Shopping Cart">
-                <IconButton>
-                  <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
-                </IconButton>
+                <Link
+                  component={RouterLink}
+                  to='/cart'
+                >
+                  <IconButton>
+                    <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
+                  </IconButton>
+                </Link>
               </Tooltip>
             </Box>
           </Toolbar>
