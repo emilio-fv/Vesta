@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, favorited }) => {
+    const [favorite, setFavorited] = useState(favorited);
+
     return (
-        <Card 
-            sx={{ 
-                padding: 0,
-            }}
-        >
-            <CardContent
-                sx={{
-                    padding: 0,
-                }}
-            >
+        <Card>
+            <CardContent sx={{ padding: 0, position: 'relative' }}>
+                {/* Favorite Button */}
+                <IconButton
+                    sx={{
+                        position: 'absolute',
+                        right: 0
+                    }}
+                    onClick={() => setFavorited(!favorite)}
+                >
+                    {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                </IconButton>
+                {/* Product Image */}
                 <Box 
                     component='img'
                     sx={{
                         width: '100%',
                         height: '150px',
-                        border: '2px solid red'
                     }}
                 />
                 <Box
