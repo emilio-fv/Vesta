@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 let theme = createTheme({
   palette: {
@@ -19,11 +21,13 @@ theme = responsiveFontSizes(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

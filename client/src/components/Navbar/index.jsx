@@ -11,15 +11,17 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import Tooltip from '@mui/material/Tooltip';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import Modal from '@mui/material/Modal';
-import Register from '../Register';
-import Login from '../Login';
+import RegisterForm from '../RegisterForm';
+import LoginForm from '../LoginForm';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+import { reset } from '../../reducers/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
@@ -58,7 +60,12 @@ function a11yProps(index) {
 }
 
 const Navbar = () => {
-  // Nav Menu (Mobile)
+  // Helpers
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  // Open / Close Nav Menu (Mobile)
   const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -71,15 +78,32 @@ const Navbar = () => {
   // Register / Login Tabs
   const [value, setValue] = useState(0);
   const handleTabChange = (event, newValue) => {
+    dispatch(reset());
     setValue(newValue);
   }
 
   // Account Button
   const [accountOpen, setAccountOpen] = useState(false);
-  const handleAccountOpen = () => setAccountOpen(true);
-  const handleAccountClose = () => setAccountOpen(false);
+  const handleAccountOpen = () => {
+    // Check if user logged in
+    if (user) {
+      if (user.admin) {
+        navigate('/admin');
+      } else {
+        navigate('/account');
+      }
+    } else {
+      setAccountOpen(true)
+    }
+  };
 
+  const handleAccountClose = () => {
+    dispatch(reset());
+    setAccountOpen(false)
+  };
 
+  // TODO: Favorites Button
+  // TODO: Shopping Cart Button
 
   return (
     <>
@@ -196,14 +220,19 @@ const Navbar = () => {
                 </IconButton>
               </Tooltip>
               <Tooltip title="Favorites">
-                <IconButton>
+                <IconButton >
                   <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Shopping Cart">
-                <IconButton>
-                  <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
-                </IconButton>
+                <Link
+                  component={RouterLink}
+                  to='/cart'
+                >
+                  <IconButton>
+                    <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
+                  </IconButton>
+                </Link>
               </Tooltip>
             </Box>
           </Toolbar>
@@ -223,13 +252,11 @@ const Navbar = () => {
           bgcolor: 'white',
           transform: 'translate(-50%, -50%)',
           width: '50vw',
-          height: '50vh',
-
         }}>
           <Box
             sx={{
               width: '100%',
-              display: { xs: 'flex', md: 'none' },
+              display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center'
@@ -247,22 +274,11 @@ const Navbar = () => {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <Register />
+              <RegisterForm />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Login />
+              <LoginForm />
             </TabPanel>
-          </Box>
-          {/* Login/Register (Desktop) */}
-          <Box 
-            sx={{ 
-              display: { xs: 'none', md: 'flex' },
-              flexDirection: 'row',
-              height: '100%'
-            }}
-          >
-            <Register />
-            <Login />
           </Box>
         </Box>
       </Modal>
