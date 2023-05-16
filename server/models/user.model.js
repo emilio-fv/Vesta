@@ -1,3 +1,4 @@
+// Import data types, database connection, bcrypt
 const { DataTypes } = require('sequelize');
 const { db } = require('../config/db.config');
 const bcrypt = require('bcrypt');
