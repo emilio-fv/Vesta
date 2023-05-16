@@ -31,6 +31,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../reducers/auth/authSlice';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -94,6 +96,14 @@ TablePaginationActions.propTypes = {
 }
 
 const AdminDash = () => {
+    // Helpers
+    const dispatch = useDispatch();
+
+    // Handle Logout Button
+    const handleLogout = () => {
+        dispatch(logout());
+    }
+
     // Table Pagination
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -118,7 +128,10 @@ const AdminDash = () => {
     return (
         <Container maxWidth='lg' sx={{ paddingY: 3 }}>
             {/* Header */}
-            <Typography variant='h5' fontWeight='bold'>Admin Dashboard</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                <Typography variant='h4' fontWeight='bold'>Admin Dashboard</Typography>
+                <Button size='small' sx={{ paddingX: 1, bgcolor: '#ed214d', '&:hover': { bgcolor: '#ff305d' }}} onClick={event => handleLogout(event)}>Logout</Button>
+            </Box>
             {/* Section Header */}
             <Box
                 sx={{
