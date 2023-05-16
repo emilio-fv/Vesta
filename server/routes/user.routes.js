@@ -2,20 +2,20 @@
 const express = require('express');
 const { authenticate } = require('../config/jwt.config');
 const {
-    registerUser,
-    loginUser,
-    logoutUser,
-    getAllUsers
+    handleRegisterUser,
+    handleLoginUser,
+    handleLogoutUser,
+    handleGetAllUsers
 } = require('../controllers/user.controller');
 
 // Instantiate router
 const router = express.Router();
 
 // User API Routes
-router.post('/register', registerUser); // ✅
-router.post('/login', loginUser); // ✅
-router.get('/logout', logoutUser); // ✅
-router.get('/all', authenticate, getAllUsers); // ✅
+router.post('/register', handleRegisterUser); 
+router.post('/login', handleLoginUser); 
+router.get('/logout', handleLogoutUser); 
+router.get('/all', handleGetAllUsers) 
 
 // Exports 
 module.exports = {

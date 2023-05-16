@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { db } = require('../config/db.config');
+const bcrypt = require('bcrypt');
 
 // User Model
 const User = db.define('User', {
@@ -13,7 +14,10 @@ const User = db.define('User', {
         allowNull: false,
         validate: {
             notNull: {
-                args: true,
+                msg: "First name required."
+            },
+            len: {
+                args: [1,65],
                 msg: "First name required."
             }
         }
@@ -23,7 +27,10 @@ const User = db.define('User', {
         allowNull: false,
         validate: {
             notNull: {
-                args: true,
+                msg: "Last name required."
+            },
+            len: {
+                args: [1,65],
                 msg: "Last name required."
             }
         }
@@ -33,12 +40,15 @@ const User = db.define('User', {
         allowNull: false,
         validate: {
             notNull: {
-                args: true,
-                msg: "Last name required."
+                msg: "Email required."
             },
             isEmail: {
                 args: true,
                 msg: "Invalid email."
+            },
+            len: {
+                args: [1,65],
+                msg: "Email required."
             }
         }
     },
@@ -47,21 +57,37 @@ const User = db.define('User', {
         allowNull: false,
         validate: {
             notNull: {
-                args: true,
                 msg: "Password required."
             },
             len: {
-                args: [8],
-                msg: "Password must be at least 8 characters."
+                args: [1,65],
+                msg: "Password required."
             }
         }
     },
     admin: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false
     }
-}, { underscored: true });
+}, 
+{ 
+    underscored: true,
+    hooks: {
+        beforeCreate: async (user) => {
+            if (user.password) {
+                const salt = await bcrypt.genSaltSync(10, 'a');
+                user.password = bcrypt.hashSync(user.password, salt);
+                console.log(user.password);
+            }
+        },
+        beforeUpdate: async (user) => {
+            if (user.password) {
+                const salt = await bcrypt.genSaltSync(10, 'a');
+                user.password = bcrypt.hashSync(user.password, salt);
+            }
+        }
+    },
+});
 
 module.exports = {
     User: User
