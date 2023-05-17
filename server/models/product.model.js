@@ -15,6 +15,10 @@ const Product = db.define('Product', {
         validate: {
             notNull: {
                 msg: "Name required."
+            },
+            len: {
+                args: [1,65],
+                msg: "Name required."
             }
         }
     },
@@ -51,6 +55,14 @@ const Product = db.define('Product', {
         validate: {
             notNull: {
                 msg: "Price required."
+            },
+            isDecimal: {
+                args: true,
+                msg: "Valid price required."
+            },
+            min: {
+                args: 0.01,
+                msg: "Price must be greater than $0.01,"
             }
         }
     },
@@ -60,6 +72,15 @@ const Product = db.define('Product', {
         validate: {
             notNull: {
                 msg: "Quantity required."
+            },
+            isInt: {
+                args: true,
+                msg: "Valid quantity required."
+            },
+            isPositive(value) {
+                if (parseInt(value) < 0) {
+                    throw new Error('Quantity must be greater than 0.')
+                }
             }
         }
     },
@@ -78,7 +99,18 @@ const Product = db.define('Product', {
     },
     discount: {
         type: DataTypes.DECIMAL(3,2),
-        defaultValue: 0
+        defaultValue: 0,
+        validate: {
+            isDecimal: {
+                args: true,
+                msg: "Valid discount required."
+            },
+            isPercentage(value) {
+                if (parseInt(value) < 0 || parseInt(value) >= 1) {
+                    throw new Error('Discount must be between 0% and 100%.');
+                }
+            }
+        }
     },
     featured: {
         type: DataTypes.BOOLEAN,
