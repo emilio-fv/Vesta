@@ -90,11 +90,10 @@ const handleGetProductsByCategory = async (req, res) => {
 const handleUpdateProductById = async (req, res) => {
     console.log("Controller: handleUpdateProductById");
     // Query database
-    const response = await updateProductById(req.body);
-    // TODO: Parse through results
-    console.log(response);
-    // TODO: return results
-    return;
+    const response = await updateProductById(req.body, req.params.id);
+
+    // return results
+    return res.json(response[1][0]);
 }
 
 // Delete Product By Id

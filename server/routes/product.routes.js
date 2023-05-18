@@ -15,7 +15,7 @@ const router = express.Router();
 router.post('/create', handleCreateProduct); // TODO test
 router.get('/all', handleGetAllProducts); // TODO test
 router.get('/all/:category', handleGetProductsByCategory); // TODO test
-router.put('/:id', handleUpdateProductById); // TODO test
+router.put('/:id/update', handleUpdateProductById); // TODO test
 router.delete('/:id', handleDeleteProductById); // TODO test
 
 // Exports

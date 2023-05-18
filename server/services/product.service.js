@@ -28,11 +28,12 @@ const getProductsByCategory = async (category) => {
 
 // Update Product By Id
 const updateProductById = async (data, id) => {
-    console.log("Service: updateProductById");
+    console.log("Service: updateProductById id: ");
     const updatedProduct = await Product.update(data, {
         where: {
             id: id
-        }
+        },
+        returning: true
     })
     return updatedProduct;
 }
