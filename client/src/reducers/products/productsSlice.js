@@ -4,7 +4,7 @@ import productsService from "./productsService";
 
 // Products Initial State
 const initialState = {
-    products: null,
+    products: [],
     status: 'idle',
     messages: null
 }
@@ -17,6 +17,11 @@ export const createProduct = createAsyncThunk('products/create', async (formData
         const messages = error.response.data.errors;
         return thunkAPI.rejectWithValue(messages);
     }
+})
+
+// Get All Products
+export const getAllProducts = createAsyncThunk('products/getAll', async () => {
+    return await productsService.getAllProducts();
 })
 
 // Product Slice
@@ -34,13 +39,16 @@ export const productsSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(createProduct.fulfilled, (state, action) => {
-                state.products = action.payload
+                state.products.push(action.payload)
                 state.status = 'succeeded'
                 state.messages = null
             })
             .addCase(createProduct.rejected, (state, action) => {
                 state.status = 'failed'
                 state.messages = action.payload
+            })
+            .addCase(getAllProducts.fulfilled, (state, action) => {
+                state.products = action.payload
             })
     }
 })

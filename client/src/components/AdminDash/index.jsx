@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/auth/authSlice';
+import { getAllProducts } from '../../reducers/products/productsSlice';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -24,7 +25,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
-import sampleProducts from '../../data/sampleProducts';
+// import sampleProducts from '../../data/sampleProducts';
 
 // Inventory Table Pagination
 function TablePaginationActions(props) {
@@ -92,6 +93,14 @@ const AdminDash = () => {
     // Helpers
     const dispatch = useDispatch();
 
+    // Products Data
+    const { products } = useSelector((state) => state.products);
+
+    // Fetch Products
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, [])
+
     // Handle Logout Button
     const handleLogout = () => {
         dispatch(logout());
@@ -102,7 +111,7 @@ const AdminDash = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5)
 
     const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - sampleProducts.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -147,7 +156,7 @@ const AdminDash = () => {
                             <TableCell>Color</TableCell>
                             <TableCell>Price</TableCell>
                             <TableCell>Quantity</TableCell>
-                            <TableCell sx={{ minWidth: '500px' }}>Description</TableCell>
+                            <TableCell sx={{ minWidth: '250px' }}>Description</TableCell>
                             <TableCell>On Sale</TableCell>
                             <TableCell>Discount</TableCell>
                             <TableCell>Featured</TableCell>
@@ -156,8 +165,8 @@ const AdminDash = () => {
                     </TableHead>
                     <TableBody>
                         {(rowsPerPage > 0 
-                            ? sampleProducts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            : sampleProducts
+                            ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : products
                         ).map((product) => (
                             <TableRow
                                 key={product.name}
@@ -166,11 +175,11 @@ const AdminDash = () => {
                                 <TableCell align='center'>{product.category}</TableCell>
                                 <TableCell align='center'>{product.size}</TableCell>
                                 <TableCell align='center'>{product.color}</TableCell>
-                                <TableCell align='center'>${product.price}</TableCell>
+                                <TableCell align='center'>{product.price}</TableCell>
                                 <TableCell align='center'>{product.quantity}</TableCell>
                                 <TableCell>{product.description}</TableCell>
                                 <TableCell align='center'>{product.onSale ? 'yes' : 'no'}</TableCell>
-                                <TableCell align='center'>{product.onSale ? parseFloat(product.discount) : 'n/a'}</TableCell>
+                                <TableCell align='center'>{product.onSale ? parseFloat(product.discount) * 100 + '%': 'n/a'}</TableCell>
                                 <TableCell align='center'>{product.featured ? 'yes' : 'no'}</TableCell>
                                 <TableCell sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                                     <Button size='small' variant='outlined'>Update</Button>
@@ -190,7 +199,7 @@ const AdminDash = () => {
                             <TablePagination 
                                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1}]}
                                 // colSpan={6}
-                                count={sampleProducts.length}
+                                count={products.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 SelectProps={{
