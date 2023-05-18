@@ -81,6 +81,6 @@ export const authSlice = createSlice({
     }
 });
 
-// Export actions & reducer
+// Export Actions & Reducers
 export const { reset, resetMessages }  = authSlice.actions;
 export default authSlice.reducer;

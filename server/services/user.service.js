@@ -1,4 +1,4 @@
-// Import user model
+// Import User model
 const { User } = require('../models/user.model');
 
 // Create User
@@ -26,6 +26,7 @@ const getAllUsers = async() => {
     return allUsers;
 }
 
+// Exports
 module.exports = {
     createUser: createUser,
     getUserByEmail: getUserByEmail,
