@@ -14,11 +14,11 @@ const Product = db.define('Product', {
         allowNull: false,
         validate: {
             notNull: {
-                msg: "Name required."
+                msg: "Product name required."
             },
             len: {
                 args: [1,65],
-                msg: "Name required."
+                msg: "Product ame required."
             }
         }
     },
@@ -27,6 +27,10 @@ const Product = db.define('Product', {
         allowNull: false,
         validate: {
             notNull: {
+                msg: "Category required."
+            },
+            len: {
+                args: [1,65],
                 msg: "Category required."
             }
         }
@@ -37,6 +41,10 @@ const Product = db.define('Product', {
         validate: {
             notNull: {
                 msg: "Size required."
+            },
+            len: {
+                args: [1,65],
+                msg: "Size required."
             }
         }
     },
@@ -45,6 +53,10 @@ const Product = db.define('Product', {
         allowNull: false,
         validate: {
             notNull: {
+                msg: "Color required."
+            },
+            len: {
+                args: [1,65],
                 msg: "Color required."
             }
         }
@@ -78,8 +90,8 @@ const Product = db.define('Product', {
                 msg: "Valid quantity required."
             },
             isPositive(value) {
-                if (parseInt(value) < 0) {
-                    throw new Error('Quantity must be greater than 0.')
+                if (parseInt(value) <= 0) {
+                    throw new Error('Quantity must be greater than 1.')
                 }
             }
         }
@@ -89,6 +101,10 @@ const Product = db.define('Product', {
         allowNull: false,
         validate: {
             notNull: {
+                msg: "Description required."
+            },
+            len: {
+                args: [1,65],
                 msg: "Description required."
             }
         }
