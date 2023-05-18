@@ -104,9 +104,9 @@ const RegisterForm = () => {
                 size='small'
                 autoComplete='off'
                 value={formData.firstName}
+                onChange={event => handleChanges(event)}
                 error={errorMessages?.some(error => error.path === 'firstName')}
                 helperText={errorMessages?.find(error => error.path === 'firstName')?.message}
-                onChange={event => handleChanges(event)}
             />
             <TextField 
                 id='lastName'
