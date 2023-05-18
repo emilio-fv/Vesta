@@ -15,7 +15,19 @@ const handleCreateProduct = async (req, res) => {
         // Add product to database
         await createProduct(req.body).then(newProduct => {
             // Return product
-            return res.json(newProduct)
+            return res.json({
+                id: newProduct.id,
+                name: newProduct.name,
+                category: newProduct.category,
+                size: newProduct.size,
+                color: newProduct.color,
+                price: newProduct.price,
+                quantity: newProduct.quantity,
+                description: newProduct.description,
+                onSale: newProduct.onSale,
+                discount: newProduct.discount,
+                featured:  newProduct.featured
+            })
         })
     } catch (error) {
         return res.status(400).json(error)
@@ -33,6 +45,7 @@ const handleGetAllProducts = async (req, res) => {
         allProducts.push({
             id: row.id,
             name: row.name,
+            category: row.category,
             size: row.size,
             color: row.color,
             price: row.price,
@@ -59,6 +72,7 @@ const handleGetProductsByCategory = async (req, res) => {
         allProducts.push({
             id: row.id,
             name: row.name,
+            category: row.category,
             size: row.size,
             color: row.color,
             price: row.price,
