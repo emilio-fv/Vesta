@@ -34,6 +34,11 @@ export const updateProduct = createAsyncThunk('products/update', async (formData
     }
 })
 
+// Delete Product 
+export const deleteProduct = createAsyncThunk('products/delete', async (id) => {
+    return await productsService.deleteProduct(id);
+})
+
 // Product Slice
 export const productsSlice = createSlice({
     name: 'products',
@@ -47,7 +52,7 @@ export const productsSlice = createSlice({
         builder
             .addCase(createProduct.fulfilled, (state, action) => {
                 state.products.push(action.payload)
-                state.status = 'succeeded'
+                state.status = 'added'
                 state.messages = []
             })
             .addCase(createProduct.rejected, (state, action) => {
@@ -67,6 +72,10 @@ export const productsSlice = createSlice({
             .addCase(updateProduct.rejected, (state, action) => {
                 state.status = 'failed'
                 state.messages = action.payload
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => {
+                state.products.filter((product) => product.id === action.payload.id);
+                state.status = 'updated'
             })
     }
 })

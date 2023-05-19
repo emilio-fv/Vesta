@@ -44,7 +44,7 @@ const ProductForm = ({ handleClose }) => {
             setErrorMessages(messages);
         }
 
-        if (status === 'succeeded') {
+        if (status === 'added') {
             dispatch(resetMessages());
             handleClose();
         }
