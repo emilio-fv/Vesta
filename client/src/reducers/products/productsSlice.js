@@ -62,6 +62,25 @@ export const productsSlice = createSlice({
         },
         setCategory: (state, action) => {
             state.category = action.payload
+        },
+        sortPriceAsc: (state) => {
+            state.products.sort((a, b) => {
+                const aPrice = parseFloat(a.price.slice(1))
+                const bPrice = parseFloat(b.price.slice(1))
+                return aPrice - bPrice;
+            })
+        },
+        sortPriceDesc: (state) => {
+            state.products.sort((a, b) => {
+                const aPrice = parseFloat(a.price.slice(1))
+                const bPrice = parseFloat(b.price.slice(1))
+                return bPrice - aPrice;
+            })
+        },
+        sortFeatured: (state) => {
+            state.products.sort((a, b) => {
+                return b.featured - a.featured;
+            })
         }
     },
     extraReducers: (builder) => {
@@ -102,5 +121,5 @@ export const productsSlice = createSlice({
 })
 
 // Export Actions & Reducers
-export const { resetStatus, resetMessages, resetProducts, setCategory } = productsSlice.actions;
+export const { resetStatus, resetMessages, resetProducts, setCategory, sortPriceAsc, sortPriceDesc, sortFeatured } = productsSlice.actions;
 export default productsSlice.reducer;
