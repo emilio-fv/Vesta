@@ -18,7 +18,7 @@ const Product = db.define('Product', {
             },
             len: {
                 args: [1,65],
-                msg: "Product ame required."
+                msg: "Product name required."
             }
         }
     },
@@ -104,7 +104,7 @@ const Product = db.define('Product', {
                 msg: "Description required."
             },
             len: {
-                args: [1,65],
+                args: [1,255],
                 msg: "Description required."
             }
         }

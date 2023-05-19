@@ -11,7 +11,11 @@ const createProduct = async (data) => {
 // Get All Products
 const getAllProducts = async () => {
     console.log("Service: getAllProducts");
-    const allProducts = await Product.findAll();
+    const allProducts = await Product.findAll({
+        order: [
+            ['createdAt', 'ASC']
+        ]
+    });
     return allProducts;
 }
 
@@ -28,7 +32,7 @@ const getProductsByCategory = async (category) => {
 
 // Update Product By Id
 const updateProductById = async (data, id) => {
-    console.log("Service: updateProductById id: ");
+    console.log("Service: updateProductById id: ", id);
     const updatedProduct = await Product.update(data, {
         where: {
             id: id
