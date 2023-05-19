@@ -8,11 +8,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../../reducers/auth/authSlice';
 
 const initialFormState = {
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    confirmPassword: null
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
 }
 
 const RegisterForm = () => {
@@ -29,7 +29,6 @@ const RegisterForm = () => {
     // Set error messages, navigate to dashboard
     useEffect(() => {
         if (status === 'failed') {
-
             setErrorMessages([...errorMessages, ...messages]);
         }
 
@@ -94,7 +93,7 @@ const RegisterForm = () => {
             autoComplete='off'
             onSubmit={event => handleSubmit(event)}
         >
-            <Typography variant='h5'>Register</Typography>
+            <Typography component='p' variant='h5'>Register</Typography>
             <TextField 
                 id='firstName'
                 name='firstName'
