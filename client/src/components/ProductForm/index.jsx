@@ -172,9 +172,9 @@ const ProductForm = ({ handleClose }) => {
                             error={errorMessages?.some(error => error.path === 'size')}
                         >
                             <MenuItem value={'XS'}>XS</MenuItem>
-                            <MenuItem value={'Small'}>Small</MenuItem>
-                            <MenuItem value={'Medium'}>Medium</MenuItem>
-                            <MenuItem value={'Large'}>Large</MenuItem>
+                            <MenuItem value={'S'}>Small</MenuItem>
+                            <MenuItem value={'M'}>Medium</MenuItem>
+                            <MenuItem value={'L'}>Large</MenuItem>
                             <MenuItem value={'XL'}>XL</MenuItem>
                         </Select>
                         {errorMessages?.some(error => error.path === 'size') 

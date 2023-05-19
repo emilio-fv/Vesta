@@ -9,14 +9,15 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import dummyImg from '../../img/placeholder.png';
+import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
+import Tooltip from '@mui/material/Tooltip';
 
 const ProductCard = ({ product, favorited }) => {
     const [favorite, setFavorited] = useState(favorited);
-
     return (
         <Card
             sx={{
-                height: '350px',
+                height: '375px',
                 display: 'flex',
                 flexDirection: 'column'
             }}
@@ -62,6 +63,13 @@ const ProductCard = ({ product, favorited }) => {
             </CardContent>
             {/* View Product Button */}
             <CardActions sx={{ padding: 0, display: 'flex', flexDirection: 'column', alignItems: 'start', gap: 1 }}>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <Typography variant='body2' marginLeft={1}>Size: {product.size}</Typography>
+                    {/* <Typography variant='body2' marginRight={1}>{product.color}</Typography> */}
+                    <Tooltip title={product.color}>
+                        <CircleRoundedIcon fontSize='small' sx={{ marginRight: 1, color: product.color, border: '1px solid black', borderRadius: '50%', padding: 0    }}/>
+                    </Tooltip>
+                </Box>
                 <Typography variant='body1' marginLeft={1}>{product.price}</Typography>
                 <Button 
                     sx={{
