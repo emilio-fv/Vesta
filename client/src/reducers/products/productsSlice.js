@@ -50,6 +50,9 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
+        resetStatus: (state) => {
+            state.status = 'idle'
+        },
         resetMessages: (state) => {
             state.messages = []
         },
@@ -99,5 +102,5 @@ export const productsSlice = createSlice({
 })
 
 // Export Actions & Reducers
-export const { resetMessages, resetProducts, setCategory } = productsSlice.actions;
+export const { resetStatus, resetMessages, resetProducts, setCategory } = productsSlice.actions;
 export default productsSlice.reducer;

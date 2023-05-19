@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, resetMessages } from '../../reducers/products/productsSlice.js';
+import { createProduct, resetMessages, resetStatus } from '../../reducers/products/productsSlice.js';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -46,6 +46,7 @@ const ProductForm = ({ handleClose }) => {
 
         if (status === 'added') {
             dispatch(resetMessages());
+            dispatch(resetStatus())
             handleClose();
         }
     }, [status])

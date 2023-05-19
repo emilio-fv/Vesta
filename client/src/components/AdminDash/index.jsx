@@ -92,14 +92,12 @@ TablePaginationActions.propTypes = {
 const AdminDash = () => {
     // Helpers
     const dispatch = useDispatch();
-    const { products, status } = useSelector((state) => state.products);
+    const { products } = useSelector((state) => state.products);
 
     // Fetch Products
     useEffect(() => {
-        if (status === 'idle' || status === 'updated') {
-            dispatch(getAllProducts())
-        }
-    }, [status])
+        dispatch(getAllProducts())
+    }, [])
 
     // Handle Logout Button
     const handleLogout = () => {
