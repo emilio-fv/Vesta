@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ProductFilter from '../ProductsFilter';
 import ProductSort from '../ProductsSort';
 import Box from '@mui/material/Box';
-import sampleProducts from '../../data/sampleProducts';
 import ProductCard from '../ProductCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProductsByCategory } from '../../reducers/products/productsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsDisplay = () => {
+    // Helpers
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { products, category } = useSelector((state) => state.products);
+
+    // Fetch Products
+    useEffect(() => {
+        if (category === null) {
+            navigate('/');
+        }
+
+        dispatch(getAllProductsByCategory(category));
+    }, [category])
+
     return (
         <Container 
             maxWidth='lg'
             sx={{ 
+                minHeight: '70vh',
                 paddingY: 3,
                 display: 'flex',
                 flexDirection: 'column',
@@ -26,7 +43,7 @@ const ProductsDisplay = () => {
                     alignItems: 'center'
                 }}
             >
-                <Typography variant='h5'>TODO: Category</Typography>
+                <Typography variant='h5'>{category}</Typography>
                 <ProductSort />
             </Box>
             {/* Products Display */}
@@ -48,8 +65,8 @@ const ProductsDisplay = () => {
                         gridGap: '25px',
                     }}
                 >
-                    {sampleProducts.map((product, key) => (
-                            <ProductCard key={key} product={product} />
+                    {products?.map((product) => (
+                            <ProductCard key={product.id} product={product} />
                         ))
                     }
                 </Box>

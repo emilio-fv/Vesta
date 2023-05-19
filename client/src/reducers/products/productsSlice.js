@@ -5,6 +5,7 @@ import productsService from "./productsService";
 // Products Initial State
 const initialState = {
     products: [],
+    category: null,
     status: 'idle',
     messages: []
 }
@@ -22,6 +23,11 @@ export const createProduct = createAsyncThunk('products/create', async (formData
 // Get All Products
 export const getAllProducts = createAsyncThunk('products/getAll', async () => {
     return await productsService.getAllProducts();
+})
+
+// Get All Products By Category
+export const getAllProductsByCategory = createAsyncThunk('products/getAllByCategory', async (category) => {
+    return await productsService.getAllProductsByCategory(category);
 })
 
 // Update Product 
@@ -46,6 +52,13 @@ export const productsSlice = createSlice({
     reducers: {
         resetMessages: (state) => {
             state.messages = []
+        },
+        resetProducts: (state) => {
+            state.products = []
+            state.status = 'idle'
+        },
+        setCategory: (state, action) => {
+            state.category = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -77,9 +90,14 @@ export const productsSlice = createSlice({
                 state.products.filter((product) => product.id === action.payload.id);
                 state.status = 'updated'
             })
+            .addCase(getAllProductsByCategory.fulfilled, (state, action) => {
+                state.products = action.payload;
+                state.status = 'succeeded'
+                state.messages = []
+            })
     }
 })
 
 // Export Actions & Reducers
-export const { resetMessages } = productsSlice.actions;
+export const { resetMessages, resetProducts, setCategory } = productsSlice.actions;
 export default productsSlice.reducer;

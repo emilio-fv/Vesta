@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -6,14 +6,22 @@ import HeroImg from '../../img/hero.jpg';
 import { Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@emotion/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { resetProducts, setCategory } from '../../reducers/products/productsSlice';
+import { useDispatch } from 'react-redux';
 
 const HomeHero = () => {
+    // Helpers
+    const dispatch = useDispatch();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     const buttonProps = {
         size: !isSmallScreen ? 'small' : 'medium',
     }
+
+    useEffect(() => {
+        dispatch(resetProducts());
+    }, [])
 
     return (
         <Container maxWidth='false' disableGutters>
@@ -42,7 +50,7 @@ const HomeHero = () => {
                     }}
                 >
                     <Button 
-                        // TODO: handle click 
+                        onClick={event => dispatch(setCategory("Unisex"))}
                         component={RouterLink}
                         to='/products'
                         {...buttonProps}
@@ -54,7 +62,7 @@ const HomeHero = () => {
                         Shop Unisex
                     </Button>
                     <Button 
-                        // TODO: handle click 
+                        onClick={event => dispatch(setCategory("Women"))}
                         component={RouterLink}
                         to='/products'
                         {...buttonProps}
@@ -66,7 +74,7 @@ const HomeHero = () => {
                         Shop Women
                     </Button>
                     <Button 
-                        // TODO: handle click 
+                        onClick={event => dispatch(setCategory("Men"))}
                         component={RouterLink}
                         to='/products'
                         {...buttonProps}
@@ -81,7 +89,7 @@ const HomeHero = () => {
             </Box>
             {/* Category Banners */}
             <Button
-                // TODO: handle click
+                onClick={event => dispatch(setCategory("Unisex"))}
                 component={RouterLink}
                 to='/products'
                 sx={{ 
@@ -99,7 +107,7 @@ const HomeHero = () => {
                 Shop Unisex
             </Button>
             <Button
-                // TODO: handle click
+                 onClick={event => dispatch(setCategory("Women"))}
                 component={RouterLink}
                 to='/products'
                 sx={{ 
@@ -117,7 +125,7 @@ const HomeHero = () => {
                 Shop Women
             </Button>
             <Button
-                // TODO: handle click
+                onClick={event => dispatch(setCategory("Men"))}
                 component={RouterLink}
                 to='/products'
                 sx={{ 
