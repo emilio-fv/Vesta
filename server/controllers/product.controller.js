@@ -62,7 +62,7 @@ const handleGetAllProducts = async (req, res) => {
 const handleGetProductsByCategory = async (req, res) => {
     console.log("Controller: handleGetProductsByCategory");
     // Destructure request body
-    const { category } = req.body
+    const { category } = req.params;
     // Query database
     const response = await getProductsByCategory(category);
     // Parse through results

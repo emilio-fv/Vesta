@@ -12,11 +12,11 @@ const {
 const router = express.Router();
 
 // Product API Routes
-router.post('/create', handleCreateProduct); // TODO test
-router.get('/all', handleGetAllProducts); // TODO test
-router.get('/all/:category', handleGetProductsByCategory); // TODO test
-router.put('/:id/update', handleUpdateProductById); // TODO test
-router.delete('/:id', handleDeleteProductById); // TODO test
+router.post('/create', handleCreateProduct); 
+router.get('/all', handleGetAllProducts); 
+router.get('/:category/all', handleGetProductsByCategory);
+router.put('/:id/update', handleUpdateProductById); 
+router.delete('/:id', handleDeleteProductById); 
 
 // Exports
 module.exports = {
