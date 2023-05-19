@@ -115,11 +115,16 @@ const handleUpdateProductById = async (req, res) => {
 const handleDeleteProductById = async (req, res) => {
     console.log("Controller: handleDeleteProductById");
     // Destructure request body
-    const { id } = req.body;
+    const { id } = req.params;
+
     // Query database
-    const response = await deleteProductById(id)
-    // TODO: return
-    return;
+    const response = await deleteProductById(id);
+
+    if (response === 0) {
+        return res.status(400).json("Product could not be deleted.") ;
+    }
+
+    return res.status(200).json("Product deleted.");
 }
 
 // Exports
