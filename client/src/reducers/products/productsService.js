@@ -21,10 +21,19 @@ const updateProduct = async (id, formData) => {
     return response.data;
 }
 
+// Delete Product
+const deleteProduct = async (id) => {
+    const response = await axios.delete(API_URL + id, { withCredentials: true });
+    return {
+        id: id,
+        response: response.data};
+}
+
 const productsService = {
     createProduct,
     getAllProducts,
     updateProduct,
+    deleteProduct,
 };
 
 export default productsService;
