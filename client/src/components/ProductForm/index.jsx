@@ -99,9 +99,6 @@ const ProductForm = ({ handleClose }) => {
                 display: 'flex',
                 flexFlow: 'column',
                 flexWrap: 'nowrap',
-                // justifyContent: 'center',
-                // alignItems: 'center',
-                // flexDirection: 'column',
                 padding: 3,
             }}
         >

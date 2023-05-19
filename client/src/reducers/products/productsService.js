@@ -15,9 +15,16 @@ const getAllProducts = async () => {
     return response.data;
 }
 
+// Update Product
+const updateProduct = async (id, formData) => {
+    const response = await axios.put(API_URL + id + '/update', formData, { withCredentials: true });
+    return response.data;
+}
+
 const productsService = {
     createProduct,
     getAllProducts,
+    updateProduct,
 };
 
 export default productsService;

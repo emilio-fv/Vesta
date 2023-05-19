@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import IconButton from '@mui/material/IconButton';
+import InventoryRow from '../InventoryRow';
+import InventoryRowForm from '../InventoryRowForm';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
@@ -24,8 +26,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
-// import sampleProducts from '../../data/sampleProducts';
 
 // Inventory Table Pagination
 function TablePaginationActions(props) {
@@ -92,14 +92,14 @@ TablePaginationActions.propTypes = {
 const AdminDash = () => {
     // Helpers
     const dispatch = useDispatch();
-
-    // Products Data
-    const { products } = useSelector((state) => state.products);
+    const { products, status } = useSelector((state) => state.products);
 
     // Fetch Products
     useEffect(() => {
-        dispatch(getAllProducts())
-    }, [])
+        if (status === 'idle' || status === 'updated') {
+            dispatch(getAllProducts())
+        }
+    }, [status])
 
     // Handle Logout Button
     const handleLogout = () => {
@@ -126,6 +126,14 @@ const AdminDash = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    // Current Row Being Updated
+    const [updateRow, setUpdateRow] = useState(null);
+
+    // Handle Update Button
+    const handleUpdateClick = (id) => {
+        setUpdateRow(id);
+    }
 
     return (
         <Container maxWidth='lg' sx={{ paddingY: 3 }}>
@@ -169,22 +177,12 @@ const AdminDash = () => {
                             : products
                         ).map((product) => (
                             <TableRow
-                                key={product.name}
+                                key={product.id}
                             >
-                                <TableCell align='center'>{product.name}</TableCell>
-                                <TableCell align='center'>{product.category}</TableCell>
-                                <TableCell align='center'>{product.size}</TableCell>
-                                <TableCell align='center'>{product.color}</TableCell>
-                                <TableCell align='center'>{product.price}</TableCell>
-                                <TableCell align='center'>{product.quantity}</TableCell>
-                                <TableCell>{product.description}</TableCell>
-                                <TableCell align='center'>{product.onSale ? 'yes' : 'no'}</TableCell>
-                                <TableCell align='center'>{product.onSale ? parseFloat(product.discount) * 100 + '%': 'n/a'}</TableCell>
-                                <TableCell align='center'>{product.featured ? 'yes' : 'no'}</TableCell>
-                                <TableCell sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                    <Button size='small' variant='outlined'>Update</Button>
-                                    <Button size='small' variant='outlined'>Delete</Button>
-                                </TableCell>
+                                {product.id === updateRow 
+                                    ? <InventoryRowForm product={product} setUpdateRow={setUpdateRow}/>
+                                    : <InventoryRow product={product} handleUpdateClick={handleUpdateClick}/>
+                                }
                             </TableRow>
                         ))}
 
