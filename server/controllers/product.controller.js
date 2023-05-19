@@ -10,7 +10,6 @@ const {
 // Create Product
 const handleCreateProduct = async (req, res) => {
     console.log("Controller: handleCreateProduct");
-
     try {
         // Add product to database
         await createProduct(req.body).then(newProduct => {
@@ -88,13 +87,28 @@ const handleGetProductsByCategory = async (req, res) => {
 
 // Update Product By Id
 const handleUpdateProductById = async (req, res) => {
-    console.log("Controller: handleUpdateProductById");
-    // Query database
-    const response = await updateProductById(req.body);
-    // TODO: Parse through results
-    console.log(response);
-    // TODO: return results
-    return;
+    console.log("Controller: handleUpdateProductById req.params: ", req.params.id);
+    console.log("req.body: ", req.body);
+    try {
+        // Query database
+        await updateProductById(req.body, req.params.id).then(updatedProduct => {
+            return res.json({
+                id: updatedProduct.id,
+                name: updatedProduct.name,
+                category: updatedProduct.category,
+                size: updatedProduct.size,
+                color: updatedProduct.color,
+                price: updatedProduct.price,
+                quantity: updatedProduct.quantity,
+                description: updatedProduct.description,
+                onSale: updatedProduct.onSale,
+                discount: updatedProduct.discount,
+                featured:  updatedProduct.featured
+            })
+        });
+    } catch (error) {
+        res.status(400).json(error);
+    }
 }
 
 // Delete Product By Id

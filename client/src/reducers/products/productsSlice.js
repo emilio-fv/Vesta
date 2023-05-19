@@ -6,7 +6,7 @@ import productsService from "./productsService";
 const initialState = {
     products: [],
     status: 'idle',
-    messages: null
+    messages: []
 }
 
 // Create Product
@@ -24,24 +24,31 @@ export const getAllProducts = createAsyncThunk('products/getAll', async () => {
     return await productsService.getAllProducts();
 })
 
+// Update Product 
+export const updateProduct = createAsyncThunk('products/update', async (formData, thunkAPI) => {
+    try {
+        return await productsService.updateProduct(formData.id, formData);
+    } catch (error) {
+        const messages = error.response.data.errors;
+        return thunkAPI.rejectWithValue(messages);
+    }
+})
+
 // Product Slice
 export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
         resetMessages: (state) => {
-            state.messages = null
+            state.messages = []
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(createProduct.pending, (state) => {
-                state.status = 'loading'
-            })
             .addCase(createProduct.fulfilled, (state, action) => {
                 state.products.push(action.payload)
                 state.status = 'succeeded'
-                state.messages = null
+                state.messages = []
             })
             .addCase(createProduct.rejected, (state, action) => {
                 state.status = 'failed'
@@ -49,6 +56,17 @@ export const productsSlice = createSlice({
             })
             .addCase(getAllProducts.fulfilled, (state, action) => {
                 state.products = action.payload
+                state.status = 'succeeded'
+                state.messages = []
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                state.products.forEach((item, index) => { if (item.id === action.payload.id) state.products[index] = action.payload})
+                state.status = 'updated'
+                state.messages = []
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.status = 'failed'
+                state.messages = action.payload
             })
     }
 })
