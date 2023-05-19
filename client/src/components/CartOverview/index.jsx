@@ -3,7 +3,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CartCard from '../CartCard';
-import sampleProducts from '../../data/sampleProducts';
+// import sampleProducts from '../../data/sampleProducts';
+const sampleProducts = [];
 
 const CartOverview = () => {
     return (

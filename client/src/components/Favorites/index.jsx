@@ -2,8 +2,10 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import sampleProducts from '../../data/sampleProducts';
+// import sampleProducts from '../../data/sampleProducts';
 import ProductCard from '../ProductCard';
+
+const sampleProducts = [];
 
 const Favorites = () => {
   return (
