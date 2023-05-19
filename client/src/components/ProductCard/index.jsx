@@ -8,13 +8,26 @@ import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import dummyImg from '../../img/placeholder.png';
 
 const ProductCard = ({ product, favorited }) => {
     const [favorite, setFavorited] = useState(favorited);
 
     return (
-        <Card>
-            <CardContent sx={{ padding: 0, position: 'relative' }}>
+        <Card
+            sx={{
+                height: '350px',
+                display: 'flex',
+                flexDirection: 'column'
+            }}
+        >
+            <CardContent 
+                sx={{
+                    height: '90%',
+                    padding: 0, 
+                    position: 'relative',
+                }}
+            >
                 {/* Favorite Button */}
                 <IconButton
                     sx={{
@@ -28,25 +41,28 @@ const ProductCard = ({ product, favorited }) => {
                 {/* Product Image */}
                 <Box 
                     component='img'
+                    src={dummyImg}
                     sx={{
                         width: '100%',
                         height: '150px',
                     }}
                 />
+                {/* Product Details */}
                 <Box
                     sx={{
-                        padding: 1
+                        padding: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1
                     }}
                 >
-                    <Typography variant='h6'>{product.name}</Typography>
-                    <Typography variant='p'>$ {parseFloat(product.price)}</Typography>
+                    <Typography sx={{ flex: 1 }} variant='subtitle1'>{product.name}</Typography>
+                    <Typography sx={{ flex: 2 }} variant='subtitle2'>{product.description}</Typography>
                 </Box>
             </CardContent>
-            <CardActions
-                sx={{
-                    padding: 0
-                }}
-            >
+            {/* View Product Button */}
+            <CardActions sx={{ padding: 0, display: 'flex', flexDirection: 'column', alignItems: 'start', gap: 1 }}>
+                <Typography variant='body1' marginLeft={1}>{product.price}</Typography>
                 <Button 
                     sx={{
                         backgroundColor: 'black',

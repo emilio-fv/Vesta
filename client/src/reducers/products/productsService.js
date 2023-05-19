@@ -15,6 +15,12 @@ const getAllProducts = async () => {
     return response.data;
 }
 
+// Get All Products By Category
+const getAllProductsByCategory = async (category) => {
+    const response = await axios.get(API_URL + category + '/all' , { withCredentials: true });
+    return response.data;
+}
+
 // Update Product
 const updateProduct = async (id, formData) => {
     const response = await axios.put(API_URL + id + '/update', formData, { withCredentials: true });
@@ -32,6 +38,7 @@ const deleteProduct = async (id) => {
 const productsService = {
     createProduct,
     getAllProducts,
+    getAllProductsByCategory,
     updateProduct,
     deleteProduct,
 };

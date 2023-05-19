@@ -21,6 +21,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import { reset } from '../../reducers/auth/authSlice';
+import { setCategory } from '../../reducers/products/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const categories = ['Unisex', 'Women', 'Men'];
@@ -122,7 +123,6 @@ const Navbar = () => {
               underline='none' 
               variant='h6'
               noWrap
-              // TODO: handle link click
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 color: 'white'
@@ -169,12 +169,11 @@ const Navbar = () => {
                     onClick={handleCloseNavMenu}
                   >
                     <Link 
-                      onClick={() => console.log(category)}
+                      onClick={event => dispatch(setCategory(category))}
                       component={RouterLink}
                       to='/products'
                       underline='none'
                       noWrap
-                      // TODO: handle link click
                     >
                       {category}
                     </Link>
@@ -199,12 +198,12 @@ const Navbar = () => {
             <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', sm: 'flex' }, gap: 3 }}>
               {categories.map((category) => (
                 <Link 
+                  onClick={event => dispatch(setCategory(category))}
                   key={category}
                   component={RouterLink}
                   to='/products'
                   noWrap
                   underline='none'
-                  // TODO: Handle click
                   sx={{ color: 'white' }}
                 >
                   {category}
