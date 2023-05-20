@@ -1,12 +1,13 @@
 import React from 'react';
 import Layout from './Layout';
+import UserAccountInfo from '../components/UserAccountInfo';
+import Favorites from '../components/Favorites';
 
 const UserDashboard = () => {
   return (
     <Layout>
-      {
-        <h1>UserDashboard</h1>
-      }
+        <UserAccountInfo />
+        <Favorites />
     </Layout>
   )
 };

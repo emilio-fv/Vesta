@@ -6,6 +6,8 @@ import Product from './views/Product';
 import Cart from './views/Cart';
 import UserDashboard from './views/UserDashboard';
 import AdminDashboard from './views/AdminDashboard';
+import AdminRoute from './components/AdminRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -14,8 +16,14 @@ function App() {
       <Route path='/products' element={<Products />} />
       <Route path='/product' element={<Product />} />
       <Route path='/cart' element={<Cart />} />
-      <Route path='/account' element={<UserDashboard />} />
-      <Route path='/admin' element={<AdminDashboard />}/>
+      {/* Private Routes */}
+      <Route element={<PrivateRoute />}>
+        <Route path='/account' element={<UserDashboard />} />
+        {/* Admin Routes */}
+        <Route element={<AdminRoute />}>
+          <Route path='/admin' element={<AdminDashboard />}/>
+        </Route>
+      </Route>
     </Routes>
   )
 }

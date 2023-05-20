@@ -1,11 +1,16 @@
 import React from 'react';
 import Layout from './Layout';
+import CartOverview from '../components/CartOverview';
+import CartSummary from '../components/CartSummary';
 
 const Cart = () => {
   return (
     <Layout>
       {
-        <h1>Cart</h1>
+        <CartOverview />
+      }
+      {      
+        <CartSummary />
       }
     </Layout>
   )
