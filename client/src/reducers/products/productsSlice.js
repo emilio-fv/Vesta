@@ -5,7 +5,9 @@ import productsService from "./productsService";
 // Products Initial State
 const initialState = {
     products: [],
+    filteredProducts: [],
     category: null,
+    filter: false,
     status: 'idle',
     messages: []
 }
@@ -81,7 +83,32 @@ export const productsSlice = createSlice({
             state.products.sort((a, b) => {
                 return b.featured - a.featured;
             })
+        },
+        resetFilteredProducts: (state) => {
+            state.filter = false
+            state.filteredProducts = []
+        },
+        filterProducts: (state, action) => {
+            state.filter = true
+            state.filteredProducts = state.products
+            if (action.payload.sizes) {
+                state.filteredProducts = state.filteredProducts.filter(function(product) {
+                    return action.payload.sizes.includes(product.size);
+                })
+            }
+            if (action.payload.colors) {
+                state.filteredProducts = state.filteredProducts.filter(function(product) {
+                    return action.payload.colors.includes(product.color)
+                })
+            }
+            if (action.payload.price) {
+                state.filteredProducts = state.filteredProducts.filter(function(product) {
+                    const price = parseFloat(product.price.slice(1));
+                    return price >= action.payload.price[0] && price <= action.payload.price[1];
+                })
+            }
         }
+
     },
     extraReducers: (builder) => {
         builder
@@ -121,5 +148,15 @@ export const productsSlice = createSlice({
 })
 
 // Export Actions & Reducers
-export const { resetStatus, resetMessages, resetProducts, setCategory, sortPriceAsc, sortPriceDesc, sortFeatured } = productsSlice.actions;
+export const { 
+    resetStatus, 
+    resetMessages, 
+    resetProducts, 
+    setCategory, 
+    sortPriceAsc, 
+    sortPriceDesc, 
+    sortFeatured,
+    resetFilteredProducts,
+    filterProducts
+} = productsSlice.actions;
 export default productsSlice.reducer;

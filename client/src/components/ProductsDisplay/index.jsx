@@ -6,22 +6,22 @@ import ProductSort from '../ProductsSort';
 import Box from '@mui/material/Box';
 import ProductCard from '../ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProductsByCategory } from '../../reducers/products/productsSlice';
+import { getAllProductsByCategory, resetFilteredProducts } from '../../reducers/products/productsSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ProductsDisplay = () => {
     // Helpers
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { products, category } = useSelector((state) => state.products);
+    const { products, filteredProducts, category, filter } = useSelector((state) => state.products);
 
     // Fetch Products
     useEffect(() => {
         if (category === null) {
             navigate('/');
         }
-
         dispatch(getAllProductsByCategory(category));
+        dispatch(resetFilteredProducts())
     }, [category])
 
     return (
@@ -65,9 +65,13 @@ const ProductsDisplay = () => {
                         gridGap: '25px',
                     }}
                 >
-                    {products?.map((product) => (
+                    { filter 
+                        ? filteredProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
-                        ))
+                            ))
+                        : products?.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                            ))
                     }
                 </Box>
             </Box>
