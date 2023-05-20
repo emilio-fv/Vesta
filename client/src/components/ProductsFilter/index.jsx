@@ -10,6 +10,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
+import Button from '@mui/material/Button';
+import { useDispatch } from 'react-redux';
+import { filterProducts } from '../../reducers/products/productsSlice';
 
 function valueText(value) {
     return `$${value}`;
@@ -30,18 +33,99 @@ const marks = [
     }
 ]
 
+const initialPriceRange = [0,500];
+
 const ProductFilter = () => {
-    const [value, setValue] = useState([0, 500]);
-    
-    const handleChange = (event, newValue) => {
-        console.log(event.target.name);
-        setValue(newValue);
+    // Helpers
+    const dispatch = useDispatch();
+
+    // Size, Color, Price Filter
+    const [sizes, setSizes] = useState({
+        XS: false,
+        S: false,
+        M: false,
+        L: false,
+        XL: false,
+    });
+    const [colors, setColors] = useState({
+        Black: false,
+        Grey: false,
+        White: false,
+        Brown: false,
+        Purple: false,
+        Blue: false,
+        Green: false,
+        Yellow: false,
+        Orange: false,
+        Pink: false,
+        Red: false,
+    })
+    const [priceRange, setPriceRange] = useState(initialPriceRange);
+
+    // Handle Size Changes
+    const handleSizeChanges = (event) => {
+        const { name, checked } = event.target;
+        setSizes({
+            ...sizes,
+            [name]: checked
+        })
     }
+
+    // Handle Color Changes
+    const handleColorChanges = (event) => {
+        const { name, checked } = event.target;
+        setColors({
+            ...colors,
+            [name]: checked
+        })
+    }
+
+    // Handle Price Changes
+    const handlePriceChange = (event, newValue) => {
+        setPriceRange(newValue);
+    }
+
+    // Handle Apply Click
+    const handleApplyClick = (event) => {
+        event.preventDefault();
+
+        // Configure filter parameters
+        const filters = {}
+
+        for (let key in sizes) {
+            if (sizes[key]) {
+                if (filters.sizes === undefined) {
+                    filters.sizes = [];
+                }
+                filters.sizes.push(key)
+            }
+        }
+
+        for (let key in colors) {
+            if (colors[key]) {
+                if (filters.colors === undefined) {
+                    filters.colors = [];
+                }
+                filters.colors.push(key)
+            }
+        }
+
+        if (priceRange !== initialPriceRange) {
+            filters.price = priceRange;
+        }
+
+        dispatch(filterProducts(filters));
+    }
+
     return (
-        <Box 
+        <Box
+            component='form'
+            onSubmit={handleApplyClick}
             sx={{
                 flex: 1,
-                px: { xs: 5, sm: 0 }
+                px: { xs: 5, sm: 0 },
+                display: 'flex',
+                flexDirection: 'column',
             }}
         >
             <Box 
@@ -66,12 +150,13 @@ const ProductFilter = () => {
                     <Typography>Size</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
+                    {/* Size Filter */}
                     <FormGroup sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-                        <FormControlLabel control={<Checkbox />} label="XS"/>
-                        <FormControlLabel control={<Checkbox />} label="Small"/>
-                        <FormControlLabel control={<Checkbox />} label="Medium"/>
-                        <FormControlLabel control={<Checkbox />} label="Large"/>
-                        <FormControlLabel control={<Checkbox />} label="XL"/>
+                        <FormControlLabel control={<Checkbox checked={sizes.XS} onChange={handleSizeChanges} name='XS'/>} label="XS"/>
+                        <FormControlLabel control={<Checkbox checked={sizes.S} onChange={handleSizeChanges} name='S'/>} label="Small"/>
+                        <FormControlLabel control={<Checkbox checked={sizes.M} onChange={handleSizeChanges} name='M'/>} label="Medium"/>
+                        <FormControlLabel control={<Checkbox checked={sizes.L} onChange={handleSizeChanges} name='L'/>} label="Large"/>
+                        <FormControlLabel control={<Checkbox checked={sizes.XL} onChange={handleSizeChanges} name='XL'/>} label="XL"/>
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
@@ -84,18 +169,19 @@ const ProductFilter = () => {
                     <Typography>Color</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
+                    {/* Color Filter */}
                     <FormGroup sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-                        <FormControlLabel control={<Checkbox />} label="Black"/>
-                        <FormControlLabel control={<Checkbox />} label="Grey"/>
-                        <FormControlLabel control={<Checkbox />} label="White"/>
-                        <FormControlLabel control={<Checkbox />} label="Brown"/>
-                        <FormControlLabel control={<Checkbox />} label="Purple"/>
-                        <FormControlLabel control={<Checkbox />} label="Blue"/>
-                        <FormControlLabel control={<Checkbox />} label="Green"/>
-                        <FormControlLabel control={<Checkbox />} label="Yellow"/>
-                        <FormControlLabel control={<Checkbox />} label="Orange"/>
-                        <FormControlLabel control={<Checkbox />} label="Pink"/>
-                        <FormControlLabel control={<Checkbox />} label="Red"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Black} onChange={handleColorChanges} name='Black'/>} label="Black"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Grey} onChange={handleColorChanges} name='Grey'/>} label="Grey"/>
+                        <FormControlLabel control={<Checkbox checked={colors.White} onChange={handleColorChanges} name='White'/>} label="White"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Brown} onChange={handleColorChanges} name='Brown'/>} label="Brown"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Purple} onChange={handleColorChanges} name='Purple'/>} label="Purple"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Blue} onChange={handleColorChanges} name='Blue'/>} label="Blue"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Green} onChange={handleColorChanges} name='Green'/>} label="Green"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Yellow} onChange={handleColorChanges} name='Yellow'/>} label="Yellow"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Orange} onChange={handleColorChanges} name='Orange'/>} label="Orange"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Pink} onChange={handleColorChanges} name='Pink'/>} label="Pink"/>
+                        <FormControlLabel control={<Checkbox checked={colors.Red} onChange={handleColorChanges} name='Red'/>} label="Red"/>
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
@@ -108,11 +194,12 @@ const ProductFilter = () => {
                     <Typography>Price</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
+                    {/* Price Filter */}
                     <Slider 
                         max={500}
                         getAriaLabel={() => 'Price Range'}
-                        value={value}
-                        onChange={handleChange}
+                        value={priceRange}
+                        onChange={handlePriceChange}
                         valueLabelDisplay='auto'
                         getAriaValueText={valueText}
                         valueLabelFormat={valueLabel}
@@ -120,6 +207,7 @@ const ProductFilter = () => {
                     />
                 </AccordionDetails>
             </Accordion>
+            <Button type='submit' sx={{ bgcolor: 'black', color: 'white',  }}>Apply</Button>
         </Box>
     )
 }
