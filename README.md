@@ -37,8 +37,10 @@
 Homepage
 https://github.com/emilio-fv/Vesta/assets/109986999/2ce00956-f385-4cdc-bf80-1d906ea4c4ec
 
-Register / Login
+Register
 <img width="1411" alt="Register" src="https://github.com/emilio-fv/Vesta/assets/109986999/bb56466f-1ef8-4a44-9ce3-c48764e9fba6">
+
+Login
 <img width="1417" alt="login" src="https://github.com/emilio-fv/Vesta/assets/109986999/7a50b8cd-8122-48ef-a6d8-a36906774567">
 
 Products
