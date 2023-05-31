@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './Layout';
+import Layout from '../components/PageLayout';
 import ProductsDisplay from '../components/ProductsDisplay';
 
 const Products = () => {

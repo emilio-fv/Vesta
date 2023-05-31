@@ -15,7 +15,7 @@ const router = express.Router();
 router.post('/register', handleRegisterUser); 
 router.post('/login', handleLoginUser); 
 router.get('/logout', handleLogoutUser); 
-router.get('/all', handleGetAllUsers) 
+router.get('/all', handleGetAllUsers);
 
 // Exports 
 module.exports = {

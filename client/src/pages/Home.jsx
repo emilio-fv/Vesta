@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from './Layout';
-import HomeHero from '../components/HomeHero';
+import Layout from '../components/PageLayout';
+import HomeLayout from '../components/HomeLayout';
 
 const Home = () => {
   return (
     <Layout>
       {
-        <HomeHero />
+        <HomeLayout />
       }
     </Layout>
   )

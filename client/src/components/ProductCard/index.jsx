@@ -8,7 +8,7 @@ import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import dummyImg from '../../img/placeholder.png';
+import dummyImg from '../../assets/placeholder.png';
 import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import Tooltip from '@mui/material/Tooltip';
 

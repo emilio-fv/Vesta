@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './views/Home';
-import Products from './views/Products';
-import Product from './views/Product';
-import Cart from './views/Cart';
-import UserDashboard from './views/UserDashboard';
-import AdminDashboard from './views/AdminDashboard';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Product from './pages/Product';
+import Cart from './pages/Cart';
+import UserDashboard from './pages/UserDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 

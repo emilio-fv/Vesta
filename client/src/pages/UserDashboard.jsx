@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './Layout';
+import Layout from '../components/PageLayout';
 import UserAccountInfo from '../components/UserAccountInfo';
 import Favorites from '../components/Favorites';
 

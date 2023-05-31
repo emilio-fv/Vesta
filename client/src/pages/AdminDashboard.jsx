@@ -1,6 +1,5 @@
 import React from 'react';
-import Layout from './Layout';
-import AdminDash from '../components/AdminDash';
+import Layout from '../components/PageLayout';import AdminDash from '../components/AdminDash';
 
 const AdminDashboard = () => {
   return (
