@@ -1,4 +1,4 @@
-// Import data types, database connection
+// Imports
 const { DataTypes } = require('sequelize');
 const { db } = require('../config/db.config');
 
@@ -137,6 +137,7 @@ const Product = db.define('Product', {
     underscored: true,
 })
 
+// Exports
 module.exports = {
-    Product: Product
+    Product
 }

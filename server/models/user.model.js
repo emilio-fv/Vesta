@@ -1,4 +1,4 @@
-// Import data types, database connection, bcrypt
+// Imports
 const { DataTypes } = require('sequelize');
 const { db } = require('../config/db.config');
 const bcrypt = require('bcrypt');
@@ -90,6 +90,7 @@ const User = db.define('User', {
     },
 });
 
+// Exports
 module.exports = {
-    User: User
+    User
 }

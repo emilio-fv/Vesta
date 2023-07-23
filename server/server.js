@@ -1,26 +1,27 @@
-// Import express, cors, cookies parser, body parser, routers
+// Configure environment variables
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}`});
+
+// Imports
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+
+// API Routers
 const { userRouter } = require('./routes/user.routes');
 const { productRouter } = require('./routes/product.routes');
 
-// Configure .env file during development stage
-if (process.env.NODE_ENV != 'production') {
-    require('dotenv').config();
-}
-
 // Port #
-const port =  process.env.PORT || 8080;
+const port =  process.env.PORT || 8000;
 
 // Create Server
 const app = express();
 
-// TODO: Middleware
+// Middleware
 app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
+    origin: '*', // TODO: update for production
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
 }));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -28,7 +29,7 @@ app.use(bodyParser.urlencoded({
     extended: true 
 }));
 
-// API Routes
+// API Endpoints
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 
@@ -45,3 +46,7 @@ try {
 app.listen(port, () => {
     console.log(`You are listening on port ${port} for requests to respond to.`);
 });
+
+app.get('/', (req, res) => {
+    res.json("Welcome to the Vesta backend server.");
+})

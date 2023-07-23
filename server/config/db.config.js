@@ -1,9 +1,7 @@
-if (process.env.NODE_ENV != 'production') {
-    require('dotenv').config();
-}
-
+// Imports
 const Sequelize = require('sequelize');
 
+// Connect to postgres db
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: 'localhost',
     dialect: 'postgres',
@@ -17,6 +15,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     logging: log => console.log('logging:', log)
 });
 
+// Exports
 module.exports = {
     db: sequelize
 };

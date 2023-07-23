@@ -1,4 +1,4 @@
-// Import express, JWT authentication function, user controller methods
+// Imports
 const express = require('express');
 const { authenticate } = require('../config/jwt.config');
 const {

@@ -1,4 +1,4 @@
-// Import express, product controller methods
+// Imports
 const express = require('express');
 const {
     handleCreateProduct,
@@ -8,7 +8,7 @@ const {
     handleDeleteProductById
 } = require('../controllers/product.controller');
 
-// Instantiate router
+// Create router
 const router = express.Router();
 
 // Product API Routes

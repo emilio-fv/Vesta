@@ -1,16 +1,16 @@
-// Import User model
+// Imports
 const { User } = require('../models/user.model');
 
 // Create User
 const createUser = async (data) => {
-    console.log("Service: createUser");
+    // TODO log service
     const newUser = await User.create(data);
     return newUser;
 }
 
 // Get User By Email
 const getUserByEmail = async (email) => {
-    console.log("Service: getUserByEmail");
+    // TODO log service
     const foundUser = await User.findOne({
         where: {
             email: email
@@ -21,14 +21,14 @@ const getUserByEmail = async (email) => {
 
 // Get All Users
 const getAllUsers = async() => {
-    console.log("Service: getAllUsers");
+    // TODO log service
     const allUsers = await User.findAll();
     return allUsers;
 }
 
 // Exports
 module.exports = {
-    createUser: createUser,
-    getUserByEmail: getUserByEmail,
-    getAllUsers: getAllUsers,
+    createUser,
+    getUserByEmail,
+    getAllUsers,
 }
