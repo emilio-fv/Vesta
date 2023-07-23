@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const { userRouter } = require('./routes/user.routes');
 const { productRouter } = require('./routes/product.routes');
 
-// Port #
+// configure Port #
 const port =  process.env.PORT || 8000;
 
 // Create Server
@@ -42,11 +42,12 @@ try {
     console.log("Unable to connect to db.");
 }
 
-// Start Server
+// Start server
 app.listen(port, () => {
     console.log(`You are listening on port ${port} for requests to respond to.`);
 });
 
+// Test server
 app.get('/', (req, res) => {
     res.json("Welcome to the Vesta backend server.");
 })
