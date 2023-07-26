@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const { authenticate } = require('../middleware/authenticate');
 const {
     handleCreateProduct,
     handleGetAllProducts,
@@ -11,12 +12,12 @@ const {
 // Create router
 const router = express.Router();
 
-// Product API Routes
-router.post('/create', handleCreateProduct); 
-router.get('/all', handleGetAllProducts); 
-router.get('/:category/all', handleGetProductsByCategory);
-router.put('/:id/update', handleUpdateProductById); 
-router.delete('/:id', handleDeleteProductById); 
+// Product API routes
+router.post('/create', authenticate, handleCreateProduct); 
+router.get('/all', authenticate, handleGetAllProducts); 
+router.get('/:category/all', authenticate, handleGetProductsByCategory);
+router.put('/:id/update', authenticate, handleUpdateProductById); 
+router.delete('/:id', authenticate, handleDeleteProductById); 
 
 // Exports
 module.exports = {

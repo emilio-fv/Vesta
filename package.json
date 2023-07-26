@@ -1,0 +1,11 @@
+{
+  "name": "vesta",
+  "version": "1.0.0",
+  "description": "E-commerce web application for a fake designer.",
+  "scripts": {
+    "start": "docker compose -f docker-compose.dev.yml up -d",
+    "stop": "docker compose -f docker-compose.dev.yml down"
+  },
+  "author": "emiliofv.sd@gmail.com",
+  "license": "ISC"
+}

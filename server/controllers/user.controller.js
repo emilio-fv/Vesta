@@ -2,6 +2,7 @@
 const {
     createUser,
     getUserByEmail,
+    getAllUsers
 } = require('../services/user.service');
 const {
     generateAccessToken,
@@ -159,10 +160,22 @@ const handleRefreshAccessToken = async (req, res) => {
     }
 }
 
+const handleGetAllUsers = async (req, res) => {
+    // TODO: Log controller method
+    try {
+        const response = await getAllUsers();
+        return res.status(200).json(response);
+    } catch (error) {
+        // TODO: Log error
+        return res.status(400).json(error);
+    }
+}
+
 // Exports
 module.exports = {
     handleRegisterUser,
     handleLoginUser,
     handleLogoutUser,
-    handleRefreshAccessToken
+    handleRefreshAccessToken,
+    handleGetAllUsers
 };
