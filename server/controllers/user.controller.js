@@ -9,41 +9,35 @@ const {
     generateRefreshToken
 } = require('../utils/jwt.utils');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 
 // Register User
 const handleRegisterUser = async (req, res) => {
     // TODO: Log controller method
-
-    // Extract form data
-    const { firstName, lastName, email, password } = req.body;
-
-    // Check if email registered
-    const foundUser = await getUserByEmail(email);
-
-    // Handle email already registered
-    if (foundUser) {
-        return res.status(400).json({ message: "Email already registered." });
-    }
-
-    // Insert user into db
     try {
-        const newUser = await createUser({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        });
-        
+        // Extract form data
+        const { email } = req.body;
+    
+        // Check if email registered
+        const foundUser = await getUserByEmail(email);
+    
+        // Handle email already registered
+        if (foundUser) {
+            return res.status(400).json({ message: "Email already registered." });
+        }
+
+        // Add user to db
+        const newUser = await createUser(req.body);
+
         // Generate access token
-        const accessToken = await generateAccessToken({
-            userId: newUser.id,
+        const accessToken = generateAccessToken({
+            id: newUser.id,
             email: newUser.email
         });
 
         // Generate refresh token
-        const refreshToken = await generateRefreshToken({
-            userId: newUser.id,
+        const refreshToken = generateRefreshToken({
+            id: newUser.id,
             email: newUser.email
         });
 
@@ -72,19 +66,18 @@ const handleRegisterUser = async (req, res) => {
 // Login User
 const handleLoginUser = async (req, res) => {
     // TODO: log controller method
-    
-    // Destructure request body
-    const { email, password } = req.body;
-    
-    // Check if email registered
-    const foundUser = await getUserByEmail(email);
-
-    // If Email not found
-    if (foundUser === null) {
-        return res.status(400).json({ message: "Email not registered." });
-    }
-
     try {
+        // Destructure request body
+        const { email, password } = req.body;
+
+        // Check if email registered
+        const foundUser = await getUserByEmail(email);
+
+        // If Email not found
+        if (foundUser === null) {
+            return res.status(400).json({ message: "Email not registered." });
+        }
+
         // Compare hashed passwords
         const correctPassword = await bcrypt.compare(password, foundUser.password);
 
@@ -94,15 +87,15 @@ const handleLoginUser = async (req, res) => {
         }
 
         // Generate access token
-        const accessToken = await generateAccessToken({
-            userId: newUser.id,
-            email: newUser.email
+        const accessToken = generateAccessToken({
+            id: foundUser.id,
+            email: foundUser.email
         });
 
         // Generate refresh token
-        const refreshToken = await generateRefreshToken({
-            userId: newUser.id,
-            email: newUser.email
+        const refreshToken = generateRefreshToken({
+            id: foundUser.id,
+            email: foundUser.email
         });
 
         // Return user
@@ -132,30 +125,35 @@ const handleLogoutUser = async (req, res) => {
 // TODO: Refresh access token
 const handleRefreshAccessToken = async (req, res) => {
     // TODO Log controller method
-    // Extract refresh token
-    const { refreshToken } = req.cookies;
+    try {
+        // Extract refresh token
+        const { refreshToken } = req.cookies;
 
-    try {        
         // Verify refresh token
-        jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
-            // Handle expired refresh token
-            if (err.message === 'expiredToken') {
-                return res.status(401).json({ message: "expiredRefreshToken"})
-            }
+        jwt.verify(
+            refreshToken, 
+            process.env.REFRESH_SECRET, 
+            (err, decoded) => {
+                // Handle expired refresh token
+                if (err?.name === 'TokenExpiredError') {
+                    return res.status(401).json({ message: "expiredRefreshToken"})
+                }
 
-            // Generate new access token
-            const newAccessToken = generateAccessToken({
-                ...decoded
-            });
+                // Generate new access token
+                const newAccessToken = generateAccessToken({
+                    id: decoded.id,
+                    email: decoded.email
+                });
 
-            // Update access token
-            return res.cookie("accessToken", newAccessToken, {
-                httpOnly: true,
-                secure: true
-            })
+                // Update access token
+                return res.cookie("accessToken", newAccessToken, {
+                    httpOnly: true,
+                    secure: true
+                }).json('access token refreshed')
         })
     } catch (error) {
         // TODO: Log error
+        console.log(error);
         return res.status(400).json(error);
     }
 }
@@ -167,6 +165,7 @@ const handleGetAllUsers = async (req, res) => {
         return res.status(200).json(response);
     } catch (error) {
         // TODO: Log error
+        console.log(error);
         return res.status(400).json(error);
     }
 }

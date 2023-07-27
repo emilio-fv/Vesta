@@ -72,6 +72,7 @@ const User = db.define('User', {
     }
 }, 
 { 
+    tableName: 'users',
     underscored: true,
     hooks: {
         beforeCreate: async (user) => {
@@ -89,6 +90,11 @@ const User = db.define('User', {
         }
     },
 });
+
+// Add to database
+User.sync().then(() => {
+    console.log('User model synced');
+})
 
 // Exports
 module.exports = {

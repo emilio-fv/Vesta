@@ -12,10 +12,12 @@ const authenticate = (req, res, next) => {
     }
 
     // Verify access token
-    jwt.verify(accessToken, process.env.SECRET_KEY, (err, decoded) => {
+    jwt.verify(
+        accessToken, 
+        process.env.ACCESS_SECRET, (err, decoded) => {
         if (err) {
-            // Check for expired access token
-            return res.status(401).json({ error: "expiredAccessToken" })
+            // TODO: Check for expired access token
+            return res.status(401).json(err)
         } else {
             req.decoded = decoded
             next();
