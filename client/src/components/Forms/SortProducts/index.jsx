@@ -6,8 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortPriceAsc, sortPriceDesc, sortFeatured } from '../../reducers/products/productsSlice';
+import { Typography } from '@mui/material';
 
-const ProductSort = () => {
+const SortProducts = () => {
     // Helpers
     const dispatch = useDispatch();
     const { category } = useSelector((state) => state.products);
@@ -36,6 +37,7 @@ const ProductSort = () => {
 
     return (
         <Box sx={{ minWidth: 120 }}>
+
             <FormControl fullWidth>
                 <InputLabel id='sort-by-label'>Sort By</InputLabel>
                 <Select
@@ -55,4 +57,4 @@ const ProductSort = () => {
     )
 }
 
-export default ProductSort;
+export default SortProducts;

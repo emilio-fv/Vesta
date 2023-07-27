@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Landing from './pages/Landing';
 import Products from './pages/Products';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
@@ -12,7 +12,10 @@ import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      {/* ✅ */}
+      <Route path='/' element={<Landing />} />
+
+      {/* TODO */}
       <Route path='/products' element={<Products />} />
       <Route path='/product' element={<Product />} />
       <Route path='/cart' element={<Cart />} />

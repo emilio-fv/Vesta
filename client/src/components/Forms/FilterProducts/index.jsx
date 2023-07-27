@@ -35,7 +35,7 @@ const marks = [
 
 const initialPriceRange = [0,500];
 
-const ProductFilter = () => {
+const FilterProducts = () => {
     // Helpers
     const dispatch = useDispatch();
 
@@ -212,4 +212,4 @@ const ProductFilter = () => {
     )
 }
 
-export default ProductFilter;
+export default FilterProducts;

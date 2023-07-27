@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import CartCard from '../CartCard';
+import CartCard from '../Cards/CartCard';
 // import sampleProducts from '../../data/sampleProducts';
 const sampleProducts = [];
 

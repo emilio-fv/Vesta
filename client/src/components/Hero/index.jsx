@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { resetProducts, setCategory } from '../../../reducers/products/productsSlice';
+import { resetProducts, setCategory } from '../../reducers/products/productsSlice';
 import HeroImg from '../../../assets/hero.jpg';
 
-// MUI Imports
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
