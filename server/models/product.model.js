@@ -35,32 +35,6 @@ const Product = db.define('Product', {
             }
         }
     },
-    size: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: "Size required."
-            },
-            len: {
-                args: [1,65],
-                msg: "Size required."
-            }
-        }
-    },
-    color: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: "Color required."
-            },
-            len: {
-                args: [1,65],
-                msg: "Color required."
-            }
-        }
-    },
     price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
@@ -78,24 +52,6 @@ const Product = db.define('Product', {
             }
         }
     },
-    quantity: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: "Quantity required."
-            },
-            isInt: {
-                args: true,
-                msg: "Valid quantity required."
-            },
-            isPositive(value) {
-                if (parseInt(value) <= 0) {
-                    throw new Error('Quantity must be greater than 1.')
-                }
-            }
-        }
-    },
     description: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -108,6 +64,9 @@ const Product = db.define('Product', {
                 msg: "Description required."
             }
         }
+    },
+    src: {
+        type: DataTypes.STRING
     },
     onSale: {
         type: DataTypes.BOOLEAN,
@@ -135,7 +94,13 @@ const Product = db.define('Product', {
 }, 
 {
     underscored: true,
+    tableName: 'products',
 })
+
+// Update database
+Product.sync().then(() => {
+    console.log('Product model synced');
+});
 
 // Exports
 module.exports = {

@@ -10,10 +10,12 @@ const {
 } = require('../utils/jwt.utils');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { logger } = require('../utils/logger.utils');
+
 
 // Register User
 const handleRegisterUser = async (req, res) => {
-    // TODO: Log controller method
+    logger.info("Controller: handleRegisterUser");
     try {
         // Extract form data
         const { email } = req.body;
@@ -23,6 +25,7 @@ const handleRegisterUser = async (req, res) => {
     
         // Handle email already registered
         if (foundUser) {
+            logger.error("Email already registered.")
             return res.status(400).json({ message: "Email already registered." });
         }
 
@@ -55,7 +58,7 @@ const handleRegisterUser = async (req, res) => {
             admin: newUser.admin
         });
     } catch (error) {
-        // TODO: log error
+        logger.error(error);
         return res.status(400).json({
             message: "User not successfully created.",
             error: error
@@ -65,7 +68,7 @@ const handleRegisterUser = async (req, res) => {
 
 // Login User
 const handleLoginUser = async (req, res) => {
-    // TODO: log controller method
+    logger.info("Controller: handleLoginUser");
     try {
         // Destructure request body
         const { email, password } = req.body;
@@ -75,6 +78,7 @@ const handleLoginUser = async (req, res) => {
 
         // If Email not found
         if (foundUser === null) {
+            logger.error("Email not registered.")
             return res.status(400).json({ message: "Email not registered." });
         }
 
@@ -83,6 +87,7 @@ const handleLoginUser = async (req, res) => {
 
         // Handle incorrect password
         if (!correctPassword) {
+            logger.error("Invalid login.")
             return res.status(400).json({ message: "Invalid login."});
         }
 
@@ -111,20 +116,20 @@ const handleLoginUser = async (req, res) => {
             admin: foundUser.admin
         });
     } catch (error) {
-        // TODO: Log error
+        logger.error(error);
         return res.status(400).json(error);
     }
 };
 
 // Logout User
 const handleLogoutUser = async (req, res) => {
-    // TODO: Log controller method
+    logger.info("Controller: handleLogoutUser");
     return res.clearCookie("accessToken").clearCookie("refreshToken").sendStatus(200);
 };
 
 // TODO: Refresh access token
 const handleRefreshAccessToken = async (req, res) => {
-    // TODO Log controller method
+    logger.info("Controller: handleRefreshAccessToken");
     try {
         // Extract refresh token
         const { refreshToken } = req.cookies;
@@ -134,11 +139,15 @@ const handleRefreshAccessToken = async (req, res) => {
             refreshToken, 
             process.env.REFRESH_SECRET, 
             (err, decoded) => {
-                // Handle expired refresh token
-                if (err?.name === 'TokenExpiredError') {
-                    return res.status(401).json({ message: "expiredRefreshToken"})
+                if (err) {
+                    logger.error(err);
+                    // Handle expired refresh token
+                    if (err?.name === 'TokenExpiredError') {
+                        return res.status(401).json({ message: "expiredRefreshToken"})
+                    } else {
+                        return res.status(401).json(err)
+                    }
                 }
-
                 // Generate new access token
                 const newAccessToken = generateAccessToken({
                     id: decoded.id,
@@ -152,20 +161,18 @@ const handleRefreshAccessToken = async (req, res) => {
                 }).json('access token refreshed')
         })
     } catch (error) {
-        // TODO: Log error
-        console.log(error);
+        logger.error(error);
         return res.status(400).json(error);
     }
 }
 
 const handleGetAllUsers = async (req, res) => {
-    // TODO: Log controller method
+    logger.info("Controller: handleGetAllUsers");
     try {
         const response = await getAllUsers();
         return res.status(200).json(response);
     } catch (error) {
-        // TODO: Log error
-        console.log(error);
+        logger.error(error);
         return res.status(400).json(error);
     }
 }

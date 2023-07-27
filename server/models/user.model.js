@@ -91,7 +91,7 @@ const User = db.define('User', {
     },
 });
 
-// Add to database
+// Update database
 User.sync().then(() => {
     console.log('User model synced');
 })

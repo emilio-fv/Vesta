@@ -13,25 +13,15 @@ const getAllProducts = async () => {
     // TODO log service
     const allProducts = await Product.findAll({
         order: [
-            ['createdAt', 'ASC']
+            ['name', 'ASC']
         ]
     });
     return allProducts;
 }
 
-// Get Products By Category
-const getProductsByCategory = async (category) => {
-    // TODO log service
-    const allProducts = await Product.findAll({
-        where: {
-            category: category
-        }
-    })
-    return allProducts;
-}
-
 // Update Product By Id
 const updateProductById = async (data, id) => {
+    console.log(data);
     // TODO log service
     const updatedProduct = await Product.update(data, {
         where: {
@@ -57,7 +47,6 @@ const deleteProductById = async (id) => {
 module.exports = {
     createProduct,
     getAllProducts,
-    getProductsByCategory,
     updateProductById,
     deleteProductById
 }
