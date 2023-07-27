@@ -4,9 +4,9 @@ import './assets/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { ThemeProvider } from '@mui/material/styles';
 import theme from './assets/mui';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

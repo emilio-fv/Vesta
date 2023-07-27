@@ -8,6 +8,6 @@ const PrivateRoute = ({children, ...rest}) => {
     return (
         user ? <Outlet /> : <Navigate to='/' />
     )
-}
+};
 
 export default PrivateRoute;

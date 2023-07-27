@@ -14,14 +14,13 @@ const Hero = () => {
     const dispatch = useDispatch();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.up("lg"));
-
     const buttonProps = {
         size: !isSmallScreen ? 'small' : 'medium',
     }
 
-    useEffect(() => {
-        dispatch(resetProducts());
-    }, [])
+    // useEffect(() => {
+    //     dispatch(resetProducts());
+    // }, [])
 
     return (
       <Box sx={{ position: 'relative' }}>

@@ -5,7 +5,7 @@ const Product = () => {
     return (
         <Layout>
             {
-                <h1>Product</h1>
+                <h1>TODO Product</h1>
             }
         </Layout>
     )

@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 // import sampleProducts from '../../data/sampleProducts';
-import ProductCard from '../Cards/ProductCard';
+import ProductCard from '../../Cards/ProductCard';
 
 const sampleProducts = [];
 
