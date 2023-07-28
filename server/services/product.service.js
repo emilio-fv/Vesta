@@ -1,38 +1,28 @@
-// Import Product model
+// Imports
 const { Product } = require('../models/product.model');
 
 // Create Product
 const createProduct = async (data) => {
-    console.log("Service: createProduct");
+    // TODO log service
     const newProduct = await Product.create(data);
     return newProduct;
 }
 
 // Get All Products
 const getAllProducts = async () => {
-    console.log("Service: getAllProducts");
+    // TODO log service
     const allProducts = await Product.findAll({
         order: [
-            ['createdAt', 'ASC']
+            ['name', 'ASC']
         ]
     });
     return allProducts;
 }
 
-// Get Products By Category
-const getProductsByCategory = async (category) => {
-    console.log("Service: getProductsByCategory");
-    const allProducts = await Product.findAll({
-        where: {
-            category: category
-        }
-    })
-    return allProducts;
-}
-
 // Update Product By Id
 const updateProductById = async (data, id) => {
-    console.log("Service: updateProductById id: ", id);
+    console.log(data);
+    // TODO log service
     const updatedProduct = await Product.update(data, {
         where: {
             id: id
@@ -44,7 +34,7 @@ const updateProductById = async (data, id) => {
 
 // Delete Product By Id
 const deleteProductById = async (id) => {
-    console.log("Service: deleteProductById");
+    // TODO log service
     const numOfDeletedProducts = await Product.destroy({
         where: {
             id: id
@@ -55,9 +45,8 @@ const deleteProductById = async (id) => {
 
 // Exports
 module.exports = {
-    createProduct: createProduct,
-    getAllProducts: getAllProducts,
-    getProductsByCategory: getProductsByCategory,
-    updateProductById: updateProductById,
-    deleteProductById: deleteProductById
+    createProduct,
+    getAllProducts,
+    updateProductById,
+    deleteProductById
 }

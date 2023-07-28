@@ -1,22 +1,20 @@
-// Import express, product controller methods
+// Imports
 const express = require('express');
 const {
     handleCreateProduct,
     handleGetAllProducts,
-    handleGetProductsByCategory,
     handleUpdateProductById,
     handleDeleteProductById
 } = require('../controllers/product.controller');
 
-// Instantiate router
+// Create router
 const router = express.Router();
 
-// Product API Routes
+// Product API routes
 router.post('/create', handleCreateProduct); 
 router.get('/all', handleGetAllProducts); 
-router.get('/:category/all', handleGetProductsByCategory);
-router.put('/:id/update', handleUpdateProductById); 
-router.delete('/:id', handleDeleteProductById); 
+router.patch('/:id/update', handleUpdateProductById); 
+router.delete('/:id/delete', handleDeleteProductById); 
 
 // Exports
 module.exports = {

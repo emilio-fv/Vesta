@@ -4,7 +4,8 @@
   "description": "An e-commerce web application for a fake fashion designer.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [
     "node js",
@@ -26,6 +27,10 @@
     "nodeman": "^1.1.2",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.31.1"
+    "sequelize": "^6.31.1",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }

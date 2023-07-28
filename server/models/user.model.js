@@ -1,4 +1,4 @@
-// Import data types, database connection, bcrypt
+// Imports
 const { DataTypes } = require('sequelize');
 const { db } = require('../config/db.config');
 const bcrypt = require('bcrypt');
@@ -72,6 +72,7 @@ const User = db.define('User', {
     }
 }, 
 { 
+    tableName: 'users',
     underscored: true,
     hooks: {
         beforeCreate: async (user) => {
@@ -90,6 +91,12 @@ const User = db.define('User', {
     },
 });
 
+// Update database
+User.sync().then(() => {
+    console.log('User model synced');
+})
+
+// Exports
 module.exports = {
-    User: User
+    User
 }
