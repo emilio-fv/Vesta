@@ -4,20 +4,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { sortPriceAsc, sortPriceDesc, sortFeatured } from '../../reducers/products/productsSlice';
 import { Typography } from '@mui/material';
 
-const SortProducts = () => {
+
+const SortProducts = ({ sortPriceAsc, sortPriceDesc, sortFeatured }) => {
     // Helpers
     const dispatch = useDispatch();
-    const { category } = useSelector((state) => state.products);
     const [sortCategory, setSortCategory] = useState("");
 
     // Reset Sort Category 
     useEffect(() => {
-        setSortCategory("");
-    }, [category])
+        return (() => {
+            setSortCategory("");
+        })
+    }, [])
 
     // Handle Sort Select Changes
     const handleChanges = (event) => {
@@ -27,9 +29,11 @@ const SortProducts = () => {
         if (value === 'Asc') {
             dispatch(sortPriceAsc());
         }
+
         if (value === 'Desc') {
             dispatch(sortPriceDesc());
         }
+
         if (value === 'Featured') {
             dispatch(sortFeatured());
         }
@@ -37,7 +41,6 @@ const SortProducts = () => {
 
     return (
         <Box sx={{ minWidth: 120 }}>
-
             <FormControl fullWidth>
                 <InputLabel id='sort-by-label'>Sort By</InputLabel>
                 <Select
@@ -57,4 +60,16 @@ const SortProducts = () => {
     )
 }
 
-export default SortProducts;
+// Connect to Redux
+// const mapStateToProps = (state) => ({ });
+
+const mapDispatchToProps = {
+    sortFeatured, 
+    sortPriceAsc, 
+    sortPriceDesc,
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(SortProducts);

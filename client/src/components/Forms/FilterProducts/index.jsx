@@ -11,8 +11,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
-import { useDispatch } from 'react-redux';
-import { filterProducts } from '../../reducers/products/productsSlice';
+import { connect, useDispatch } from 'react-redux';
+import { filter } from '../../../store/reducers/inventory/inventorySlice.js';
 
 function valueText(value) {
     return `$${value}`;
@@ -35,7 +35,7 @@ const marks = [
 
 const initialPriceRange = [0,500];
 
-const FilterProducts = () => {
+const FilterProducts = ({ filter }) => {
     // Helpers
     const dispatch = useDispatch();
 
@@ -114,7 +114,7 @@ const FilterProducts = () => {
             filters.price = priceRange;
         }
 
-        dispatch(filterProducts(filters));
+        dispatch(filter(filters));
     }
 
     return (
@@ -212,4 +212,14 @@ const FilterProducts = () => {
     )
 }
 
-export default FilterProducts;
+// Connect to Redux
+// const mapStateToProps = (state) => ({ });
+
+const mapDispatchToProps = {
+    filter 
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(FilterProducts);

@@ -5,8 +5,12 @@ import SortProducts from '../components/Forms/SortProducts';
 import FilterProducts from '../components/Forms/FilterProducts';
 import ProductsDisplay from '../components/Displays/ProductsDisplay';
 import Typography from '@mui/material/Typography';
+import { useParams } from 'react-router-dom';
 
-const Products = () => {
+const Products = ({ props }) => {
+  // Extract category from url
+  const { category } = useParams();
+
   return (
     <Layout>
       {
@@ -27,7 +31,7 @@ const Products = () => {
               alignItems: 'center'
             }}
           >
-            <Typography variant='h5'>TODO Category</Typography>
+            <Typography variant='h5'>{category.toUpperCase()}</Typography>
             <SortProducts />
           </Box>
           <Box
@@ -40,7 +44,7 @@ const Products = () => {
             }}
           >
             <FilterProducts />
-            <ProductsDisplay />
+            <ProductsDisplay category={category}/>
           </Box>
         </Container>
       }

@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { resetProducts, setCategory } from '../../reducers/products/productsSlice';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import HeroImg from '../../../assets/hero.jpg';
 
 import Box from '@mui/material/Box';
@@ -11,16 +9,12 @@ import { useTheme } from '@emotion/react';
 
 const Hero = () => {
     // Helpers
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.up("lg"));
     const buttonProps = {
         size: !isSmallScreen ? 'small' : 'medium',
-    }
-
-    // useEffect(() => {
-    //     dispatch(resetProducts());
-    // }, [])
+    };
 
     return (
       <Box sx={{ position: 'relative' }}>
@@ -48,9 +42,7 @@ const Hero = () => {
               }}
           >
             <Button 
-                onClick={event => dispatch(setCategory("Unisex"))}
-                component={RouterLink}
-                to='/products'
+                onClick={event => navigate('/unisex/products')}
                 {...buttonProps}
                 sx={{ 
                     border: '2px solid black',
@@ -60,9 +52,7 @@ const Hero = () => {
                 Shop Unisex
             </Button>
             <Button 
-                onClick={event => dispatch(setCategory("Women"))}
-                component={RouterLink}
-                to='/products'
+                onClick={event => navigate('/women/products')}
                 {...buttonProps}
                 sx={{ 
                     border: '2px solid black',
@@ -72,9 +62,9 @@ const Hero = () => {
                 Shop Women
             </Button>
             <Button 
-                onClick={event => dispatch(setCategory("Men"))}
-                component={RouterLink}
-                to='/products'
+                onClick={event => navigate('/men/products')}
+                // component={RouterLink}
+                // to='/products'
                 {...buttonProps}
                 sx={{ 
                     border: '2px solid black',

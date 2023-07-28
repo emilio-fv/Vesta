@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import ProductFilter from '../ProductsFilter';
-import ProductSort from '../ProductsSort';
+import React from 'react';
 import Box from '@mui/material/Box';
 import ProductCard from '../../Cards/ProductCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllProductsByCategory, resetFilteredProducts } from '../../../reducers/products/productsSlice';
-import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { useGetInventoryByCategoryQuery } from '../../../store/api/inventoryApi';
 
-const ProductsDisplay = () => {
+const ProductsDisplay = ({ category, inventory }) => {
     // Helpers
-    const dispatch = useDispatch();
-    const { products, filteredProducts, category, filter } = useSelector((state) => state.products);
+    const { isLoading, isSuccess } = useGetInventoryByCategoryQuery({ category: category });
 
-    // Fetch Products
-    useEffect(() => {
-        dispatch(getAllProductsByCategory(category));
-        dispatch(resetFilteredProducts())
-    }, [category])
+    if (isLoading) {
+        <h1>TODO: Loading spinner</h1>
+    }
 
     return (
         <Box
@@ -29,16 +21,22 @@ const ProductsDisplay = () => {
                 gridGap: '25px',
             }}
         >
-            { filter 
-                ? filteredProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                    ))
-                : products?.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                    ))
+            { isSuccess && inventory
+                ? inventory.map((product) => (
+                    <ProductCard key={product.id} product={product}/>
+                ))
+                : null
             }
         </Box>
     )
 }
 
-export default ProductsDisplay;
+// Connect to Redux store
+const mapStateToProps = (state) => ({
+    inventory: state.inventory.inventory
+});
+
+// Exports
+export default connect(
+    mapStateToProps,
+)(ProductsDisplay);

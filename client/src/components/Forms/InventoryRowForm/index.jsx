@@ -14,7 +14,6 @@ import Select from '@mui/material/Select';
 import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
 
-
 const InventoryRowForm = ({ product, setUpdateRow }) => {
     // Helpers 
     const dispatch = useDispatch();
@@ -67,7 +66,8 @@ const InventoryRowForm = ({ product, setUpdateRow }) => {
 
     // Handle Save Button
     const handleSaveClick = () => {
-        dispatch(updateProduct(formData));
+        // dispatch(updateProduct(formData));
+        // TODO update inventory
     }
 
     // Handle Undo Button

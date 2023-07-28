@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // API Endpoints
-app.use('/api/users', userRouter);
+app.use('/api/auth', userRouter);
 app.use('/api/products', productRouter);
 
 // Test DB connection

@@ -13,7 +13,7 @@ import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import Tooltip from '@mui/material/Tooltip';
 
 const ProductCard = ({ product, favorited }) => {
-    const [favorite, setFavorited] = useState(favorited);
+    // const [favorite, setFavorited] = useState(favorited);
     return (
         <Card
             sx={{
@@ -29,8 +29,8 @@ const ProductCard = ({ product, favorited }) => {
                     position: 'relative',
                 }}
             >
-                {/* Favorite Button */}
-                <IconButton
+                {/* TODO: Favorite Button */}
+                {/* <IconButton
                     sx={{
                         position: 'absolute',
                         right: 0
@@ -38,7 +38,7 @@ const ProductCard = ({ product, favorited }) => {
                     onClick={() => setFavorited(!favorite)}
                 >
                     {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </IconButton>
+                </IconButton> */}
                 {/* Product Image */}
                 <Box 
                     component='img'

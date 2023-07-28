@@ -6,12 +6,9 @@ import Button from '@mui/material/Button';
 
 const InventoryRow = ({ product, handleUpdateClick }) => {
     // Helpers
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    // Handle Delete
-    const handleDelete = (id) => {
-        dispatch(deleteProduct(id));
-    }
+    // TODO delete product
 
     return (
         <>
@@ -27,7 +24,7 @@ const InventoryRow = ({ product, handleUpdateClick }) => {
             <TableCell align='center'>{product.featured ? 'Yes' : 'No'}</TableCell>
             <TableCell sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Button onClick={event => handleUpdateClick(product.id)} size='small' variant='outlined'>Update</Button>
-                <Button onClick={event => handleDelete(product.id)} size='small' variant='outlined'>Delete</Button>
+                <Button onClick={event => console.log("delete")} size='small' variant='outlined'>Delete</Button>
             </TableCell>
         </>
     );

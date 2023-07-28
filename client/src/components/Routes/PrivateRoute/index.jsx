@@ -1,13 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({children, ...rest}) => {
-    const { user } = useSelector((state) => state.auth);
-
+const PrivateRoute = ({ loggedInUser, children, ...rest}) => {
     return (
-        user ? <Outlet /> : <Navigate to='/' />
+        loggedInUser ? <Outlet /> : <Navigate to='/' />
     )
 };
 
-export default PrivateRoute;
+// Connect to Redux store
+const mapStateToProps = (state) => ({
+    loggedInUser: state.auth.loggedInUser
+});
+
+export default connect(
+    mapStateToProps
+)(PrivateRoute);

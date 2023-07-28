@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../../../reducers/products/productsSlice';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -20,22 +19,13 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
-const Inventory = () => {
-    // Helpers
-    const dispatch = useDispatch();
-    const { products } = useSelector((state) => state.products);
-
-    // Fetch Products
-    useEffect(() => {
-        dispatch(getAllProducts())
-    }, [])
-
+const Inventory = ({ inventory }) => {
     // Table Pagination
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5)
 
     const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - inventory.length) : 0;
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -94,8 +84,8 @@ const Inventory = () => {
                     </TableHead>
                     <TableBody>
                         {(rowsPerPage > 0 
-                            ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            : products
+                            ? inventory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : inventory
                         ).map((product) => (
                             <TableRow
                                 key={product.id}
@@ -117,7 +107,7 @@ const Inventory = () => {
                             <TablePagination 
                                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1}]}
                                 // colSpan={6}
-                                count={products.length}
+                                count={inventory.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 SelectProps={{
@@ -147,4 +137,11 @@ const Inventory = () => {
     )
 }
 
-export default Inventory;
+// Connect to Redux store
+const mapStateToProps = (state) => ({
+    inventory: state.inventory.inventory
+})
+
+export default connect(
+    mapStateToProps
+)(Inventory);

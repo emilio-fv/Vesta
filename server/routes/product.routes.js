@@ -13,7 +13,7 @@ const router = express.Router();
 // Product API routes
 router.post('/create', handleCreateProduct); 
 router.get('/all', handleGetAllProducts); 
-router.put('/:id/update', handleUpdateProductById); 
+router.patch('/:id/update', handleUpdateProductById); 
 router.delete('/:id/delete', handleDeleteProductById); 
 
 // Exports

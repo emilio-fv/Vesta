@@ -3,17 +3,16 @@ import Layout from '../components/Layout';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import Box from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../../reducers/auth/authSlice';
 import Inventory from '../components/Displays/';
+import { useLogoutMutation } from '../store/api/authApi';
 
 const AdminDashboard = () => {
   // Helpers
-  const dispatch = useDispatch();
+  const [logout] = useLogoutMutation();
 
   // Handle Logout Button
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
   }
 
   return (

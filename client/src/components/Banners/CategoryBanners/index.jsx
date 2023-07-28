@@ -1,20 +1,16 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCategory } from '../../../reducers/products/productsSlice';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 const CategoryBanners = () => {
   // Helpers
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
       {/* Unisex Banner */}
       <Button
-        onClick={event => dispatch(setCategory("Unisex"))}
-        component={RouterLink}
-        to='/products'
+        onClick={event => navigate('/unisex/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
@@ -31,9 +27,7 @@ const CategoryBanners = () => {
       </Button>
       {/* Women Banner */}
       <Button
-        onClick={event => dispatch(setCategory("Women"))}
-        component={RouterLink}
-        to='/products'
+        onClick={event => navigate('/women/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
@@ -50,9 +44,7 @@ const CategoryBanners = () => {
       </Button>
       {/* Men Banner */}
       <Button
-        onClick={event => dispatch(setCategory("Men"))}
-        component={RouterLink}
-        to='/products'
+        onClick={event => navigate('/men/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
