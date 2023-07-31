@@ -10,8 +10,8 @@ const Landing = () => {
     <Layout>
       <Hero />
       <CategoryBanners />
-      <SaleBanner />
       <About />
+      <SaleBanner />
     </Layout>
   )
 };

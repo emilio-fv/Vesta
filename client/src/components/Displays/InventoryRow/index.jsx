@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteProduct } from '../../reducers/products/productsSlice';
+import { useUpdateInventoryMutation, useDeleteInventoryMutation } from '../../../store/api/inventoryApi';
 import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 
@@ -23,7 +22,7 @@ const InventoryRow = ({ product, handleUpdateClick }) => {
             <TableCell align='center'>{product.discount * 100 + '%'}</TableCell>
             <TableCell align='center'>{product.featured ? 'Yes' : 'No'}</TableCell>
             <TableCell sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Button onClick={event => handleUpdateClick(product.id)} size='small' variant='outlined'>Update</Button>
+                <Button onClick={event => console.log("update")} size='small' variant='outlined'>Update</Button>
                 <Button onClick={event => console.log("delete")} size='small' variant='outlined'>Delete</Button>
             </TableCell>
         </>

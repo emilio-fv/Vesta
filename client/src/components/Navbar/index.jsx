@@ -14,15 +14,15 @@ import Tooltip from '@mui/material/Tooltip';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import Modal from '@mui/material/Modal';
-import RegisterForm from '../RegisterForm';
-import LoginForm from '../LoginForm';
+import RegisterForm from '../Forms/RegisterForm';
+import LoginForm from '../Forms/LoginForm';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import { reset } from '../../reducers/auth/authSlice';
-import { setCategory } from '../../reducers/products/productsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+// import { reset } from '../../reducers/auth/authSlice';
+// import { setCategory } from '../../reducers/products/productsSlice';
+import { connect } from 'react-redux';
 
 const categories = ['Unisex', 'Women', 'Men'];
 
@@ -60,48 +60,38 @@ function a11yProps(index) {
   };
 }
 
-const Navbar = () => {
+const Navbar = ({ loggedInUser }) => {
   // Helpers
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-
-  // Open / Close Nav Menu (Mobile)
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  // Register / Login Tabs
-  const [value, setValue] = useState(0);
-  const handleTabChange = (event, newValue) => {
-    dispatch(reset());
-    setValue(newValue);
-  }
-
-  // Account Button
   const [accountOpen, setAccountOpen] = useState(false);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [value, setValue] = useState(0);
+
+  // Handle open and close nav menu (Mobile)
+  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  // Handle changing tabs
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  // Handle open account modal
   const handleAccountOpen = () => {
     // Check if user logged in
-    if (user) {
-      if (user.admin) {
+    if (loggedInUser) {
+      if (loggedInUser.admin) {
         navigate('/admin');
       } else {
         navigate('/account');
       }
     } else {
-      setAccountOpen(true)
+      setAccountOpen(true);
     }
   };
 
-  const handleAccountClose = () => {
-    dispatch(reset());
-    setAccountOpen(false)
-  };
+  // Handle close account modal
+  const handleAccountClose = () => setAccountOpen(false);
 
   // TODO: Favorites Button
   // TODO: Shopping Cart Button
@@ -169,7 +159,7 @@ const Navbar = () => {
                     onClick={handleCloseNavMenu}
                   >
                     <Link 
-                      onClick={event => dispatch(setCategory(category))}
+                      // onClick={event => dispatch(setCategory(category))}
                       component={RouterLink}
                       to='/products'
                       underline='none'
@@ -198,7 +188,7 @@ const Navbar = () => {
             <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', sm: 'flex' }, gap: 3 }}>
               {categories.map((category) => (
                 <Link 
-                  onClick={event => dispatch(setCategory(category))}
+                  // onClick={event => dispatch(setCategory(category))}
                   key={category}
                   component={RouterLink}
                   to='/products'
@@ -285,4 +275,12 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+// Connect to Redux store
+const mapStateToDispatch = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn
+})
+
+// Exports
+export default connect(
+  mapStateToDispatch
+)(Navbar);

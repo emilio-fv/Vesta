@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../reducers/auth/authSlice';
+import { useLoginMutation } from '../../../store/api/authApi';
 import { useNavigate } from 'react-router-dom';
 
 const initialFormState = {
@@ -56,7 +56,7 @@ const LoginForm = () => {
             })
             return;
         } else {
-            dispatch(login(formData));
+            // dispatch(login(formData));
         }
     }
 

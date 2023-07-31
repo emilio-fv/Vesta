@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const { db } = require('./config/db.config'); 
 
 // API Routers
-const { userRouter } = require('./routes/user.routes');
+const { authRouter } = require('./routes/auth.routes');
 const { productRouter } = require('./routes/product.routes');
 
 // Configure Port #
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // API Endpoints
-app.use('/api/auth', userRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/products', productRouter);
 
 // Test DB connection

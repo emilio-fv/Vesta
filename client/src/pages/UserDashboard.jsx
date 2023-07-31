@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import UserAccountInfo from '../components/UserAccountInfo';
+import UserAccountInfo from '../components/Displays/UserAccountInfo';
 import Favorites from '../components/Displays/Favorites';
 
 const UserDashboard = () => {

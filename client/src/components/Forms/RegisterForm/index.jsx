@@ -1,82 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../../store/api/authApi';
+import { useForm } from 'react-hook-form';
+import TextInput from '../../Inputs/Text';
+import PasswordField from '../../Inputs/Password';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { register } from '../../reducers/auth/authSlice';
-
-const initialFormState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-}
 
 const RegisterForm = () => {
     // Helpers
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { user, status, messages } = useSelector((state) => state.auth);
+    const [ register, { data, isError, error, isSuccess } ] = useRegisterMutation();
 
-    // Register Form Data & Error Messages
-    const [formData, setFormData] = useState(initialFormState);
-    const [errorMessages, setErrorMessages] = useState([]);
+    // Handle register form changes and submit
+    const { handleSubmit, control, watch } = useForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    })
 
-
-    // Set error messages, navigate to dashboard
+    // Handler register success
     useEffect(() => {
-        if (status === 'failed') {
-            setErrorMessages([...errorMessages, ...messages]);
-        }
-
-        if (status === 'succeeded' && user !== null) {
-            if (user.admin) {
-                navigate('/admin')
+        if (isSuccess) {
+            if (data.admin) {
+                navigate('/admin');
+            } else {
+                navigate('/account');
             }
-            navigate('/account')
         }
-    }, [user, status])
+    }, [isSuccess])
 
-    // Handle Form Changes
-    const handleChanges = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        })
-    };
 
-    // Handle Form Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        // Validate confirm password
-        if (formData.confirmPassword === null || formData.confirmPassword.length === 0) {
-            setErrorMessages([
-                ...errorMessages,
-                { path: 'confirmPassword', message: 'Confirm Password required.'}
-            ])
-        } 
-
-        // Compare Password & Confirm Password
-        if (formData.password !== formData.confirmPassword) {
-            setErrorMessages([
-                ...errorMessages,
-                { path: 'confirmPassword', message: 'Passwords must match'}
-            ])
-        } 
-
-        // Register
-        dispatch(register({
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            password: formData.password
-        }));
-
+    // Handle form submit
+    const handleRegister = (data) => {
+        register(data);
     };
 
     return (
@@ -91,73 +52,61 @@ const RegisterForm = () => {
                 gap: 1
             }}
             autoComplete='off'
-            onSubmit={event => handleSubmit(event)}
+            onSubmit={handleSubmit(handleRegister)}
         >
             <Typography component='p' variant='h5'>Register</Typography>
-            <TextField 
-                id='firstName'
-                name='firstName'
-                label="First Name" 
-                variant="standard" 
-                margin='none' 
-                size='small'
-                autoComplete='off'
-                value={formData.firstName}
-                onChange={event => handleChanges(event)}
-                error={errorMessages?.some(error => error.path === 'firstName')}
-                helperText={errorMessages?.find(error => error.path === 'firstName')?.message}
+            <TextInput 
+                name={'firstName'}
+                control={control}
+                rules={{ 
+                    required: 'First name required.'
+                }}
+                label={'First Name'}
             />
-            <TextField 
-                id='lastName'
-                name='lastName'
-                label="Last Name" 
-                variant="standard" 
-                margin='none' 
-                size='small'
-                autoComplete='off'
-                value={formData.lastName}
-                error={errorMessages?.some(error => error.path === 'lastName')}
-                helperText={errorMessages?.find(error => error.path === 'lastName')?.message}
-                onChange={event => handleChanges(event)}
+            <TextInput 
+                name={'lastName'}
+                control={control}
+                rules={{ 
+                    required: 'Last name required.'
+                }}
+                label={'Last Name'}
             />
-            <TextField 
-                id='email'
-                name='email'
-                label="Email" 
-                variant="standard" 
-                margin='none' 
-                size='small'
-                autoComplete='off'
-                error={errorMessages?.some(error => error.path === 'email')}
-                helperText={errorMessages?.find(error => error.path === 'email')?.message}
-                onChange={event => handleChanges(event)}
+            <TextInput 
+                name={'email'}
+                control={control}
+                rules={{
+                    required: 'Email required.', 
+                    pattern: { 
+                      value: /^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/, 
+                      message: "Invalid email."}
+                }}
+                label={'Email'}
             />
-            <TextField 
-                id='password'
-                name='password'
-                label="Password" 
-                variant="standard" 
-                margin='none' 
-                size='small' 
-                type="password"
-                autoComplete='off'
-                error={errorMessages?.some(error => error.path === 'password')}
-                helperText={errorMessages?.find(error => error.path === 'password')?.message}
-                onChange={event => handleChanges(event)}
+            <PasswordField 
+                name={'password'}
+                control={control}
+                rules={{ 
+                    required: 'Password required.'
+                }}
+                label={'Password'}
             />
-            <TextField 
-                id='confirmPassword'
-                name='confirmPassword'
-                label="Confirm Password" 
-                variant="standard" 
-                margin='none' 
-                size='small'
-                type="password"
-                autoComplete='off'
-                error={errorMessages?.some(error => error.path === 'confirmPassword')}
-                helperText={errorMessages?.find(error => error.path === 'confirmPassword')?.message}
-                onChange={event => handleChanges(event)}
+            <PasswordField 
+                name={'confirmPassword'}
+                control={control}
+                rules={{ 
+                    required: 'Confirm password required.',
+                    validate: value => {
+                        if (watch('password') !== value) {
+                            return "Passwords must match."
+                        }
+                    }
+                }}
+                label={'Confirm Password'}
             />
+            {isError 
+                ? <Typography component='p' sx={{ color: 'error.main' }}>{error.data.message}</Typography>
+                : null
+            }
             <Button type='submit' variant='contained' size='small' sx={{ marginTop: 1 }}>Register</Button>
         </Box>
     )

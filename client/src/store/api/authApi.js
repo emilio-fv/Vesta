@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Auth API slice
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api' }),
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (data) => ({
@@ -12,8 +12,14 @@ export const authApi = createApi({
         method: 'POST',
         body: data
       }),
-      transformResponse: (response, meta, arg) => response.data,
-      transformErrorResponse: (response, meta, arg) => response.data, 
+      // transformResponse: (response, meta, arg) => {
+      //     console.log(response)
+      //     return response
+      //   },
+      //   transformErrorResponse: (response, meta, arg) => {
+      //   console.log(response)
+      //   return response;
+      // }, 
     }),
     login: builder.mutation({
       query: (data) => ({
@@ -26,7 +32,7 @@ export const authApi = createApi({
     }),
     logout: builder.mutation({
       query: (data) => ({
-        url: '/auth/login',
+        url: '/auth/logout',
         method: 'GET',
         body: data
       }),

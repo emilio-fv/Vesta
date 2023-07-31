@@ -2,8 +2,8 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import Box from '@mui/material';
-import Inventory from '../components/Displays/';
+import Box from '@mui/material/Box';
+import Inventory from '../components/Displays/Inventory';
 import { useLogoutMutation } from '../store/api/authApi';
 
 const AdminDashboard = () => {

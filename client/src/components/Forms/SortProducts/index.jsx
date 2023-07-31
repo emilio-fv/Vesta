@@ -4,9 +4,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { sortPriceAsc, sortPriceDesc, sortFeatured } from '../../reducers/products/productsSlice';
-import { Typography } from '@mui/material';
+import { connect, useDispatch } from 'react-redux';
+import { sortPriceAsc, sortPriceDesc, sortFeatured } from '../../../store/reducers/products/productsSlice.js';
+// import { Typography } from '@mui/material';
 
 
 const SortProducts = ({ sortPriceAsc, sortPriceDesc, sortFeatured }) => {

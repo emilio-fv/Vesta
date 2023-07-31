@@ -1,10 +1,11 @@
 // Imports
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { baseQueryWithReauth } from '../middleware/reauthentication';
 
 // Inventory API slice
 export const inventoryApi = createApi({
   reducerPath: 'inventoryApi',
-  baseQuery: fetchBaseQuery({}),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     createInventory: builder.mutation({
       query: (data) => ({

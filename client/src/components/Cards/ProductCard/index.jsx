@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import dummyImg from '../../assets/placeholder.png';
+// import IconButton from '@mui/material/IconButton';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import dummyImg from '../../../assets/placeholder.png';
 import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import Tooltip from '@mui/material/Tooltip';
 
