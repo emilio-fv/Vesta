@@ -8,7 +8,7 @@ const {
     handleRefreshAccessToken,
     handleGetAllUsers,
     handleDeleteUser
-} = require('../../controllers/user.controller');
+} = require('../../controllers/auth.controller');
 
 // Instantiate router
 const router = express.Router();
@@ -23,5 +23,5 @@ router.delete('/:id/delete', handleDeleteUser);
 
 // Exports 
 module.exports = {
-    userRouter: router
+    authRouter: router
 };

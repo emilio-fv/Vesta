@@ -14,26 +14,19 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        resetErrors: (state) => {
-            state.status = 'idle'
-            state.errors = null
-          }
     },
     extraReducers: (builder) => {
         builder
-            // .addMatcher(authApi.endpoints.register.matchRejected, (state, action) => {
-            //     state.status = 'failed'
-            //     state.errors = action.payload
-            // })
             .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+                state.status = 'success'
+                state.loggedInUser = action.payload
+            })
+            .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
                 state.status = 'success'
                 state.loggedInUser = action.payload
             })
     }
 });
-
-
-// export const { reset, resetMessages }  = authSlice.actions;
 
 // Reducer
 export default authSlice.reducer;

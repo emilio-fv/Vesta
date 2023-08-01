@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const { db } = require('./config/db.config'); 
 
 // API Routers
-const { userRouter } = require('./routes/user');
+const { authRouter } = require('./routes/auth');
 const { productRouter } = require('./routes/products');
 
 // Create backend Server
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // API Endpoints
-app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/products', productRouter);
 
 // Test DB connection

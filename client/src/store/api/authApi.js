@@ -27,8 +27,8 @@ export const authApi = createApi({
         method: 'POST',
         body: data
       }),
-      transformResponse: (response, meta, arg) => response.data,
-      transformErrorResponse: (response, meta, arg) => response.data, 
+      // transformResponse: (response, meta, arg) => response,
+      // transformErrorResponse: (response, meta, arg) => response.data, 
     }),
     logout: builder.mutation({
       query: (data) => ({
@@ -36,16 +36,16 @@ export const authApi = createApi({
         method: 'GET',
         body: data
       }),
-      transformResponse: (response, meta, arg) => response.data,
-      transformErrorResponse: (response, meta, arg) => response.data, 
+      // transformResponse: (response, meta, arg) => response.data,
+      // transformErrorResponse: (response, meta, arg) => response.data, 
     }),
     refresh: builder.mutation({
       query: () => ({
         url: '/auth/refresh',
         method: 'GET'
       }),
-      transformResponse: (response, meta, arg) => response.data,
-      transformErrorResponse: (response, meta, arg) => response.data, 
+      // transformResponse: (response, meta, arg) => response.data,
+      // transformErrorResponse: (response, meta, arg) => response.data, 
     })
   })
 });
