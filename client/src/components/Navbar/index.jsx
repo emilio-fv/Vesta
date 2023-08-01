@@ -204,7 +204,7 @@ const Navbar = ({ loggedInUser }) => {
             <Box sx={{ flexGrow: 0 }}>
               {/* TODO: Add links to icons */}
               <Tooltip title="Account">
-                <IconButton onClick={handleAccountOpen}>
+                <IconButton onClick={event => handleAccountOpen(event)}>
                   <AccountCircleIcon fontSize='small' htmlColor='#fff'/>
                 </IconButton>
               </Tooltip>
@@ -277,7 +277,7 @@ const Navbar = ({ loggedInUser }) => {
 
 // Connect to Redux store
 const mapStateToDispatch = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn
+  loggedInUser: state.auth.loggedInUser
 })
 
 // Exports

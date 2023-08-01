@@ -27,7 +27,7 @@ const UserAccountInfo = ({ loggedInUser }) => {
         }}>
             <Typography>First Name: { loggedInUser.firstName }</Typography>
             <Typography>Last Name: { loggedInUser.lastName }</Typography>
-            <Typography>Email: { loggedInUser.email }</Typography>
+            {/* <Typography>Email: { loggedInUser.email }</Typography> */}
         </Box> 
     </Container>
   )

@@ -1,15 +1,11 @@
 // Imports
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-const baseQuery = fetchBaseQuery({ 
-  baseUrl: 'http://localhost:8000/api', 
-  credentials: 'include' 
-});
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { baseQueryWithReauth } from '../middleware/reauthentication';
 
 // Auth API slice
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (data) => ({
@@ -36,9 +32,21 @@ export const authApi = createApi({
         url: '/auth/refresh',
         method: 'GET'
       }),
+    }),
+    getAllUsers: builder.query({
+      query: () => ({
+        url: '/auth/all',
+        method: 'GET'
+      })
     })
   })
 });
 
 // API hooks
-export const { useLoginMutation, useLogoutMutation, useRefreshMutation, useRegisterMutation } = authApi;
+export const { 
+  useLoginMutation, 
+  useLogoutMutation, 
+  useRefreshMutation, 
+  useRegisterMutation, 
+  useGetAllUsersQuery 
+} = authApi;
