@@ -25,6 +25,12 @@ export const authSlice = createSlice({
                 state.status = 'success'
                 state.loggedInUser = action.payload
             })
+            .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+                console.log('success logout');
+                state.loggedInUser = null
+                state.status = 'idle'
+                state.errors = null
+            })
     }
 });
 

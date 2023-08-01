@@ -1,10 +1,15 @@
 // Imports
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+const baseQuery = fetchBaseQuery({ 
+  baseUrl: 'http://localhost:8000/api', 
+  credentials: 'include' 
+});
+
 // Auth API slice
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api' }),
+  baseQuery: baseQuery,
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (data) => ({
@@ -12,14 +17,6 @@ export const authApi = createApi({
         method: 'POST',
         body: data
       }),
-      // transformResponse: (response, meta, arg) => {
-      //     console.log(response)
-      //     return response
-      //   },
-      //   transformErrorResponse: (response, meta, arg) => {
-      //   console.log(response)
-      //   return response;
-      // }, 
     }),
     login: builder.mutation({
       query: (data) => ({
@@ -27,25 +24,18 @@ export const authApi = createApi({
         method: 'POST',
         body: data
       }),
-      // transformResponse: (response, meta, arg) => response,
-      // transformErrorResponse: (response, meta, arg) => response.data, 
     }),
     logout: builder.mutation({
-      query: (data) => ({
+      query: () => ({
         url: '/auth/logout',
-        method: 'GET',
-        body: data
+        method: 'POST',
       }),
-      // transformResponse: (response, meta, arg) => response.data,
-      // transformErrorResponse: (response, meta, arg) => response.data, 
     }),
     refresh: builder.mutation({
       query: () => ({
         url: '/auth/refresh',
         method: 'GET'
       }),
-      // transformResponse: (response, meta, arg) => response.data,
-      // transformErrorResponse: (response, meta, arg) => response.data, 
     })
   })
 });

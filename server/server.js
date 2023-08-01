@@ -5,7 +5,6 @@ require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}`});
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const { db } = require('./config/db.config'); 
 
 // API Routers
@@ -17,13 +16,14 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: '*', // TODO: update for production
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: 'http://localhost:3000', // TODO: update for production
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+    methods: ['POST', 'PUT', 'GET'],
     credentials: true
 }));
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ 
+app.use(express.json());
+app.use(express.urlencoded({ 
     extended: true 
 }));
 

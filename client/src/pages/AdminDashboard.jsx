@@ -23,7 +23,7 @@ const AdminDashboard = () => {
             <Typography variant='h4' fontWeight='bold'>Admin Dashboard</Typography>
             <Button size='small' sx={{ paddingX: 1, bgcolor: '#ed214d', '&:hover': { bgcolor: '#ff305d' }}} onClick={event => handleLogout(event)}>Logout</Button>
           </Box>
-          <Inventory />
+          {/* <Inventory /> */}
         </>
       }
     </Layout>
