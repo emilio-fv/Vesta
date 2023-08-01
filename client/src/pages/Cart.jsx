@@ -1,5 +1,6 @@
 import React from 'react';
-import Layout from '../components/Layout';import CartOverview from '../components/CartOverview';
+import Layout from '../components/Layout';
+import CartOverview from '../components/Displays/CartOverview';
 import CartSummary from '../components/Displays/CartSummary';
 
 const Cart = () => {

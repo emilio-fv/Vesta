@@ -7,7 +7,7 @@ const {
     handleLogoutUser,
     handleRefreshAccessToken,
     handleGetAllUsers
-} = require('../controllers/user.controller');
+} = require('../controllers/auth.controller');
 
 // Instantiate router
 const router = express.Router();
@@ -21,5 +21,5 @@ router.get('/all', authenticate, handleGetAllUsers);
 
 // Exports 
 module.exports = {
-    userRouter: router
+    authRouter: router
 };

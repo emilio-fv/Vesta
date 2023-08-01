@@ -1,5 +1,6 @@
 // Imports
 import { createSlice } from "@reduxjs/toolkit";
+import { authApi } from "../../api/authApi";
 
 // Initial State
 const initialState = {
@@ -13,39 +14,21 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // reset: (state) => {
-        //     state.status = 'idle'
-        //     state.messages = null
-        // },
-        // resetMessages: (state) => {
-        //     state.messages = null
-        // },
+        resetErrors: (state) => {
+            state.status = 'idle'
+            state.errors = null
+          }
     },
     extraReducers: (builder) => {
-        // builder
-            // .addCase(register.fulfilled, (state, action) => {
-            //     state.user = action.payload
-            //     state.status = 'succeeded'
-            //     state.messages = null
-            // })
-            // .addCase(register.rejected, (state, action) => {
+        builder
+            // .addMatcher(authApi.endpoints.register.matchRejected, (state, action) => {
             //     state.status = 'failed'
-            //     state.messages = action.payload
+            //     state.errors = action.payload
             // })
-            // .addCase(login.fulfilled, (state, action) => {
-            //     state.user = action.payload
-            //     state.status = 'succeeded'
-            //     state.messages = null
-            // })
-            // .addCase(login.rejected, (state, action) => {
-            //     state.status = 'failed'
-            //     state.messages = action.payload
-            // })
-            // .addCase(logout.fulfilled, (state) => {
-            //     state.user = null
-            //     state.status = 'idle'
-            //     state.messages = null
-            // })
+            .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+                state.status = 'success'
+                state.loggedInUser = action.payload
+            })
     }
 });
 

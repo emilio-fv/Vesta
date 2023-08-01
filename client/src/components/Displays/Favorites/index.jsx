@@ -22,9 +22,9 @@ const Favorites = () => {
                 padding: 2
             }}
         >
-            {sampleProducts.map((product) => (
+            {/* {sampleProducts.map((product) => (
                 <ProductCard key={product.name} product={product} favorited={true}/>
-            ))}
+            ))} */}
         </Box>
     </Container>
   )

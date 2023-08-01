@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeroImg from '../../../assets/hero.jpg';
+import HeroImg from '../../assets/hero.jpg'
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

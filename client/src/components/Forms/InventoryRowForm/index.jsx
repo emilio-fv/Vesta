@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct, resetMessages } from '../../reducers/products/productsSlice';
+import { useUpdateInventoryMutation } from '../../../store/api/inventoryApi';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl'
@@ -73,7 +73,7 @@ const InventoryRowForm = ({ product, setUpdateRow }) => {
     // Handle Undo Button
     const handleUndoClick = () => {
         setUpdateRow(null);
-        dispatch(resetMessages());
+        // dispatch(resetMessages());
     }
 
     return (
