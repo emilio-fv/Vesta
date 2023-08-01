@@ -19,7 +19,7 @@ const UserAccountInfo = ({ loggedInUser }) => {
     <Container sx={{ paddingY: 3 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3, alignItems: 'center' }}>
           <Typography variant='h4' fontWeight='bold'>Hello, { loggedInUser.firstName }</Typography>
-          <Button sx={{ bgcolor: '#ed214d', '&:hover': { bgcolor: '#ff305d'} }} onClick={event => handleLogout(event)}>Logout</Button>
+          <Button sx={{ bgcolor: '#ed214d', '&:hover': { bgcolor: '#ff305d'} }} onClick={event => handleLogout()}>Logout</Button>
         </Box>
         <Typography fontWeight='bold'>Account Overview</Typography>
         <Box sx={{

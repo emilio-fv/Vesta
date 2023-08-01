@@ -48,10 +48,12 @@ const handleRegisterUser = async (req, res) => {
         // Return cookie wih tokens and user data
         return res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: 'none'
         }).cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: 'none'
         })
         .json({
             firstName: newUser.firstName,
@@ -107,10 +109,12 @@ const handleLoginUser = async (req, res) => {
         // Return user
         return res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: 'none'
         }).cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: 'none'
         }).json({
             firstName: foundUser.firstName,
             lastName: foundUser.lastName,
@@ -125,7 +129,7 @@ const handleLoginUser = async (req, res) => {
 // Logout User
 const handleLogoutUser = async (req, res) => {
     logger.info("Controller: handleLogoutUser");
-    return res.clearCookie("accessToken").clearCookie("refreshToken").sendStatus(200);
+    return res.clearCookie("accessToken").clearCookie("refreshToken").json("Logged out");
 };
 
 // TODO: Refresh access token

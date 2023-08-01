@@ -1,13 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
 
-const AdminRoute = ({children, ...rest}) => {
-    const { user } = useSelector((state) => state.auth);
-
+const AdminRoute = ({ loggedInUser, children, ...rest}) => {
     return (
-        user.admin ? <Outlet /> : <Navigate to='/'/>
+        loggedInUser.admin ? <Outlet /> : <Navigate to='/'/>
     )
 }
 
-export default AdminRoute;
+// Connect to Redux store
+const mapStateToProps = (state) => ({
+    loggedInUser: state.auth.loggedInUser
+})
+export default connect(
+    mapStateToProps
+)(AdminRoute);

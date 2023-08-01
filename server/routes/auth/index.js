@@ -16,7 +16,7 @@ const router = express.Router();
 // User API routes
 router.post('/register', handleRegisterUser); 
 router.post('/login', handleLoginUser); 
-router.get('/logout', handleLogoutUser); 
+router.post('/logout', handleLogoutUser);
 router.get('/refresh', handleRefreshAccessToken);
 router.get('/all', handleGetAllUsers);
 router.delete('/:id/delete', handleDeleteUser);
