@@ -2,7 +2,8 @@
 const {
     createUser,
     getUserByEmail,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 } = require('../services/user.service');
 const {
     generateAccessToken,
@@ -177,11 +178,22 @@ const handleGetAllUsers = async (req, res) => {
     }
 }
 
+const handleDeleteUser = async (req, res) => {
+    logger.info("Controller: handleDeleteUser");
+    try {
+        const response = await deleteUser(req.body.id);
+    } catch (error) {
+        logger.error(error);
+        return res.status(400).json(error); 
+    }
+}
+
 // Exports
 module.exports = {
     handleRegisterUser,
     handleLoginUser,
     handleLogoutUser,
     handleRefreshAccessToken,
-    handleGetAllUsers
+    handleGetAllUsers,
+    handleDeleteUser
 };

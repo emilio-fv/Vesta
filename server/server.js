@@ -9,11 +9,8 @@ const bodyParser = require('body-parser');
 const { db } = require('./config/db.config'); 
 
 // API Routers
-const { authRouter } = require('./routes/auth.routes');
-const { productRouter } = require('./routes/product.routes');
-
-// Configure Port #
-const port =  process.env.PORT || 8000;
+const { authRouter } = require('./routes/auth');
+const { productRouter } = require('./routes/products');
 
 // Create backend Server
 const app = express();
@@ -45,12 +42,4 @@ app.use('/api/products', productRouter);
     }
 })()
 
-// Start server
-app.listen(port, () => {
-    console.log(`You are listening on port ${port} for requests to respond to.`);
-});
-
-// Test server
-app.get('/', (req, res) => {
-    res.json("Welcome to the Vesta backend server.");
-})
+module.exports = app;

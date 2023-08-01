@@ -21,7 +21,7 @@ const RegisterForm = () => {
         email: '',
         password: '',
         confirmPassword: ''
-    })
+    });
 
     // Handler register success
     useEffect(() => {
@@ -78,7 +78,8 @@ const RegisterForm = () => {
                     required: 'Email required.', 
                     pattern: { 
                       value: /^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/, 
-                      message: "Invalid email."}
+                      message: "Invalid email."
+                    }
                 }}
                 label={'Email'}
             />
