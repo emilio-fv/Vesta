@@ -18,7 +18,7 @@ router.post('/register', handleRegisterUser);
 router.post('/login', handleLoginUser); 
 router.post('/logout', handleLogoutUser);
 router.get('/refresh', handleRefreshAccessToken);
-router.get('/all', handleGetAllUsers);
+router.get('/all', authenticate, handleGetAllUsers);
 router.delete('/:id/delete', handleDeleteUser);
 
 // Exports 
