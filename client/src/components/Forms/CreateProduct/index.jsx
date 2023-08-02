@@ -19,7 +19,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
   const [ createProduct, { isError, error, isSuccess }] = useCreateProductMutation();
 
   // Handle form changes and submit
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     name: '',
     category: '',
     price: 0.00,
@@ -42,6 +42,10 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
   // Handle create product success
   useEffect(() => {
     if (isSuccess) {
+      setSrcError(null);
+      setSrc(null);
+      setFile(null);
+      reset();
       handleCloseProductForm();
     }
   }, [isSuccess]);

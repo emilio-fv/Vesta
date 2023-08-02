@@ -30,10 +30,9 @@ const handleGetAllProducts = async (req, res) => {
     logger.info("Controller: handleGetAllProducts");
     // Query database
     const response = await getAllProducts();
-    // Prase through results
-    return res.json({
-        products: [...response]
-    });
+
+    // Return products
+    return res.json(response);
 }
 
 // Update Product By Id

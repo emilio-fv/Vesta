@@ -22,6 +22,10 @@ export const productsSlice = createSlice({
                 state.status = 'success'
                 state.products.push(action.payload);
             })
+            .addMatcher(productsApi.endpoints.getAllProducts.matchFulfilled, (state, action) => {
+                state.status = 'success'
+                state.products = action.payload;
+            })
     }
 })
 
