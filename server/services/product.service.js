@@ -11,11 +11,7 @@ const createProduct = async (data) => {
 // Get All Products
 const getAllProducts = async () => {
     // TODO log service
-    const allProducts = await Product.findAll({
-        order: [
-            ['name', 'ASC']
-        ]
-    });
+    const allProducts = await Product.findAll();
     return allProducts;
 }
 

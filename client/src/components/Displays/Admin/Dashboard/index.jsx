@@ -51,10 +51,10 @@ const Dashboard = () => {
 
   return (
     <Box
-      sx={{ 
-        flexGrow: 1, 
+      sx={{
+        width: '100%',
         bgcolor: 'background.paper', 
-        display: 'flex', 
+        display: 'flex',
       }}
     >
       <Tabs
@@ -70,7 +70,7 @@ const Dashboard = () => {
       <TabPanel value={value} index={0}>
         TODO: Inventory
       </TabPanel>
-      <TabPanel value={value} index={1} >
+      <TabPanel value={value} index={1}>
         <Products />
       </TabPanel>
     </Box>

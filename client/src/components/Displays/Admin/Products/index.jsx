@@ -1,24 +1,65 @@
 // Imports
 import React from 'react';
-// import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import { connect } from 'react-redux';
-import { Typography } from '@mui/material';
+import { useGetAllProductsQuery } from '../../../../store/api/productsApi';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Link } from '@mui/material';
+
+const headerStyling = {
+  fontWeight: 'bold'
+}
 
 const ProductsTable = ({ products }) => {
+  // Fetch products
+  const { isSuccess } = useGetAllProductsQuery();
+
   return (
-    <Box 
-      sx={{ 
-        width: 1,
-        display: 'flex',
-        justifyContent: 'flex-end'
-      }}
-    >
-      {products.map((product) => (
-          <Typography>{product.name}</Typography>
-        ))
-      }
-    </Box>
+    <TableContainer component={Paper} >
+      <Table sx={{ minWidth: 850, maxWidth: 950 }}  stickyHeader aria-label='Products table'>
+        <colgroup>
+          <col width='10%'/>
+          <col width='10%'/>
+          <col width='10%'/>
+          <col width='30%'/>
+          <col width='10%'/>
+          <col width='20%'/>
+        </colgroup>
+        <TableHead>
+          <TableRow>
+            <TableCell sx={headerStyling}>Name</TableCell>
+            <TableCell sx={headerStyling}>Category</TableCell>
+            <TableCell sx={headerStyling}>Price</TableCell>
+            <TableCell sx={headerStyling}>Description</TableCell>
+            <TableCell sx={headerStyling}>Image</TableCell>
+            <TableCell sx={headerStyling}>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {isSuccess 
+            ? products.map((product) => (
+                <TableRow
+                  key={product.id}
+                >
+                  <TableCell>{product.name}</TableCell>
+                  <TableCell>{product.category}</TableCell>
+                  <TableCell>${product.price}</TableCell>
+                  <TableCell>{product.description}</TableCell>
+                  <TableCell><Link href={product.src} target='_blank' rel='noopener'>url</Link></TableCell>
+                  <TableCell>TODO: Actions</TableCell>
+                </TableRow>
+              ))
+            : null
+          }
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 };
 
@@ -131,3 +172,5 @@ export default connect(
 //         </Container>
 //     )
 // }
+
+
