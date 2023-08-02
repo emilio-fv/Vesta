@@ -41,11 +41,9 @@ const handleUpdateProductById = async (req, res) => {
     try {
         // Query database
         const updatedProduct = await updateProductById(req.body, req.params.id);
-        
+
         // Return updated product
-        return res.status(200).json({
-            updatedProduct: updatedProduct
-        });
+        return res.status(200).json(updatedProduct[1][0]);
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error);

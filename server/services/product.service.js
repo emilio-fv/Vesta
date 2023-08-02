@@ -17,7 +17,6 @@ const getAllProducts = async () => {
 
 // Update Product By Id
 const updateProductById = async (data, id) => {
-    console.log(data);
     // TODO log service
     const updatedProduct = await Product.update(data, {
         where: {
