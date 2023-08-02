@@ -1,8 +1,9 @@
 // Imports
 import { createSlice } from "@reduxjs/toolkit";
+import { productsApi } from "../../api/productsApi";
 
 const initialState = {
-    products: null,
+    products: [],
     status: 'idle', // idle | loading | failed | success
     errors: null
 };
@@ -11,9 +12,16 @@ const initialState = {
 export const productsSlice = createSlice({
     name: 'products',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        // sort by name
+        // sort by category
+    },
     extraReducers: (builder) => {
-        // builder
+        builder
+            .addMatcher(productsApi.endpoints.createProduct.matchFulfilled, (state, action) => {
+                state.status = 'success'
+                state.products.push(action.payload);
+            })
     }
 })
 

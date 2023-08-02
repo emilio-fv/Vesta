@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import UserAccountInfo from '../components/Displays/UserAccountInfo';
-import Favorites from '../components/Displays/Favorites';
+import AccountInfo from '../components/Displays/User/AccountInfo';
+import Favorites from '../components/Displays/User/Favorites';
 
 const UserDashboard = () => {
   return (
     <Layout>
-        <UserAccountInfo />
+        <AccountInfo />
         <Favorites />
     </Layout>
   )

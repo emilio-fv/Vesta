@@ -9,7 +9,7 @@ const { db } = require('./config/db.config');
 
 // API Routers
 const { authRouter } = require('./routes/auth');
-const { productRouter } = require('./routes/products');
+const { productsRouter } = require('./routes/products');
 
 // Create backend Server
 const app = express();
@@ -29,7 +29,7 @@ app.use(express.urlencoded({
 
 // API Endpoints
 app.use('/api/auth', authRouter);
-app.use('/api/products', productRouter);
+app.use('/api/products', productsRouter);
 
 // Test DB connection
 (async () => {

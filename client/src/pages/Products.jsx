@@ -3,7 +3,6 @@ import Layout from '../components/Layout';
 import { Box, Container } from '@mui/material';
 import SortProducts from '../components/Forms/SortProducts';
 import FilterProducts from '../components/Forms/FilterProducts';
-import ProductsDisplay from '../components/Displays/Products';
 import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
 
@@ -44,7 +43,7 @@ const Products = ({ props }) => {
             }}
           >
             <FilterProducts />
-            <ProductsDisplay category={category}/>
+            {/* TODO: Display products */}
           </Box>
         </Container>
       }

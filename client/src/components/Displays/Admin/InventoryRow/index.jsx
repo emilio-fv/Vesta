@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUpdateInventoryMutation, useDeleteInventoryMutation } from '../../../store/api/inventoryApi';
+import { useUpdateInventoryMutation, useDeleteInventoryMutation } from '../../../../store/api/inventoryApi';
 import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 

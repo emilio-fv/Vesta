@@ -4,9 +4,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { connect } from 'react-redux';
-import { useLogoutMutation } from '../../../store/api/authApi.js';
+import { useLogoutMutation } from '../../../../store/api/authApi.js';
 
-const UserAccountInfo = ({ loggedInUser }) => {
+const AccountInfo = ({ loggedInUser }) => {
   // Helpers
   const [logout] = useLogoutMutation();
 
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps
-)(UserAccountInfo);
+)(AccountInfo);

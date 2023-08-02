@@ -68,29 +68,29 @@ const Product = db.define('Product', {
     src: {
         type: DataTypes.STRING
     },
-    onSale: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-    },
-    discount: {
-        type: DataTypes.DECIMAL(3,2),
-        defaultValue: 0,
-        validate: {
-            isDecimal: {
-                args: true,
-                msg: "Valid discount required."
-            },
-            isPercentage(value) {
-                if (parseInt(value) < 0 || parseInt(value) >= 1) {
-                    throw new Error('Discount must be between 0% and 100%.');
-                }
-            }
-        }
-    },
-    featured: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-    },
+    // onSale: {
+    //     type: DataTypes.BOOLEAN,
+    //     defaultValue: false
+    // },
+    // discount: {
+    //     type: DataTypes.DECIMAL(3,2),
+    //     defaultValue: 0,
+    //     validate: {
+    //         isDecimal: {
+    //             args: true,
+    //             msg: "Valid discount required."
+    //         },
+    //         isPercentage(value) {
+    //             if (parseInt(value) < 0 || parseInt(value) >= 1) {
+    //                 throw new Error('Discount must be between 0% and 100%.');
+    //             }
+    //         }
+    //     }
+    // },
+    // featured: {
+    //     type: DataTypes.BOOLEAN,
+    //     defaultValue: false
+    // },
 }, 
 {
     underscored: true,

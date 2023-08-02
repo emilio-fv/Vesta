@@ -20,6 +20,11 @@ const LoginForm = () => {
         password: ''
     });
 
+    // Handle form submit
+    const handleLogin = (data) => {
+        login(data);
+    }
+
     // Handle login success
     useEffect(() => {
         if (isSuccess) {
@@ -30,11 +35,6 @@ const LoginForm = () => {
             }
         }
     }, [isSuccess]);
-
-    // Handle form submit
-    const handleLogin = (data) => {
-        login(data);
-    }
 
     return (
         <Box 

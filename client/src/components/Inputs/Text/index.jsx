@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({ name, control, rules, label }) => {
+const TextInput = ({ name, control, rules, label, multiline }) => {
   return (
         <Controller 
             name={name}
@@ -17,6 +17,7 @@ const TextInput = ({ name, control, rules, label }) => {
                     margin='none' 
                     size='small'
                     autoComplete='off'
+                    multiline={multiline}
                     value={value}
                     onChange={onChange}
                     error={!!error}
