@@ -18,5 +18,5 @@ router.delete('/:id/delete', handleDeleteProductById);
 
 // Exports
 module.exports = {
-    productRouter: router
+    productsRouter: router
 }

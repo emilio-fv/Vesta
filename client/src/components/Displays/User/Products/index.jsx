@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import ProductCard from '../../Cards/ProductCard';
+import ProductCard from '../../../Cards/ProductCard';
 import { connect } from 'react-redux';
-import { useGetInventoryByCategoryQuery } from '../../../store/api/inventoryApi';
+import { useGetInventoryByCategoryQuery } from '../../../../store/api/inventoryApi';
 
 const ProductsDisplay = ({ category, inventory }) => {
     // Helpers

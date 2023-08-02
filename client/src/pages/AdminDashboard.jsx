@@ -1,17 +1,26 @@
-import React from 'react';
+// Imports
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
-import { Typography } from '@mui/material';
-import { Button } from '@mui/material';
-import Box from '@mui/material/Box';
 // import Inventory from '../components/Displays/Inventory';
-import { useGetAllUsersQuery, useLogoutMutation } from '../store/api/authApi';
+import { useLogoutMutation } from '../store/api/authApi';
+
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container'
+import Dashboard from '../components/Displays/Admin/Dashboard';
+import CreateProduct from '../components/Forms/CreateProduct';
 
 const AdminDashboard = () => {
   // Helpers
   const [logout] = useLogoutMutation();
-  const { data: users, isSuccess } = useGetAllUsersQuery();
+  
+  // Handle create product form modal
+  const [productFormOpen, setProductFormOpen] = useState(false);
+  const handleOpenProductForm = () => setProductFormOpen(true);
+  const handleCloseProductForm = () => setProductFormOpen(false);
 
-  // Handle Logout Button
+  // Handle logout button
   const handleLogout = () => {
     logout();
   }
@@ -19,17 +28,50 @@ const AdminDashboard = () => {
   return (
     <Layout>
       {
-        <>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-            <Typography variant='h4' fontWeight='bold'>Admin Dashboard</Typography>
-            <Button size='small' sx={{ paddingX: 1, bgcolor: '#ed214d', '&:hover': { bgcolor: '#ff305d' }}} onClick={event => handleLogout(event)}>Logout</Button>
+        <Container sx={{ pb: 3 }}>
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              justifyContent: 'space-between',
+              padding: 3,
+            }}
+          >
+            <Typography variant='h5' fontWeight='bold'>Admin Dashboard</Typography>
+            <Box>
+              <Button 
+                size='small' 
+                sx={{ 
+                  paddingX: 1,
+                }} 
+                // onClick={event => handleLogout(event)}
+              >
+                Add Inventory
+              </Button>
+              <Button 
+                size='small' 
+                sx={{ 
+                  paddingX: 1,
+                }} 
+                onClick={handleOpenProductForm}
+              >
+                Create Product
+              </Button>
+              <Button 
+                size='small' 
+                sx={{ 
+                  paddingX: 1, 
+                  bgcolor: '#ed214d', 
+                  '&:hover': { bgcolor: '#ff305d' }
+                }} 
+                onClick={event => handleLogout(event)}
+              >
+                Logout
+              </Button>
+            </Box>
           </Box>
-          {/* <Inventory /> */}
-          {isSuccess 
-            ? users.map((user) => ( <Typography>{user.id}</Typography>))
-            : null
-          }
-        </>
+          <Dashboard />
+          <CreateProduct productFormOpen={productFormOpen} handleCloseProductForm={handleCloseProductForm}/>
+        </Container>
       }
     </Layout>
   )

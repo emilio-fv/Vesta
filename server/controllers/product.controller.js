@@ -17,7 +17,7 @@ const handleCreateProduct = async (req, res) => {
 
         // Return new product
         return res.status(200).json({
-            ...newProduct
+            ...newProduct.dataValues
         })
     } catch (error) {
         logger.error(error);
