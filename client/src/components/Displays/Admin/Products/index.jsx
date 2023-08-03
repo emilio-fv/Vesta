@@ -1,7 +1,7 @@
 // Imports
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useGetAllProductsQuery } from '../../../../store/api/productsApi';
+import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../../store/api/productsApi';
 import UpdateProduct from '../../../Forms/UpdateProduct';
 
 import Table from '@mui/material/Table';
@@ -27,6 +27,7 @@ const ProductsTable = ({ products }) => {
     setSelectedProduct(null);
   };
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deleteProduct] = useDeleteProductMutation();
 
   // Fetch products
   const { isSuccess } = useGetAllProductsQuery();
@@ -35,6 +36,11 @@ const ProductsTable = ({ products }) => {
   const handleUpdateClick = (product) => {
     setSelectedProduct(product);
     handleOpenUpdateProductForm();
+  };
+
+  // Handle delete button click
+  const handleDeleteClick = (productId) => {
+    deleteProduct(productId);
   };
 
   return (
@@ -79,7 +85,7 @@ const ProductsTable = ({ products }) => {
                     </TableCell>
                     <TableCell>
                       <Button onClick={() => handleUpdateClick(product)}>Update</Button>
-                      <Button>Delete</Button>
+                      <Button onClick={() => handleDeleteClick(product.id)}>Delete</Button>
                     </TableCell>
                   </TableRow>
               )) 

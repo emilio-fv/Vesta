@@ -62,7 +62,10 @@ const handleDeleteProductById = async (req, res) => {
         const response = await deleteProductById(id);
 
         // Return success message
-        return res.status(200).json("Product deleted.");
+        return res.status(200).json({
+            productId: id,
+            message: "Product deleted"
+        });
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error);
