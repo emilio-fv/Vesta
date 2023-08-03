@@ -3,11 +3,12 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
-const PriceInput = ({ name, control, rules, label }) => {
+const PriceInput = ({ name, control, defaultValue, rules, label }) => {
   return (
     <Controller 
       name={name}
       control={control}
+      defaultValue={defaultValue}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField 
