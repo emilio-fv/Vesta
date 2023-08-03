@@ -26,6 +26,11 @@ export const productsSlice = createSlice({
                 state.status = 'success'
                 state.products = action.payload;
             })
+            .addMatcher(productsApi.endpoints.updateProduct.matchFulfilled, (state, action) => {
+                const updatedProduct = action.payload
+                const index = state.products.findIndex((product) => product.id === updatedProduct.id);
+                state.products[index] = updatedProduct;
+            })
     }
 })
 
