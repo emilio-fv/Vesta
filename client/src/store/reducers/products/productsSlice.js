@@ -31,6 +31,13 @@ export const productsSlice = createSlice({
                 const index = state.products.findIndex((product) => product.id === updatedProduct.id);
                 state.products[index] = updatedProduct;
             })
+            .addMatcher(productsApi.endpoints.deleteProduct.matchFulfilled, (state, action) => {
+                const { productId } = action.payload;
+                const index = state.products.findIndex((product) => {
+                    return parseInt(product.id) === parseInt(productId);
+                });
+                state.products.splice(index, 1);
+            })
     }
 })
 

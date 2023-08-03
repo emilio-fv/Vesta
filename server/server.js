@@ -18,7 +18,7 @@ const app = express();
 app.use(cors({
     origin: 'http://localhost:3000', // TODO: update for production
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-    methods: ['POST', 'PUT', 'GET', 'PATCH'],
+    methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
     credentials: true
 }));
 app.use(cookieParser());
