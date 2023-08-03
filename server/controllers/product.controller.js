@@ -52,12 +52,12 @@ const handleUpdateProductById = async (req, res) => {
 
 // Delete Product By Id
 const handleDeleteProductById = async (req, res) => {
-    // TODO: log controller method
     logger.info("Controller: handleDeleteProductById");
     // Destructure request body
     const { id } = req.params;
 
-    try {        
+    try {
+        // TODO: Check if any inventory
         // Query database
         const response = await deleteProductById(id);
 
