@@ -6,10 +6,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Products from '../Products';
+import Inventory from '../Inventory';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -68,7 +68,7 @@ const Dashboard = () => {
         <Tab label="Products" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        TODO: Inventory
+        <Inventory />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Products />

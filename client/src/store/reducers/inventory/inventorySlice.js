@@ -64,6 +64,10 @@ const inventorySlice = createSlice({
         }
         state.inventory.push(action.payload);
       })
+      .addMatcher(inventoryApi.endpoints.getAllInventory.matchFulfilled, (state, action) => {
+        state.status = 'success'
+        state.inventory = action.payload
+      })
   }
 });
 
