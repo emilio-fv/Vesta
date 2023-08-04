@@ -45,19 +45,20 @@ const Inventory = db.define('Inventory', {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
+    productId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Product',
+            key: 'id'
+        }
+    }
 },
 {
     underscored: true,
     tableName: 'inventory',
 });
 
-// Define relationship to Products
-Inventory.belongsTo(Product, { foreignKey: 'productId' })
-
-// Update database
-Inventory.sync().then(() => {
-    console.log('Inventory model synced');
-});
+Inventory.belongsTo(Product);
 
 // Exports
 module.exports = {

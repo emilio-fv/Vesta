@@ -75,14 +75,6 @@ const Product = db.define('Product', {
     tableName: 'products',
 });
 
-// Define relationship to Inventory
-Product.hasMany(Inventory)
-
-// Update database
-Product.sync().then(() => {
-    console.log('Product model synced');
-});
-
 // Exports
 module.exports = {
     Product

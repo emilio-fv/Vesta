@@ -10,7 +10,7 @@ const {
 // Create router
 const router = express.Router();
 
-// Product API routes
+// Product API endpoints
 router.post('/create', handleCreateProduct); // ✅
 router.get('/all', handleGetAllProducts); // 
 router.patch('/:id/update', handleUpdateProductById); 

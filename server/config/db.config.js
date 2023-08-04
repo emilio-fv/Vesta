@@ -1,8 +1,8 @@
 // Imports
-const { Sequelize } = require('sequelize');
+const Sequelize = require('sequelize');
 
 // Connect to postgres db
-const sequelize = new Sequelize(
+const db = new Sequelize(
     process.env.DB_NAME, 
     process.env.DB_USER, 
     process.env.DB_PASSWORD, 
@@ -15,5 +15,5 @@ const sequelize = new Sequelize(
 
 // Exports
 module.exports = {
-    db: sequelize
+    db
 };

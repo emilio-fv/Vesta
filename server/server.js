@@ -5,14 +5,18 @@ require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}`});
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const { db } = require('./config/db.config'); 
+const { db } = require('./models/index');
 
 // API Routers
 const { authRouter } = require('./routes/auth');
 const { productsRouter } = require('./routes/products');
+const { inventoryRouter } = require('./routes/inventory');
 
 // Create backend Server
 const app = express();
+
+// Configure port #
+const port =  process.env.PORT || 8000;
 
 // Middleware
 app.use(cors({
@@ -30,16 +34,22 @@ app.use(express.urlencoded({
 // API Endpoints
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/inventory', inventoryRouter);
 
-// Test DB connection
-(async () => {
+// Initialize server function
+const initializeApp = async () => {
     try {
         await db.authenticate();
         console.log('connection to db established successfully.');
+        await db.sync();
+        app.listen(port, () => {
+            console.log(`You are listening on port ${port} for requests to respond to.`);
+        });
     } catch (error) {
         console.log(error);
         console.log("Unable to connect to db.");
     }
-})()
+}
 
-module.exports = app;
+initializeApp();
+// module.exports = app;
