@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'
 import Dashboard from '../components/Displays/Admin/Dashboard';
 import CreateProduct from '../components/Forms/CreateProduct';
-import AddInventory from '../components/Forms/AddInventory';
+import CreateInventory from '../components/Forms/CreateInventory';
 
 const AdminDashboard = () => {
   // Helpers
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
           </Box>
           <Dashboard />
           <CreateProduct productFormOpen={productFormOpen} handleCloseProductForm={handleCloseProductForm}/>
-          <AddInventory inventoryFormOpen={inventoryFormOpen} handleCloseInventoryForm={handleCloseInventoryForm}/>
+          <CreateInventory inventoryFormOpen={inventoryFormOpen} handleCloseInventoryForm={handleCloseInventoryForm}/>
         </Container>
       }
     </Layout>
