@@ -10,7 +10,9 @@ const createInventory = async (data) => {
 
 const getAllInventory = async () => {
   logger.info('Service: getAllInventory')
-  const allInventory = await Inventory.findAll();
+  const allInventory = await Inventory.findAll({
+    include: 'Product'
+  });
   return allInventory;
 }
 

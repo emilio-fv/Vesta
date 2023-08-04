@@ -68,26 +68,26 @@ const ProductsTable = ({ products }) => {
           {isSuccess 
             ? products.map((product) => (
                 <TableRow key={product.id}>
-                    <TableCell>
-                      {product.name}
-                    </TableCell>
-                    <TableCell>
-                      {product.category}
-                    </TableCell>
-                    <TableCell>
-                      ${product.price}
-                    </TableCell>
-                    <TableCell>
-                      {product.description}
-                    </TableCell>
-                    <TableCell>
-                      <Link href={product.src} target='_blank' rel='noopener'>url</Link>
-                    </TableCell>
-                    <TableCell>
-                      <Button onClick={() => handleUpdateClick(product)}>Update</Button>
-                      <Button onClick={() => handleDeleteClick(product.id)}>Delete</Button>
-                    </TableCell>
-                  </TableRow>
+                  <TableCell>
+                    {product.name}
+                  </TableCell>
+                  <TableCell>
+                    {product.category}
+                  </TableCell>
+                  <TableCell>
+                    ${product.price}
+                  </TableCell>
+                  <TableCell>
+                    {product.description}
+                  </TableCell>
+                  <TableCell>
+                    <Link href={product.src} target='_blank' rel='noopener'>url</Link>
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={() => handleUpdateClick(product)}>Update</Button>
+                    <Button onClick={() => handleDeleteClick(product.id)}>Delete</Button>
+                  </TableCell>
+                </TableRow>
               )) 
             : null
           }
