@@ -5,7 +5,7 @@ import { useUpdateProductMutation } from '../../../store/api/productsApi';
 import { useEffect } from 'react';
 import TextInput from '../../Inputs/Text';
 import SelectInput from '../../Inputs/Select';
-import PriceInput from '../../Inputs/Price';
+import NumberInput from '../../Inputs/Number';
 import { Cloudinary } from '@cloudinary/url-gen';
 import ImageUploadWidget from '../../ImageUploadWidget';
 
@@ -13,6 +13,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { categories } from '../../../assets/selectOptions';
 
 const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProductForm }) => {
   // Helpers
@@ -113,9 +114,9 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
               required: 'Category required.'
             }}
             label={'Category'}
-            options={['Women', 'Men', 'Unisex']}
+            options={categories}
           />
-          <PriceInput 
+          <NumberInput 
             name={'price'}
             control={control}
             defaultValue={product?.price}
@@ -123,6 +124,10 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
               required: 'Price required.'
             }}
             label={'Price'}
+            inputProps={{
+              step: '.01',
+              min: '0.01'
+            }}
           />
           <TextInput 
             name={'description'}

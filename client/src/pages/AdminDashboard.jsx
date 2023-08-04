@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'
 import Dashboard from '../components/Displays/Admin/Dashboard';
 import CreateProduct from '../components/Forms/CreateProduct';
+import AddInventory from '../components/Forms/AddInventory';
 
 const AdminDashboard = () => {
   // Helpers
@@ -19,6 +20,11 @@ const AdminDashboard = () => {
   const [productFormOpen, setProductFormOpen] = useState(false);
   const handleOpenProductForm = () => setProductFormOpen(true);
   const handleCloseProductForm = () => setProductFormOpen(false);
+
+  // Handle add inventory form modal
+  const [inventoryFormOpen, setInventoryFormOpen] = useState(false);
+  const handleOpenInventoryForm = () => setInventoryFormOpen(true);
+  const handleCloseInventoryForm = () => setInventoryFormOpen(false);
 
   // Handle logout button
   const handleLogout = () => {
@@ -43,7 +49,7 @@ const AdminDashboard = () => {
                 sx={{ 
                   paddingX: 1,
                 }} 
-                // onClick={event => handleLogout(event)}
+                onClick={handleOpenInventoryForm}
               >
                 Add Inventory
               </Button>
@@ -71,6 +77,7 @@ const AdminDashboard = () => {
           </Box>
           <Dashboard />
           <CreateProduct productFormOpen={productFormOpen} handleCloseProductForm={handleCloseProductForm}/>
+          <AddInventory inventoryFormOpen={inventoryFormOpen} handleCloseInventoryForm={handleCloseInventoryForm}/>
         </Container>
       }
     </Layout>

@@ -45,7 +45,10 @@ const PasswordInput = ({ name, control, rules, label }) => {
                             </InputAdornment>
                         }
                     />
-                    {error ? <FormHelperText sx={{ color: 'error.main' }}>{error.message}</FormHelperText> : null}
+                    {error 
+                        ? <FormHelperText sx={{ color: 'error.main' }}>{error.message}</FormHelperText> 
+                        : null
+                    }
                 </FormControl>  
             )}
         />

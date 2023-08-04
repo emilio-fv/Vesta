@@ -3,7 +3,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
-const PriceInput = ({ name, control, defaultValue, rules, label }) => {
+const NumberInput = ({ name, control, defaultValue, rules, label, inputProps }) => {
   return (
     <Controller 
       name={name}
@@ -11,7 +11,7 @@ const PriceInput = ({ name, control, defaultValue, rules, label }) => {
       defaultValue={defaultValue}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <TextField 
+        <TextField  
           fullWidth
           id={name}
           label={label}
@@ -20,10 +20,7 @@ const PriceInput = ({ name, control, defaultValue, rules, label }) => {
           type='number'
           value={value}
           onChange={onChange}
-          inputProps={{
-            step: '.01',
-            min: '0.01'
-          }}
+          inputProps={inputProps}
           error={!!error}
           helperText={error ? error.message : null}
         />
@@ -32,4 +29,4 @@ const PriceInput = ({ name, control, defaultValue, rules, label }) => {
   )
 };
 
-export default PriceInput;
+export default NumberInput;
