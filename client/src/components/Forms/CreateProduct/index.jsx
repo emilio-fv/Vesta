@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Cloudinary } from '@cloudinary/url-gen';
 import TextInput from '../../Inputs/Text';
 import SelectInput from '../../Inputs/Select';
-import PriceInput from '../../Inputs/Price';
+import NumberInput from '../../Inputs/Number';
 import { useCreateProductMutation } from '../../../store/api/productsApi';
 import ImageUploadWidget from '../../ImageUploadWidget';
 
@@ -11,6 +11,7 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { categories } from '../../../assets/selectOptions';
 
 const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
   // Helpers
@@ -89,7 +90,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
         <Box
           component='form'
           sx={{
-            flex: 1,
+            // flex: 1,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -114,15 +115,19 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
               required: 'Category required.'
             }}
             label={'Category'}
-            options={['Women', 'Men', 'Unisex']}
+            options={categories}
           />
-          <PriceInput 
+          <NumberInput 
             name={'price'}
             control={control}
             rules={{
               required: 'Price required.'
             }}
             label={'Price'}
+            inputProps={{
+              step: '.01',
+              min: '0.01'
+            }}
           />
           <TextInput 
             name={'description'}

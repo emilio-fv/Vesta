@@ -24,7 +24,7 @@ const SelectInput = ({ name, control, defaultValue, rules, label, options }) => 
             error={!!error}
           >
             {options.map((option) => (
-              <MenuItem value={option}>{option}</MenuItem>
+              <MenuItem value={option.value}>{option.option}</MenuItem>
             ))}
           </Select>
           {error 

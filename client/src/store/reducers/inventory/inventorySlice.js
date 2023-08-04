@@ -57,13 +57,12 @@ const inventorySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(inventoryApi.endpoints.getInventoryByCategory.matchFulfilled, (state, action) => {
-        state.inventory = action.payload
+      .addMatcher(inventoryApi.endpoints.createInventory.matchFulfilled, (state, action) => {
         state.status = 'success'
-      })
-      .addMatcher(inventoryApi.endpoints.getInventoryByCategory.matchRejected, (state, action) => {
-        state.status = 'failed'
-        state.errors = action
+        if (!state.inventory) {
+          state.inventory = [];
+        }
+        state.inventory.push(action.payload);
       })
   }
 });

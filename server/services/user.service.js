@@ -1,5 +1,5 @@
 // Imports
-const { User } = require('../models/user.model');
+const { models: { User } } = require('../models/index');
 
 // Create User
 const createUser = async (data) => {

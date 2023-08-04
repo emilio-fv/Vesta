@@ -91,11 +91,6 @@ const User = db.define('User', {
     },
 });
 
-// Update database
-User.sync().then(() => {
-    console.log('User model synced');
-})
-
 // Exports
 module.exports = {
     User

@@ -13,7 +13,7 @@ const {
 // Instantiate router
 const router = express.Router();
 
-// User API routes
+// User API endpoints
 router.post('/register', handleRegisterUser); 
 router.post('/login', handleLoginUser); 
 router.post('/logout', handleLogoutUser);
