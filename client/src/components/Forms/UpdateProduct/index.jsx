@@ -23,10 +23,12 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
 
   // Handle form changes and submit
   const { handleSubmit, control } = useForm({
-    name: '',
-    category: '',
-    price: '',
-    description: ''
+    defaultValues: {
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      description: product.description
+    }
   })
 
   // Configure cloudinary params
@@ -44,9 +46,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
 
   // Handle form submit
   const handleUpdateProduct = (data) => {
-    // console.log(data);
-    // console.log(uploadedImgUrl);
-
     updateProduct({
       ...data,
       src: uploadedImgUrl,
@@ -70,7 +69,7 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
         handleCloseUpdateProductForm();
       }}
       aria-labelledby='Update product form'
-      aria-describedby='Form used to update products'
+      aria-describedby='Form used to update product'
     >
       <Box
         sx={{
@@ -87,7 +86,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
         <Box
           component='form'
           sx={{
-            flex: 1,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -100,7 +98,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <TextInput 
             name={'name'}
             control={control}
-            defaultValue={product?.name}
             rules={{
               required: 'Name required.'
             }}
@@ -109,7 +106,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <SelectInput 
             name={'category'}
             control={control}
-            defaultValue={product?.category}
             rules={{
               required: 'Category required.'
             }}
@@ -119,7 +115,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <NumberInput 
             name={'price'}
             control={control}
-            defaultValue={product?.price}
             rules={{
               required: 'Price required.'
             }}
@@ -132,7 +127,6 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <TextInput 
             name={'description'}
             control={control}
-            defaultValue={product?.description}
             rules={{
               required: 'Description required.'
             }}

@@ -6,12 +6,11 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FormHelperText } from '@mui/material';
 
-const SelectInput = ({ name, control, defaultValue, rules, label, options }) => {
+const SelectInput = ({ name, control, rules, label, options }) => {
   return (
     <Controller 
       name={name}
       control={control}
-      defaultValue={defaultValue}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <FormControl sx={{ minWidth: 120 }}>

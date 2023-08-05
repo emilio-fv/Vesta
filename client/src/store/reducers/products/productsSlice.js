@@ -27,15 +27,15 @@ export const productsSlice = createSlice({
                 state.products = action.payload;
             })
             .addMatcher(productsApi.endpoints.updateProduct.matchFulfilled, (state, action) => {
-                const updatedProduct = action.payload
-                const index = state.products.findIndex((product) => product.id === updatedProduct.id);
+                state.status = 'success'
+                const updatedProduct = action.payload;
+                const index = state.products.findIndex((product) => parseInt(product.id) === parseInt(updatedProduct.id));
                 state.products[index] = updatedProduct;
             })
             .addMatcher(productsApi.endpoints.deleteProduct.matchFulfilled, (state, action) => {
+                state.status = 'success'
                 const { productId } = action.payload;
-                const index = state.products.findIndex((product) => {
-                    return parseInt(product.id) === parseInt(productId);
-                });
+                const index = state.products.findIndex((product) =>  parseInt(product.id) === parseInt(productId));
                 state.products.splice(index, 1);
             })
     }

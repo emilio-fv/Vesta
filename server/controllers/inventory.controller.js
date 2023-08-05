@@ -1,7 +1,8 @@
 // Imports
 const { 
   createInventory,
-  getAllInventory
+  getAllInventory,
+  updateInventoryById
 } = require('../services/inventory.service');
 const { logger } = require('../utils/logger.utils');
 
@@ -26,9 +27,21 @@ const handleGetAllInventory = async (req, res) => {
     logger.error(error);
     return res.status(400).json(error);
   }
+};
+
+const handleUpdateInventoryById = async (req, res) => {
+  logger.info('Controller: handleUpdateInventoryById')
+  try {
+    const updatedInventory = await updateInventoryById(req.body, req.params.id);
+    return res.status(200).json(updatedInventory);
+  } catch (error) {
+    logger.error(error);
+    return res.status(400).json(error);
+  }
 }
 // Exports
 module.exports = {
   handleCreateInventory,
   handleGetAllInventory,
+  handleUpdateInventoryById,
 }
