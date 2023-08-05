@@ -115,14 +115,13 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
             label={'Quantity'}
             inputProps={{
               step: '1',
-              min: 0,
+              min: '0',
             }}
           />
           <CheckboxInput 
             name={'onSale'}
             control={control}
             label={'On Sale'}
-
           />
           {/* Discount */}
           <NumberInput 

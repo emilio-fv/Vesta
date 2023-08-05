@@ -29,7 +29,7 @@ export const inventoryApi = createApi({
     updateInventory: builder.mutation({
       query: (data) => ({
         url: `/inventory/${data.id}/update`,
-        method: 'PUT',
+        method: 'PATCH',
         body: data
       })
     }),

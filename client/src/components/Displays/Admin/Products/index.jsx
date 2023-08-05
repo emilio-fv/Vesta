@@ -93,12 +93,13 @@ const ProductsTable = ({ products }) => {
           }
         </TableBody>
       </Table>
-      {selectedProduct ?
-      <UpdateProduct 
-        product={selectedProduct} 
-        handleCloseUpdateProductForm={handleCloseUpdateProductForm} 
-        updateProductFormOpen={updateProductFormOpen}
-      /> : null
+      {selectedProduct 
+        ? <UpdateProduct 
+            product={selectedProduct} 
+            updateProductFormOpen={updateProductFormOpen}
+            handleCloseUpdateProductForm={handleCloseUpdateProductForm} 
+          /> 
+        : null
       }
     </TableContainer>
   )
