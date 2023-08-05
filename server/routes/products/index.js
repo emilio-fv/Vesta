@@ -11,8 +11,8 @@ const {
 const router = express.Router();
 
 // Product API endpoints
-router.post('/create', handleCreateProduct); // ✅
-router.get('/all', handleGetAllProducts); // 
+router.post('/create', handleCreateProduct); 
+router.get('/all', handleGetAllProducts); 
 router.patch('/:id/update', handleUpdateProductById); 
 router.delete('/:id/delete', handleDeleteProductById); 
 

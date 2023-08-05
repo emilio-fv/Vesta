@@ -24,6 +24,17 @@ const getAllInventory = async () => {
   return allInventory;
 };
 
+const getInventoryByProductId = async (productId) => {
+  logger.info('Service: getInventoryByProductId');
+  const allInventory = await Inventory.findAll({
+    where: {
+      productId: productId
+    }
+  });
+
+  return allInventory;
+};
+
 const updateInventoryById = async (data, id) => {
   logger.info('Service: updateInventoryById');
   await Inventory.update(data, {
@@ -38,11 +49,23 @@ const updateInventoryById = async (data, id) => {
     include: 'Product'
   });
   return updatedInventory;
-}
+};
+
+const deleteInventoryById = async (id) => {
+  logger.info('Servicer: deleteInventoryById');
+  const numberOfDeletedProducts = await Inventory.destroy({
+    where: {
+      id: id
+    }
+  });
+  return numberOfDeletedProducts;
+};
 
 // Exports
 module.exports = {
   createInventory,
   getAllInventory,
-  updateInventoryById
+  getInventoryByProductId,
+  updateInventoryById,
+  deleteInventoryById
 }
