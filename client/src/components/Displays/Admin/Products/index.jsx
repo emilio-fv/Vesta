@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../../store/api/productsApi';
 import UpdateProduct from '../../../Forms/UpdateProduct';
+import { resetErrors } from '../../../../store/reducers/products/productsSlice';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,12 +14,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const headerStyling = {
   fontWeight: 'bold'
 }
 
-const ProductsTable = ({ products }) => {
+const ProductsTable = ({ products, errors, resetErrors }) => {
   // Helpers
   const [updateProductFormOpen, setUpdateProductFormOpen] = useState(false);
   const handleOpenUpdateProductForm = () => setUpdateProductFormOpen(true);
@@ -101,15 +103,25 @@ const ProductsTable = ({ products }) => {
           /> 
         : null
       }
+      {errors
+        ? <Alert sx={{ position: 'fixed', bottom: 10, left: '50%', transform: 'translate(-50%, -50%)' }} severity='error' onClose={() => {resetErrors()}}>{errors}</Alert>
+        : null 
+      }
     </TableContainer>
   )
 };
 
 // Connect to Redux store
 const mapStateToProps = (state) => ({
-  products: state.products.products
+  products: state.products.products,
+  errors: state.products.errors
 });
 
+const mapDispatchToProps = {
+  resetErrors
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ProductsTable);

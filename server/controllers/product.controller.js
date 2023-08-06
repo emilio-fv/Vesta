@@ -5,6 +5,9 @@ const {
     updateProductById,
     deleteProductById
 } = require('../services/product.service');
+const {
+    getInventoryByProductId
+} = require('../services/inventory.service');
 const { logger } = require('../utils/logger.utils');
 
 // Create Product
@@ -53,19 +56,24 @@ const handleUpdateProductById = async (req, res) => {
 // Delete Product By Id
 const handleDeleteProductById = async (req, res) => {
     logger.info("Controller: handleDeleteProductById");
-    // Destructure request body
-    const { id } = req.params;
-
     try {
-        // TODO: Check if any inventory
-        // Query database
-        const response = await deleteProductById(id);
+        // Check if any inventory
+        const currentInventory = await getInventoryByProductId(req.params.id);
+        
+        if (currentInventory.length > 0) {
+            return res.status(400).json({ message: 'Unable to delete product with current inventory.' });
+        };
 
-        // Return success message
-        return res.status(200).json({
-            productId: id,
-            message: "Product deleted"
-        });
+        // Query database
+        const response = await deleteProductById(req.params.id);
+        
+        if (response) {
+            // Return success message
+            return res.status(200).json({
+                productId: req.params.id,
+                message: "Product deleted"
+            });
+        }
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error);

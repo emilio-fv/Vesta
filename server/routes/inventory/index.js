@@ -3,7 +3,8 @@ const express = require('express');
 const { 
   handleCreateInventory,
   handleGetAllInventory,
-  handleUpdateInventoryById
+  handleUpdateInventoryById,
+  handleDeleteInventoryById
  } = require('../../controllers/inventory.controller');
 
 //  Create router
@@ -13,6 +14,7 @@ const router = express.Router();
 router.post('/create', handleCreateInventory);
 router.get('/all', handleGetAllInventory);
 router.patch('/:id/update', handleUpdateInventoryById);
+router.delete('/:id/delete', handleDeleteInventoryById);
 
 // Exports
 module.exports = {

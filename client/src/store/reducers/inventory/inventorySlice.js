@@ -70,10 +70,15 @@ const inventorySlice = createSlice({
       })
       .addMatcher(inventoryApi.endpoints.updateInventory.matchFulfilled, (state, action) => {
         state.status = 'success'
-        console.log(action.payload);
         const updatedInventory = action.payload;
         const index = state.inventory.findIndex((item) => parseInt(item.id) === parseInt(updatedInventory.id));
         state.inventory[index] = updatedInventory;
+      })
+      .addMatcher(inventoryApi.endpoints.deleteInventory.matchFulfilled, (state, action) => {
+        state.status = 'success'
+        const { inventoryId } = action.payload;
+        const index = state.inventory.findIndex((item) => parseInt(item.id) === parseInt(inventoryId));
+        state.inventory.splice(index, 1);
       })
   }
 });

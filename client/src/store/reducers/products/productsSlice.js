@@ -13,6 +13,10 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: initialState,
     reducers: {
+        resetErrors: (state) => {
+            state.status = 'idle'
+            state.errors = null
+        }
         // sort by name
         // sort by category
     },
@@ -38,11 +42,16 @@ export const productsSlice = createSlice({
                 const index = state.products.findIndex((product) =>  parseInt(product.id) === parseInt(productId));
                 state.products.splice(index, 1);
             })
+            .addMatcher(productsApi.endpoints.deleteProduct.matchRejected, (state, action) => {
+                state.status = 'failed'
+                state.errors = action.payload.data.message
+            })
     }
 })
 
 // Actions
 export const { 
+    resetErrors,
     sortPriceAsc, 
     sortPriceDesc, 
     sortFeatured,
