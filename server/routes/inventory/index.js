@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const { authenticate } = require('../../middleware/authenticate');
 const { 
   handleCreateInventory,
   handleGetAllInventory,
@@ -7,14 +8,14 @@ const {
   handleDeleteInventoryById
  } = require('../../controllers/inventory.controller');
 
-//  Create router
+// Create router
 const router = express.Router();
 
-// Inventory API endpoints
-router.post('/create', handleCreateInventory);
-router.get('/all', handleGetAllInventory);
-router.patch('/:id/update', handleUpdateInventoryById);
-router.delete('/:id/delete', handleDeleteInventoryById);
+// Inventory endpoints
+router.post('/create', authenticate, handleCreateInventory);
+router.get('/all', authenticate, handleGetAllInventory);
+router.patch('/:id/update', authenticate, handleUpdateInventoryById);
+router.delete('/:id/delete', authenticate, handleDeleteInventoryById);
 
 // Exports
 module.exports = {

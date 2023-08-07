@@ -4,10 +4,11 @@ const { Inventory } = require("./inventory.model");
 const { Product } = require("./product.model");
 const { User } = require("./user.model");
 
-// Associations
+// Product and inventory association
 Product.hasMany(Inventory);
 Inventory.belongsTo(Product);
 
+// Exports
 module.exports = {
   db,
   models: {
@@ -15,4 +16,4 @@ module.exports = {
     Product, 
     Inventory,
   }
-}
+};

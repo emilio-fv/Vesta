@@ -21,12 +21,12 @@ const handleCreateProduct = async (req, res) => {
         // Return new product
         return res.status(200).json({
             ...newProduct.dataValues
-        })
+        });
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error)
     }
-}
+};
 
 // Get All Products
 const handleGetAllProducts = async (req, res) => {

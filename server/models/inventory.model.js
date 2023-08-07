@@ -58,8 +58,6 @@ const Inventory = db.define('Inventory', {
     tableName: 'inventory',
 });
 
-Inventory.belongsTo(Product);
-
 // Exports
 module.exports = {
     Inventory

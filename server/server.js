@@ -6,13 +6,12 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { db } = require('./models/index');
-
-// API Routers
 const { authRouter } = require('./routes/auth');
 const { productsRouter } = require('./routes/products');
 const { inventoryRouter } = require('./routes/inventory');
+const { logger } = require('./utils/logger.utils');
 
-// Create backend Server
+// Create backend server
 const app = express();
 
 // Configure port #
@@ -31,7 +30,7 @@ app.use(express.urlencoded({
     extended: true 
 }));
 
-// API Endpoints
+// API endpoints
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/inventory', inventoryRouter);
@@ -40,16 +39,15 @@ app.use('/api/inventory', inventoryRouter);
 const initializeApp = async () => {
     try {
         await db.authenticate();
-        console.log('connection to db established successfully.');
+        logger.info('Connected to db established successfully.')
         await db.sync();
         app.listen(port, () => {
-            console.log(`You are listening on port ${port} for requests to respond to.`);
+            logger.info(`You are listening on port ${port} for requests to respond to.`)
         });
     } catch (error) {
-        console.log(error);
-        console.log("Unable to connect to db.");
+        logger.error(error);
     }
 }
 
+// 
 initializeApp();
-// module.exports = app;

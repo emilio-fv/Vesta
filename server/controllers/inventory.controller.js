@@ -8,7 +8,7 @@ const {
 const { logger } = require('../utils/logger.utils');
 
 const handleCreateInventory = async (req, res) => {
-  logger.info("Controller: handleCreateInventory")
+  logger.info("Controller: handleCreateInventory");
   try {
     const newInventory = await createInventory(req.body);
     console.log(newInventory);
@@ -20,7 +20,7 @@ const handleCreateInventory = async (req, res) => {
 };
 
 const handleGetAllInventory = async (req, res) => {
-  logger.info('Controller: handleGetAllInventory')
+  logger.info('Controller: handleGetAllInventory');
   try {
     const allInventory = await getAllInventory();
     return res.status(200).json(allInventory);
@@ -31,7 +31,7 @@ const handleGetAllInventory = async (req, res) => {
 };
 
 const handleUpdateInventoryById = async (req, res) => {
-  logger.info('Controller: handleUpdateInventoryById')
+  logger.info('Controller: handleUpdateInventoryById');
   try {
     const updatedInventory = await updateInventoryById(req.body, req.params.id);
     return res.status(200).json(updatedInventory);
@@ -64,4 +64,4 @@ module.exports = {
   handleGetAllInventory,
   handleUpdateInventoryById,
   handleDeleteInventoryById
-}
+};
