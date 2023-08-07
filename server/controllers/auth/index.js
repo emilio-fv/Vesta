@@ -4,14 +4,14 @@ const {
     getUserByEmail,
     getAllUsers,
     deleteUserById
-} = require('../services/user.service');
+} = require('../../services/user');
 const {
     generateAccessToken,
     generateRefreshToken
-} = require('../utils/jwt.utils');
+} = require('../../utils/jwt.utils');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { logger } = require('../utils/logger.utils');
+const { logger } = require('../../utils/logger.utils');
 
 const handleRegisterUser = async (req, res) => {
     logger.info("Controller: handleRegisterUser");

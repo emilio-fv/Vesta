@@ -4,11 +4,11 @@ const {
     getAllProducts,
     updateProductById,
     deleteProductById
-} = require('../services/product.service');
+} = require('../../services/product');
 const {
     getInventoryByProductId
-} = require('../services/inventory.service');
-const { logger } = require('../utils/logger.utils');
+} = require('../../services/inventory');
+const { logger } = require('../../utils/logger.utils');
 
 // Create Product
 const handleCreateProduct = async (req, res) => {

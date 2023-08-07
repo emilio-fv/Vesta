@@ -1,6 +1,6 @@
 // Imports
-const { models: { Product } } = require('../models/index');
-const { logger } = require('../utils/logger.utils');
+const { models: { Product } } = require('../../models/index');
+const { logger } = require('../../utils/logger.utils');
 
 const createProduct = async (data) => {
     logger.info('Service: createProduct')

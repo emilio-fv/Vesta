@@ -4,8 +4,8 @@ const {
   getAllInventory,
   updateInventoryById,
   deleteInventoryById
-} = require('../services/inventory.service');
-const { logger } = require('../utils/logger.utils');
+} = require('../../services/inventory');
+const { logger } = require('../../utils/logger.utils');
 
 const handleCreateInventory = async (req, res) => {
   logger.info("Controller: handleCreateInventory");

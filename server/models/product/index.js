@@ -1,7 +1,7 @@
 // Imports
 const { DataTypes } = require('sequelize');
-const { db } = require('../config/db.config');
-const { Inventory } = require('./inventory.model');
+const { db } = require('../../config/db.config');
+const { Inventory } = require('../inventory');
 
 // Product model
 const Product = db.define('Product', {
