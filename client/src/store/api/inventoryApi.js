@@ -42,5 +42,11 @@ export const inventoryApi = createApi({
   })
 });
 
-// API hooks
-export const { useCreateInventoryMutation, useDeleteInventoryMutation, useGetAllInventoryQuery, useGetInventoryByCategoryQuery, useUpdateInventoryMutation } = inventoryApi;
+// Export API hooks
+export const { 
+  useCreateInventoryMutation, 
+  useDeleteInventoryMutation, 
+  useGetAllInventoryQuery,
+  useGetInventoryByCategoryQuery, 
+  useUpdateInventoryMutation 
+} = inventoryApi;

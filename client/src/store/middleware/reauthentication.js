@@ -3,7 +3,7 @@ import { authApi } from "../api/authApi";
 import { baseQuery } from "../api/config";
 
 export const baseQueryWithReauth = async (args, api, extraOptions) => {
-  // Try request
+  // Attempt request
   let result = await baseQuery(args, api, extraOptions);
 
   // Check for expired refresh & access tokens
@@ -12,7 +12,7 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
     const response = await baseQuery('/auth/refresh', authApi);
 
     if (response.data) {
-      // Retry original request
+      // Re-attempt original request
       result = await baseQuery(args, api, extraOptions);
     } else {
       // Handle expired refresh token

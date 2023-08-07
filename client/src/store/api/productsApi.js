@@ -36,5 +36,10 @@ export const productsApi = createApi({
   })
 });
 
-// API hooks
-export const { useCreateProductMutation, useGetAllProductsQuery, useUpdateProductMutation, useDeleteProductMutation } = productsApi;
+// Export API hooks
+export const { 
+  useCreateProductMutation, 
+  useGetAllProductsQuery, 
+  useUpdateProductMutation, 
+  useDeleteProductMutation 
+} = productsApi;

@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productsApi } from "../../api/productsApi";
 
+// Initial state
 const initialState = {
     products: [],
     status: 'idle', // idle | loading | failed | success
@@ -17,8 +18,6 @@ export const productsSlice = createSlice({
             state.status = 'idle'
             state.errors = null
         }
-        // sort by name
-        // sort by category
     },
     extraReducers: (builder) => {
         builder
@@ -49,7 +48,7 @@ export const productsSlice = createSlice({
     }
 })
 
-// Actions
+// TODO: Update Actions
 export const { 
     resetErrors,
     sortPriceAsc, 
