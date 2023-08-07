@@ -1,4 +1,4 @@
-// Import configureStore, reducers
+// Imports
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import {
@@ -26,6 +26,7 @@ const persistConfig = {
     whitelist: ['auth']
 }
 
+// Combine reducers
 const rootReducer = combineReducers({
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
@@ -35,9 +36,10 @@ const rootReducer = combineReducers({
     [inventoryApi.reducerPath]: inventoryApi.reducer
 })
 
+// Create persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Redux Store
+// Redux store
 export const store = configureStore({
     reducer: persistedReducer,
     devTools: process.env.NODE_ENV !== 'production',
@@ -53,4 +55,5 @@ export const store = configureStore({
         )
 });
 
+// Exports
 export const persistor = persistStore(store);

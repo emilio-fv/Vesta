@@ -1,7 +1,7 @@
 // Imports
 const { DataTypes } = require('sequelize');
-const { db } = require('../config/db.config');
-const { Product } = require('./product.model');
+const { db } = require('../../config/db.config');
+const { Product } = require('../product');
 
 // Inventory model
 const Inventory = db.define('Inventory', {
@@ -57,8 +57,6 @@ const Inventory = db.define('Inventory', {
     underscored: true,
     tableName: 'inventory',
 });
-
-Inventory.belongsTo(Product);
 
 // Exports
 module.exports = {

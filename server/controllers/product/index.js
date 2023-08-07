@@ -4,11 +4,11 @@ const {
     getAllProducts,
     updateProductById,
     deleteProductById
-} = require('../services/product.service');
+} = require('../../services/product');
 const {
     getInventoryByProductId
-} = require('../services/inventory.service');
-const { logger } = require('../utils/logger.utils');
+} = require('../../services/inventory');
+const { logger } = require('../../utils/logger.utils');
 
 // Create Product
 const handleCreateProduct = async (req, res) => {
@@ -21,12 +21,12 @@ const handleCreateProduct = async (req, res) => {
         // Return new product
         return res.status(200).json({
             ...newProduct.dataValues
-        })
+        });
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error)
     }
-}
+};
 
 // Get All Products
 const handleGetAllProducts = async (req, res) => {

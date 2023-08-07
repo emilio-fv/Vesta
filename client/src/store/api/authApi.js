@@ -42,7 +42,7 @@ export const authApi = createApi({
   })
 });
 
-// API hooks
+// Export API hooks
 export const { 
   useLoginMutation, 
   useLogoutMutation, 

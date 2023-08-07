@@ -2,13 +2,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { inventoryApi } from '../../api/inventoryApi';
 
-// Initial State
+// Initial state
 const initialState = {
   inventory: null, 
   status: 'idle', // idle | loading | failed | success
   errors: null
 };
 
+// Inventory slice
 const inventorySlice = createSlice({
   name: 'inventory',
   initialState,

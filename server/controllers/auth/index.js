@@ -3,30 +3,25 @@ const {
     createUser,
     getUserByEmail,
     getAllUsers,
-    deleteUser
-} = require('../services/user.service');
+    deleteUserById
+} = require('../../services/user');
 const {
     generateAccessToken,
     generateRefreshToken
-} = require('../utils/jwt.utils');
+} = require('../../utils/jwt.utils');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { logger } = require('../utils/logger.utils');
+const { logger } = require('../../utils/logger.utils');
 
-
-// Register User
 const handleRegisterUser = async (req, res) => {
     logger.info("Controller: handleRegisterUser");
     try {
-        // Extract form data
-        const { email } = req.body;
-    
         // Check if email registered
-        const foundUser = await getUserByEmail(email);
+        const foundUser = await getUserByEmail(req.body.email);
     
         // Handle email already registered
         if (foundUser) {
-            logger.error("Email already registered.")
+            logger.error("Email already registered.");
             return res.status(400).json({ message: "Email already registered." });
         }
 
@@ -65,7 +60,7 @@ const handleRegisterUser = async (req, res) => {
         return res.status(400).json({
             message: "User not successfully created.",
             error: error
-        })
+        });
     }
 };
 
@@ -73,24 +68,21 @@ const handleRegisterUser = async (req, res) => {
 const handleLoginUser = async (req, res) => {
     logger.info("Controller: handleLoginUser");
     try {
-        // Destructure request body
-        const { email, password } = req.body;
-
         // Check if email registered
-        const foundUser = await getUserByEmail(email);
+        const foundUser = await getUserByEmail(req.body.email);
 
         // If Email not found
         if (foundUser === null) {
-            logger.error("Email not registered.")
+            logger.error("Email not registered.");
             return res.status(400).json({ message: "Email not registered." });
         }
 
         // Compare hashed passwords
-        const correctPassword = await bcrypt.compare(password, foundUser.password);
+        const correctPassword = await bcrypt.compare(req.body.password, foundUser.password);
 
         // Handle incorrect password
         if (!correctPassword) {
-            logger.error("Invalid login.")
+            logger.error("Invalid login.");
             return res.status(400).json({ message: "Invalid login."});
         }
 
@@ -163,7 +155,7 @@ const handleRefreshAccessToken = async (req, res) => {
                 return res.cookie("accessToken", newAccessToken, {
                     httpOnly: true,
                     secure: true
-                }).json('access token refreshed')
+                }).json('access token refreshed');
         })
     } catch (error) {
         logger.error(error);
@@ -182,10 +174,10 @@ const handleGetAllUsers = async (req, res) => {
     }
 }
 
-const handleDeleteUser = async (req, res) => {
-    logger.info("Controller: handleDeleteUser");
+const handleDeleteUserById = async (req, res) => {
+    logger.info("Controller: handleDeleteUserById");
     try {
-        const response = await deleteUser(req.body.id);
+        const response = await deleteUserById(req.body.id);
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error); 
@@ -199,5 +191,5 @@ module.exports = {
     handleLogoutUser,
     handleRefreshAccessToken,
     handleGetAllUsers,
-    handleDeleteUser
+    handleDeleteUserById
 };

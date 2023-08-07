@@ -1,13 +1,14 @@
 // Imports
 const { db } = require('../config/db.config');
-const { Inventory } = require("./inventory.model");
-const { Product } = require("./product.model");
-const { User } = require("./user.model");
+const { User } = require('./user');
+const { Product } = require('./product');
+const { Inventory } = require('./inventory');
 
-// Associations
+// Product and inventory association
 Product.hasMany(Inventory);
 Inventory.belongsTo(Product);
 
+// Exports
 module.exports = {
   db,
   models: {
@@ -15,4 +16,4 @@ module.exports = {
     Product, 
     Inventory,
   }
-}
+};

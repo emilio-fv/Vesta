@@ -2,14 +2,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../../api/authApi";
 
-// Initial State
+// Initial state
 const initialState = {
     loggedInUser: null,
     status: 'idle', // idle | loading | failed | success
     errors: null
 };
 
-// Auth Slice
+// Auth slice
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
