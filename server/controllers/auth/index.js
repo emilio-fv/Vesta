@@ -191,5 +191,5 @@ module.exports = {
     handleLogoutUser,
     handleRefreshAccessToken,
     handleGetAllUsers,
-    handleDeleteUser
+    handleDeleteUserById
 };

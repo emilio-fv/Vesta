@@ -6,7 +6,7 @@ const {
     handleGetAllProducts,
     handleUpdateProductById,
     handleDeleteProductById
-} = require('../../controllers/product.controller');
+} = require('../../controllers/product');
 
 // Create router
 const router = express.Router();

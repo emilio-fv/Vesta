@@ -6,7 +6,7 @@ const {
   handleGetAllInventory,
   handleUpdateInventoryById,
   handleDeleteInventoryById
- } = require('../../controllers/inventory.controller');
+ } = require('../../controllers/inventory');
 
 // Create router
 const router = express.Router();

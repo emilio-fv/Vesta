@@ -7,8 +7,8 @@ const {
     handleLogoutUser,
     handleRefreshAccessToken,
     handleGetAllUsers,
-    handleDeleteUser
-} = require('../../controllers/auth.controller');
+    handleDeleteUserById
+} = require('../../controllers/auth');
 
 // Create router
 const router = express.Router();
@@ -19,7 +19,7 @@ router.post('/login', handleLoginUser);
 router.post('/logout', handleLogoutUser);
 router.get('/refresh', handleRefreshAccessToken);
 router.get('/all', authenticate, handleGetAllUsers);
-router.delete('/:id/delete', authenticate, handleDeleteUser);
+router.delete('/:id/delete', authenticate, handleDeleteUserById);
 
 // Exports 
 module.exports = {
