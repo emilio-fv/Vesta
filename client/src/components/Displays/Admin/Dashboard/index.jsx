@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [value, setValue] = useState(0);
 
   // Handle change tab
-  const handleChangeTab = (newValue) => {
+  const handleChangeTab = (event, newValue) => {
     setValue(newValue);
   };
 

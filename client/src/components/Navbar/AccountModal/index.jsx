@@ -13,7 +13,7 @@ const AccountModal = ({ open, onClose }) => {
   const [value, setValue] = useState(0);
 
   // Handle changing tabs
-  const handleTabChange = (newValue) => {
+  const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
 

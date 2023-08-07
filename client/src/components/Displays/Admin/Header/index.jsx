@@ -1,5 +1,5 @@
 // Imports
-import { useLogoutMutation } from '../store/api/authApi';
+import { useLogoutMutation } from '../../../../store/api/authApi';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';

@@ -113,7 +113,7 @@ const Navbar = ({ loggedInUser }) => {
                       underline='none'
                       noWrap
                     >
-                      {category}
+                      {category.toUpperCase()}
                     </Link>
                   </MenuItem>
                 ))}
@@ -138,7 +138,7 @@ const Navbar = ({ loggedInUser }) => {
                   underline='none'
                   sx={{ color: 'white' }}
                 >
-                  {category}
+                  {category.toUpperCase()}
                 </Link>
               ))}
             </Box>
