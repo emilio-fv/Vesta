@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import TabPanel from '../TabPanel';
+import TabPanel from '../../TabPanel';
 import RegisterForm from '../../Forms/RegisterForm';
 import LoginForm from '../../Forms/LoginForm';
 

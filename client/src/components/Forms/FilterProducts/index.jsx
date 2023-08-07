@@ -212,7 +212,7 @@ const FilterProducts = ({ filter }) => {
     )
 }
 
-// Connect to Redux
+// Connect to Redux store
 // const mapStateToProps = (state) => ({ });
 
 const mapDispatchToProps = {

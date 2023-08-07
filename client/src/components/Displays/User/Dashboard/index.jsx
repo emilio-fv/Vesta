@@ -1,11 +1,11 @@
 // Imports
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Products from '../Products';
-import Inventory from '../Inventory';
 import TabPanel from '../../../TabPanel';
+import AccountInfo from '../../User/AccountInfo';
+import Favorites from '../../User/Favorites';
 
 const Dashboard = () => {
   // Helpers
@@ -31,17 +31,17 @@ const Dashboard = () => {
         aria-label="Admin dashboard"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab label="Inventory" />
-        <Tab label="Products" />
+        <Tab label="Favorites" />
+        <Tab label="Account Info" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Inventory />
+        <Favorites />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Products />
+        <AccountInfo />
       </TabPanel>
     </Box>
-  );
-}
+  )
+};
 
 export default Dashboard;
