@@ -1,27 +1,30 @@
 // Imports
 import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
-import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import Tooltip from '@mui/material/Tooltip';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import Link from '@mui/material/Link';
 import { connect } from 'react-redux';
 import Logo from './Logo';
 import AccountModal from './AccountModal';
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import { useTheme } from '@emotion/react';
 
 const categories = ['unisex', 'women', 'men'];
 
 const Navbar = ({ loggedInUser }) => {
   // Helpers
+  const theme = useTheme();
   const navigate = useNavigate();
   const [accountOpen, setAccountOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -58,25 +61,30 @@ const Navbar = ({ loggedInUser }) => {
 
   return (
     <>
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
-          <Toolbar disableGutters
-            sx={{
-              display: 'flex',
+      <AppBar position='static' >
+        <Container maxWidth='xl' >
+          <Toolbar 
+            disableGutters 
+            sx={{ 
+              display: 'flex', 
               justifyContent: 'space-between'
-            }}
+            }} 
           >
             {/* Logo (Desktop) */}
             <Logo 
-              component={RouterLink} 
-              variant='h6'
+              component={RouterLink}
               sx={{
                 display: { xs: 'none', md: 'flex' },
-                color: 'white'
+                color: 'primary.lightText',
+                fontSize: '1.5rem'
               }}
             />
             {/* Menu (mobile) */}
-            <Box sx={{ display: { xs: 'flex', sm: 'none' } }} >
+            <Box 
+              sx={{ 
+                display: { xs: 'flex', sm: 'none' } 
+              }}
+            >
               <IconButton
                 size='large'
                 aria-label='product categories menu'
@@ -84,7 +92,7 @@ const Navbar = ({ loggedInUser }) => {
                 aria-haspopup='true'
                 onClick={handleOpenNavMenu}
               >
-                <MenuIcon htmlColor='#fff'/>
+                <MenuIcon htmlColor={theme.palette.primary.lightText}/>
               </IconButton>
               <Menu
                 id='menu-appbar'
@@ -112,6 +120,7 @@ const Navbar = ({ loggedInUser }) => {
                       to={`/${category}/products`}
                       underline='none'
                       noWrap
+                      sx={{ fontSize: '.85rem' }}
                     >
                       {category.toUpperCase()}
                     </Link>
@@ -124,11 +133,19 @@ const Navbar = ({ loggedInUser }) => {
               component={RouterLink}
               sx={{
                 display: { xs: 'flex', md: 'none' },
-                color: 'white'
+                fontSize: '1.5rem',
+                color: 'primary.lightText'
               }}
             />
             {/* Menu (Desktop) */}
-            <Box sx={{ marginLeft: 3, flexGrow: 1, display: { xs: 'none', sm: 'flex' }, gap: 3 }}>
+            <Box 
+              sx={{ 
+                marginLeft: 3, 
+                flexGrow: 1, 
+                display: { xs: 'none', sm: 'flex' }, 
+                gap: 3 
+              }}
+            >
               {categories.map((category) => (
                 <Link 
                   key={category}
@@ -136,7 +153,10 @@ const Navbar = ({ loggedInUser }) => {
                   to={`/${category}/products`}
                   noWrap
                   underline='none'
-                  sx={{ color: 'white' }}
+                  sx={{ 
+                    color: 'primary.lightText', 
+                    fontSize: '.85rem' 
+                  }}
                 >
                   {category.toUpperCase()}
                 </Link>
@@ -146,17 +166,17 @@ const Navbar = ({ loggedInUser }) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Account">
                 <IconButton onClick={() => handleAccountOpen()}>
-                  <AccountCircleIcon fontSize='small' htmlColor='#fff'/>
+                  <AccountCircleIcon fontSize='small' htmlColor={theme.palette.primary.lightText}/>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Favorites">
                 <IconButton onClick={() => handleFavoritesButton()}>
-                  <FavoriteBorderRoundedIcon fontSize='small' htmlColor='#fff'/>
+                  <FavoriteBorderRoundedIcon fontSize='small' htmlColor={theme.palette.primary.lightText}/>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Shopping Cart">
                 <IconButton onClick={() => handleShoppingCartButton()}>
-                  <ShoppingCartRoundedIcon fontSize='small' htmlColor='#fff'/>
+                  <ShoppingCartRoundedIcon fontSize='small' htmlColor={theme.palette.primary.lightText}/>
                 </IconButton>
               </Tooltip>
             </Box>

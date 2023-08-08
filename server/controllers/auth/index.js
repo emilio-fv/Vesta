@@ -53,6 +53,7 @@ const handleRegisterUser = async (req, res) => {
         .json({
             firstName: newUser.firstName,
             lastName: newUser.lastName,
+            email: newUser.email,
             admin: newUser.admin
         });
     } catch (error) {
@@ -110,6 +111,7 @@ const handleLoginUser = async (req, res) => {
         }).json({
             firstName: foundUser.firstName,
             lastName: foundUser.lastName,
+            email: foundUser.email,
             admin: foundUser.admin
         });
     } catch (error) {

@@ -8,34 +8,33 @@ const CategoryBanners = () => {
 
   return (
     <>
-      {/* Unisex Banner */}
       <Button
-        onClick={event => navigate('/unisex/products')}
+        onClick={() => navigate('/unisex/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
-          backgroundColor: 'black',
-          color: 'white',
+          bgcolor: 'primary.main',
+          color: 'primary.lightText',
           ':hover': {
-            bgcolor: 'grey',
-            color: 'black'
+            bgcolor: 'primary.main',
+            opacity: 0.75
           },
           borderRadius: 0
         }}
       >
         Shop Unisex
       </Button>
-      {/* Women Banner */}
       <Button
-        onClick={event => navigate('/women/products')}
+        onClick={() => navigate('/women/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
-          backgroundColor: 'white',
+          backgroundColor: 'primary.light',
           color: 'black',
           ':hover': {
-            bgcolor: 'grey',
-            color: 'black'
+            bgcolor: 'primary.main',
+            color: 'primary.lightText',
+            opacity: 0.75
           },
           borderRadius: 0
         }}
@@ -44,15 +43,15 @@ const CategoryBanners = () => {
       </Button>
       {/* Men Banner */}
       <Button
-        onClick={event => navigate('/men/products')}
+        onClick={() => navigate('/men/products')}
         sx={{ 
           width: '100%', 
           height: '10rem',
-          backgroundColor: 'black',
-          color: 'white',
+          backgroundColor: 'primary.main',
+          color: 'primary.lightText',
           ':hover': {
-            bgcolor: 'grey',
-            color: 'black'
+            bgcolor: 'primary.main',
+            opacity: 0.75
           },
           borderRadius: 0
         }}

@@ -11,7 +11,7 @@ const AccountInfo = ({ loggedInUser }) => {
         <Box sx={{ padding: 2 }}>
             <Typography>First Name: { loggedInUser.firstName }</Typography>
             <Typography>Last Name: { loggedInUser.lastName }</Typography>
-            {/* TODO display registered email */}
+            <Typography>Email: { loggedInUser.email }</Typography>
         </Box> 
     </Container>
   )

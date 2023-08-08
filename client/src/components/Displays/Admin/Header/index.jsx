@@ -1,13 +1,11 @@
 // Imports
-import { useLogoutMutation } from '../../../../store/api/authApi';
+import LogoutButton from '../../../Buttons/Logout';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Link } from '@mui/material';
 
 const Header = ({ handleOpenInventoryForm, handleOpenProductForm }) => {
-    // Helpers
-    const [logout] = useLogoutMutation();
-
   return (
     <Box 
       sx={{ 
@@ -17,11 +15,20 @@ const Header = ({ handleOpenInventoryForm, handleOpenProductForm }) => {
       }}
     >
     <Typography variant='h5' fontWeight='bold'>Admin Dashboard</Typography>
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: 2
+      }}
+    >
       <Button 
         size='small' 
         sx={{ 
           paddingX: 1,
+          '&:hover': {
+            bgcolor: 'white',
+            textDecoration: 'underline'
+          }
         }} 
         onClick={handleOpenInventoryForm}
       >
@@ -31,22 +38,16 @@ const Header = ({ handleOpenInventoryForm, handleOpenProductForm }) => {
         size='small' 
         sx={{ 
           paddingX: 1,
+          '&:hover': {
+            bgcolor: 'white',
+            textDecoration: 'underline'
+          }
         }} 
         onClick={handleOpenProductForm}
       >
         Create Product
       </Button>
-      <Button 
-        size='small' 
-        sx={{ 
-          paddingX: 1, 
-          bgcolor: '#ed214d', 
-          '&:hover': { bgcolor: '#ff305d' }
-        }} 
-        onClick={() => logout()}
-      >
-        Logout
-      </Button>
+      <LogoutButton />
     </Box>
   </Box>
   )
