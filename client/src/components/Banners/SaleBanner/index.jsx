@@ -12,10 +12,12 @@ const SaleBanner = () => {
       sx={{
         width: '100%',
         height: '10rem',
-        backgroundColor: '#ff1a1a',
-        color: 'black', 
+        bgcolor: 'primary.sale',
+        color: 'primary.darkText', 
         ':hover': {
-          bgcolor: '#fa6055'
+          bgcolor: 'primary.sale',
+          color: 'primary.lightText',
+          opacity: 0.9
         },
         borderRadius: 0,
       }}

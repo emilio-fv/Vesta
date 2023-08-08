@@ -17,8 +17,8 @@ const Footer = () => {
       sx={{ 
         display: 'flex', 
         flexDirection: { xs: 'column', md: 'row' }, 
-        backgroundColor: 'black', 
-        color: 'white',
+        backgroundColor: 'primary.main', 
+        color: 'primary.lightText',
         paddingY: 6,
         gap: 2
       }}
@@ -26,7 +26,6 @@ const Footer = () => {
       {/* Product Links */}
       <Box 
         sx={{ 
-          // paddingY: 1, 
           flexGrow: 1, 
           display: 'flex',
           flexDirection: 'column',
