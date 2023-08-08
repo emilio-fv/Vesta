@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 const About = () => {
   return (
-    <Box sx={{ paddingTop: 6, bgcolor: 'primary.light' }}>
+    <Box sx={{ paddingTop: 6 }}>
       <Typography component='h3' variant='h4' align='center'>
         About Vesta
       </Typography>

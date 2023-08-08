@@ -48,6 +48,7 @@ const RegisterForm = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        gap: 1
       }}
       autoComplete='off'
       onSubmit={handleSubmit(handleRegister)}
