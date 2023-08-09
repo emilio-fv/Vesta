@@ -44,7 +44,8 @@ const handleGetAllInventory = async (req, res) => {
 const handleGetInventoryByCategory = async (req, res) => {
   logger.info('Controller: handleGetInventoryByCategory');
   try {
-    const response = await getInventoryByCategory(req.params.category);
+    const category = req.params.category.charAt(0).toUpperCase() + req.params.category.slice(1);
+    const response = await getInventoryByCategory(category);
 
     return res.status(200).json(response);
   } catch (error) {

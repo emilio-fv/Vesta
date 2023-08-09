@@ -3,7 +3,6 @@ import LogoutButton from '../../../Buttons/Logout';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { Link } from '@mui/material';
 
 const Header = ({ handleOpenInventoryForm, handleOpenProductForm }) => {
   return (

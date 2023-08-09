@@ -1,10 +1,13 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import { Box, Container } from '@mui/material';
 import SortProducts from '../components/Forms/SortProducts';
 import FilterProducts from '../components/Forms/FilterProducts';
-import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
+import ProductsDisplay from '../components/Displays/User/Products';
+
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 const Products = () => {
   // Extract category from url
@@ -42,7 +45,7 @@ const Products = () => {
           }}
         >
           <FilterProducts />
-          {/* TODO: Display products */}
+          <ProductsDisplay category={category} />
         </Box>
       </Container>
     </Layout>

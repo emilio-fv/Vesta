@@ -14,6 +14,11 @@ const inventorySlice = createSlice({
   name: 'inventory',
   initialState,
   reducers: {
+    resetInventory: (state) => {
+      state.inventory = null
+      state.status = 'idle'
+      state.errors = null
+    },
     sortByPriceAsc: (state) => {
       state.inventory.sort((a, b) => {
         const aPrice = parseFloat(a.price.slice(1));
@@ -81,11 +86,16 @@ const inventorySlice = createSlice({
         const index = state.inventory.findIndex((item) => parseInt(item.id) === parseInt(inventoryId));
         state.inventory.splice(index, 1);
       })
+      .addMatcher(inventoryApi.endpoints.getInventoryByCategory.matchFulfilled, (state, action) => {
+        state.status = 'success'
+        state.inventory = action.payload
+      })
   }
 });
 
 // Actions
 export const {
+  resetInventory, 
   sortByPriceAsc,
   sortByPriceDesc,
   sortByFeatured,
