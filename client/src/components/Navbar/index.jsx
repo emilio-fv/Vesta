@@ -4,6 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logo from './Logo';
 import AccountModal from './AccountModal';
+import { resetInventory } from '../../store/reducers/inventory/inventorySlice';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import AppBar from '@mui/material/AppBar';
@@ -22,7 +23,7 @@ import { useTheme } from '@emotion/react';
 
 const categories = ['unisex', 'women', 'men'];
 
-const Navbar = ({ loggedInUser }) => {
+const Navbar = ({ loggedInUser, resetInventory }) => {
   // Helpers
   const theme = useTheme();
   const navigate = useNavigate();
@@ -35,11 +36,16 @@ const Navbar = ({ loggedInUser }) => {
 
   // Handle open account 
   const handleAccountOpen = () => {
-    loggedInUser 
-      ? loggedInUser.admin 
-        ? navigate('/admin')
-        : navigate('/account')
-      : setAccountOpen(true);
+    if (loggedInUser) {
+      if (loggedInUser.admin) {
+        resetInventory();
+        navigate('/admin');
+      } else {
+        navigate('/account');
+      }
+    } else {
+      setAccountOpen(true);
+    }
   };
 
   // Handle close account modal
@@ -192,11 +198,16 @@ const Navbar = ({ loggedInUser }) => {
 }
 
 // Connect to Redux store
-const mapStateToDispatch = (state) => ({
+const mapStateToProps = (state) => ({
   loggedInUser: state.auth.loggedInUser
 })
 
+const mapDispatchToProps = {
+  resetInventory
+}
+
 // Exports
 export default connect(
-  mapStateToDispatch
+  mapStateToProps,
+  mapDispatchToProps
 )(Navbar);

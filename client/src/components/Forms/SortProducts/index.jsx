@@ -8,20 +8,19 @@ import { connect } from 'react-redux';
 import { sortByPriceAsc, sortByPriceDesc } from '../../../store/reducers/inventory/inventorySlice';
 
 const SortProducts = ({ sortByPriceAsc, sortByPriceDesc }) => {
-  // Helpers
-  const [sortCategory, setSortCategory] = useState("");
-
+  // Handle select value 
+  const [value, setValue] = useState(null);
   // Reset sort category 
   useEffect(() => {
     return (() => {
-        setSortCategory("");
+        setValue(null);
     })
   }, []);
 
   // Handle Sort Select Changes
   const handleChanges = (event) => {
     const { value } = event.target;
-    setSortCategory(value);
+    setValue(value);
 
     if (value === 'Asc') {
       sortByPriceAsc();
@@ -39,19 +38,19 @@ const SortProducts = ({ sortByPriceAsc, sortByPriceDesc }) => {
         <Select
           labelId='sort-by-label'
           id='sort-by'
-          value={sortCategory}
+          value={value}
           label='sort-category'
-          onChange={event => handleChanges(event)}
+          onChange={(event) => handleChanges(event)}
         >
-          <MenuItem value={'Asc'}>Price (Ascending)</MenuItem>
-          <MenuItem value={'Desc'}>Price (Descending)</MenuItem>
+          <MenuItem value={'Asc'}>Price: high to low</MenuItem>
+          <MenuItem value={'Desc'}>Price: low to high</MenuItem>
         </Select>
       </FormControl>
     </Box>
   )
 }
 
-// Connect to Redux
+// Connect to Redux store
 const mapDispatchToProps = {
   sortByPriceAsc, 
   sortByPriceDesc

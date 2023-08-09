@@ -48,13 +48,9 @@ export const productsSlice = createSlice({
     }
 })
 
-// TODO: Update Actions
+// Actions
 export const { 
     resetErrors,
-    sortPriceAsc, 
-    sortPriceDesc, 
-    sortFeatured,
-    filterProducts
 } = productsSlice.actions;
 
 // Reducer
