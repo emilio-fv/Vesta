@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import { connect, useDispatch } from 'react-redux';
-import { filter } from '../../../store/reducers/inventory/inventorySlice.js';
+// import { filter } from '../../../store/reducers/inventory/inventorySlice.js';
 
 function valueText(value) {
     return `$${value}`;
@@ -216,7 +216,7 @@ const FilterProducts = ({ filter }) => {
 // const mapStateToProps = (state) => ({ });
 
 const mapDispatchToProps = {
-    filter 
+    // filter 
 };
 
 export default connect(
