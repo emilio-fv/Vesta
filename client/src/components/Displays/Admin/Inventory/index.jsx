@@ -19,19 +19,21 @@ const headerStyling = {
 };
 
 const Inventory = ({ inventory }) => {
-  // Fetch all inventory
+  // Fetch inventory
+  const { isSuccess } = useGetAllInventoryQuery(null, { refetchOnMountOrArgChange: true });
+
+  // Update inventory 
   const [updateInventoryFormOpen, setUpdateInventoryFormOpen] = useState(false);
   const handleOpenUpdateInventoryForm = () => setUpdateInventoryFormOpen(true);
   const handleCloseUpdateInventoryForm = () => {
     setUpdateInventoryFormOpen(false);
     setSelectedInventory(null);
   };
-  const [selectedInventory, setSelectedInventory] = useState(null);
-  const [deleteInventory] = useDeleteInventoryMutation();
   const [error, setError] = useState(null);
+  const [selectedInventory, setSelectedInventory] = useState(null);
 
-  // Fetch inventory
-  const { isSuccess } = useGetAllInventoryQuery();
+  // Delete inventory
+  const [deleteInventory] = useDeleteInventoryMutation();
 
   // Handle update button
   const handleUpdateClick = (item) => {
@@ -39,7 +41,7 @@ const Inventory = ({ inventory }) => {
     handleOpenUpdateInventoryForm();
   };
 
-  // TODO: Handle delete button 
+  // Handle delete button 
   const handleDeleteClick = (item) => {
     if (item.quantity !== 0) {
       setError('Cannot delete inventory with quantity greater than 0.');
@@ -47,8 +49,7 @@ const Inventory = ({ inventory }) => {
     }
 
     deleteInventory(item.id); 
-  }
-
+  };
 
   return (
     <>
@@ -77,7 +78,7 @@ const Inventory = ({ inventory }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isSuccess && inventory
+            {isSuccess && inventory.length > 0
               ? inventory.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>

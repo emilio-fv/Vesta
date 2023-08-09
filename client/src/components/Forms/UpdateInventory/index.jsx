@@ -10,7 +10,8 @@ import Button from '@mui/material/Button';
 import SelectInput from '../../Inputs/Select';
 import NumberInput from '../../Inputs/Number';
 import CheckboxInput from '../../Inputs/Checkbox';
-import { colors, sizes } from '../../../assets/selectOptions';
+import { colors, sizes } from '../../../assets/constants';
+// import { colors, sizes } from '../../../assets/selectOptions';
 
 const UpdateInventory = ({ item, updateInventoryFormOpen, handleCloseUpdateInventoryForm }) => {
   // Helpers

@@ -5,12 +5,20 @@ import { connect } from 'react-redux';
 import { useGetInventoryByCategoryQuery } from '../../../../store/api/inventoryApi';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const ProductsDisplay = ({ category, inventory }) => {
+const ProductsDisplay = ({ category, inventory, filter, filtered }) => {
   // Helpers
   const { isLoading, isSuccess } = useGetInventoryByCategoryQuery(category, { refetchOnMountOrArgChange: true });
 
   if (isLoading) {
     <CircularProgress color='success' />
+  }
+
+  let products;
+
+  if (filter) {
+    products = filtered;
+  } else {
+    products = inventory;
   }
 
   return (
@@ -22,8 +30,8 @@ const ProductsDisplay = ({ category, inventory }) => {
         gridGap: '50px',
       }}
     >
-      { isSuccess && inventory
-        ? inventory.map((item) => (
+      { isSuccess && products
+        ? products.map((item) => (
             <ProductCard key={item.id} product={item}/>
           ))
         : null
@@ -34,7 +42,9 @@ const ProductsDisplay = ({ category, inventory }) => {
 
 // Connect to Redux store
 const mapStateToProps = (state) => ({
-  inventory: state.inventory.inventory
+  inventory: state.inventory.inventory,
+  filter: state.inventory.filter,
+  filtered: state.inventory.filtered
 });
 
 // Exports

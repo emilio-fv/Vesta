@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import SelectInput from '../../Inputs/Select';
 import { connect } from 'react-redux';
-import { sizes, colors } from '../../../assets/selectOptions.js';
+// import { sizes, colors } from '../../../assets/selectOptions.js';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import NumberInput from '../../Inputs/Number';
 import CheckboxInput from '../../Inputs/Checkbox';
 import { useCreateInventoryMutation } from '../../../store/api/inventoryApi';
+import { colors, sizes } from '../../../assets/constants';
 
 const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products }) => {
   // Helpers
