@@ -3,15 +3,26 @@ const {
   createInventory,
   getAllInventory,
   updateInventoryById,
-  deleteInventoryById
+  deleteInventoryById,
+  getInventoryByCategory
 } = require('../../services/inventory');
 const { logger } = require('../../utils/logger.utils');
 
 const handleCreateInventory = async (req, res) => {
   logger.info("Controller: handleCreateInventory");
   try {
-    const newInventory = await createInventory(req.body);
-    console.log(newInventory);
+    const { size, color, quantity, onSale, discount, featured, productId } = req.body;
+    const data = {
+      size: size,
+      color: color,
+      quantity: quantity,
+      onSale: onSale,
+      discount: discount,
+      featured: featured
+    };
+
+    const newInventory = await createInventory(data, productId);
+
     return res.status(200).json(newInventory);
   } catch (error) {
     logger.error(error);
@@ -24,6 +35,18 @@ const handleGetAllInventory = async (req, res) => {
   try {
     const allInventory = await getAllInventory();
     return res.status(200).json(allInventory);
+  } catch (error) {
+    logger.error(error);
+    return res.status(400).json(error);
+  }
+};
+
+const handleGetInventoryByCategory = async (req, res) => {
+  logger.info('Controller: handleGetInventoryByCategory');
+  try {
+    const response = await getInventoryByCategory(req.params.category);
+
+    return res.status(200).json(response);
   } catch (error) {
     logger.error(error);
     return res.status(400).json(error);
@@ -62,6 +85,7 @@ const handleDeleteInventoryById = async (req, res) => {
 module.exports = {
   handleCreateInventory,
   handleGetAllInventory,
+  handleGetInventoryByCategory,
   handleUpdateInventoryById,
   handleDeleteInventoryById
 };
