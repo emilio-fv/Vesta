@@ -5,19 +5,21 @@ const {
   handleCreateInventory,
   handleGetAllInventory,
   handleUpdateInventoryById,
-  handleDeleteInventoryById
+  handleDeleteInventoryById,
+  handleGetInventoryByCategory
  } = require('../../controllers/inventory');
 
 // Create router
 const router = express.Router();
 
 // Inventory endpoints
-router.post('/create', authenticate, handleCreateInventory);
-router.get('/all', authenticate, handleGetAllInventory);
-router.patch('/:id/update', authenticate, handleUpdateInventoryById);
-router.delete('/:id/delete', authenticate, handleDeleteInventoryById);
+router.post('/create', handleCreateInventory);
+router.get('/all', handleGetAllInventory);
+router.get('/:category/all', handleGetInventoryByCategory);
+router.patch('/:id/update', handleUpdateInventoryById);
+router.delete('/:id/delete', handleDeleteInventoryById);
 
 // Exports
 module.exports = {
   inventoryRouter: router
-}
+};

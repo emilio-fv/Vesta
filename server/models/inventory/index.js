@@ -44,13 +44,6 @@ const Inventory = db.define('Inventory', {
     featured: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    },
-    productId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'Product',
-            key: 'id'
-        }
     }
 },
 {

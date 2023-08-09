@@ -77,7 +77,7 @@ const Inventory = ({ inventory }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isSuccess
+            {isSuccess && inventory
               ? inventory.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>

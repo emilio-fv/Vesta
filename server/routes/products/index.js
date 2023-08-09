@@ -12,10 +12,10 @@ const {
 const router = express.Router();
 
 // Product endpoints
-router.post('/create', authenticate, handleCreateProduct); 
-router.get('/all', authenticate, handleGetAllProducts); 
-router.patch('/:id/update', authenticate, handleUpdateProductById); 
-router.delete('/:id/delete', authenticate, handleDeleteProductById); 
+router.post('/create', handleCreateProduct); 
+router.get('/all', handleGetAllProducts); 
+router.patch('/:id/update', handleUpdateProductById); 
+router.delete('/:id/delete', handleDeleteProductById); 
 
 // Exports
 module.exports = {

@@ -1,12 +1,16 @@
 // Imports
+const { Sequelize } = require('sequelize');
 const { models: { Inventory } } = require('../../models/index');
+const { Product } = require('../../models/product');
 const { logger } = require('../../utils/logger.utils');
 
-const createInventory = async (data) => {
-  logger.info('Service: createInventory')
+const createInventory = async (data, productId) => {
+  logger.info('Service: createInventory');
   let newInventory = await Inventory.create({
     ...data,
+    ProductId: productId
   });
+
   newInventory = await Inventory.findOne({
     where: {
       id: newInventory.id
@@ -17,11 +21,24 @@ const createInventory = async (data) => {
 };
 
 const getAllInventory = async () => {
-  logger.info('Service: getAllInventory')
+  logger.info('Service: getAllInventory');
   const allInventory = await Inventory.findAll({
     include: 'Product'
   });
   return allInventory;
+};
+
+const getInventoryByCategory = async (category) => {
+  logger.info('Service: getInventoryByCategory');
+  const products = await Product.findAll({
+    where: {
+      category: category
+    },
+    attributes: ['id', 'name', 'category', 'price', 'description', 'src'],
+    include: ['inventory']
+  });
+
+  return products;
 };
 
 const getInventoryByProductId = async (productId) => {
@@ -66,6 +83,7 @@ module.exports = {
   createInventory,
   getAllInventory,
   getInventoryByProductId,
+  getInventoryByCategory,
   updateInventoryById,
   deleteInventoryById
 }

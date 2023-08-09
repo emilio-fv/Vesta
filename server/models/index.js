@@ -5,7 +5,7 @@ const { Product } = require('./product');
 const { Inventory } = require('./inventory');
 
 // Product and inventory association
-Product.hasMany(Inventory);
+Product.hasMany(Inventory, { as: 'inventory' });
 Inventory.belongsTo(Product);
 
 // Exports

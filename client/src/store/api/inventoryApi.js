@@ -21,8 +21,8 @@ export const inventoryApi = createApi({
       })
     }),
     getInventoryByCategory: builder.query({
-      query: (data) => ({
-        url: `/inventory/${data.category}/all`,
+      query: (category) => ({
+        url: `/inventory/${category}/all`,
         method: 'GET'
       })
     }),

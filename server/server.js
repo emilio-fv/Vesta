@@ -35,7 +35,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/inventory', inventoryRouter);
 
-// Initialize server function
+
 const initializeApp = async () => {
     try {
         await db.authenticate();
@@ -49,5 +49,4 @@ const initializeApp = async () => {
     }
 }
 
-// 
 initializeApp();
