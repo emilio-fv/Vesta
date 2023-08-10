@@ -14,6 +14,7 @@ import {
 import authReducer from './reducers/auth/authSlice';
 import productsReducer from './reducers/products/productsSlice';
 import inventoryReducer from './reducers/inventory/inventorySlice';
+import cartReducer from './reducers/cart/cartSlice';
 import { authApi } from './api/authApi';
 import { productsApi } from './api/productsApi';
 import { inventoryApi } from './api/inventoryApi';
@@ -23,7 +24,7 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    whitelist: ['auth'],
+    whitelist: ['auth', 'cart'],
 }
 
 // Combine reducers
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
     products: productsReducer,
     [productsApi.reducerPath]: productsApi.reducer,
     inventory: inventoryReducer,
-    [inventoryApi.reducerPath]: inventoryApi.reducer
+    [inventoryApi.reducerPath]: inventoryApi.reducer,
+    cart: cartReducer
 })
 
 // Create persisted reducer

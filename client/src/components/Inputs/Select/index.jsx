@@ -6,20 +6,25 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FormHelperText } from '@mui/material';
 
-const SelectInput = ({ name, control, rules, label, options }) => {
+const SelectInput = ({ name, control, rules, label, options, handleChange, disabled }) => {
   return (
     <Controller 
       name={name}
       control={control}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <FormControl sx={{ minWidth: 120 }}>
+        <FormControl sx={{ minWidth: 120 }} disabled={disabled}> 
           <InputLabel>{label}</InputLabel>
           <Select
             value={value}
             label={label}
             autoWidth
-            onChange={onChange}
+            onChange={event => {
+              if (handleChange) {
+                handleChange(event.target.value);
+              }
+              onChange(event)
+            }}
             error={!!error}
           >
             {options.map((option) => (

@@ -26,11 +26,10 @@ export const inventoryApi = createApi({
         method: 'GET'
       })
     }),
-    getFavorites: builder.query({
-      query: (data) => ({
-        url: '/inventory/favorites',
-        method: 'GET',
-        body: data
+    getInventoryByProductId: builder.query({
+      query: (id) => ({
+        url: `/inventory/${id}/item`,
+        method: 'GET'
       })
     }),
     updateInventory: builder.mutation({
@@ -54,7 +53,7 @@ export const {
   useCreateInventoryMutation, 
   useDeleteInventoryMutation, 
   useGetAllInventoryQuery,
-  useGetFavoritesQuery,
+  useGetInventoryByProductIdQuery,
   useGetInventoryByCategoryQuery, 
   useUpdateInventoryMutation 
 } = inventoryApi;

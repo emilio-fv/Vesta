@@ -1,49 +1,35 @@
+// Imports
 import React from 'react';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { calculateSubtotal } from '../../../../utils/calculateSubtotal';
 
-const CartSummary = () => {
-    return (
-        <Container 
-            sx={{ 
-                paddingY: 3,
-                display: 'flex'
-            }}
-        >
-            <Box
-                sx={{
-                    flex: { xs: 2, sm: 3},
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'end',
-                    gap: 1,
-                }}
-            >
-                <Typography variant={{ xs: 'p', sm: 'h6'}} fontWeight='bold'>Subtotal</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}} fontWeight='bold'>Tax</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}} fontWeight='bold'>Shipping</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}} fontWeight='bold'>Total</Typography>
-            </Box>
-            <Box
-                sx={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'end',
-                    gap: 1,
-                    paddingX: 2,
-                }}
-            >
-                <Typography variant={{ xs: 'p', sm: 'h6'}}>$ 10.99</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}}>$ 10.99</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}}>$ 10.99</Typography>
-                <Typography variant={{ xs: 'p', sm: 'h6'}}>$ 10.99</Typography>
-                <Button variant='outlined' sx={{ marginTop: 2 }}>Checkout</Button>
-            </Box>
-        </Container>
-    )
+const CartSummary = ({ cart }) => {
+  return (
+      <Box
+        sx={{
+          flex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3
+        }}
+      >
+        <Typography variant='h5' fontWeight='bold'>Summary</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row'}}>
+          <Box>
+            <Typography># of Items:</Typography>
+            <Typography>Subtotal:</Typography>
+            <Typography variant='p' fontSize={'.8rem'}>*Taxes & shipping calculated at checkout</Typography>
+          </Box>
+          <Box>
+            <Typography>{cart.length}</Typography>
+            <Typography align='right'>${calculateSubtotal(cart)}</Typography>
+          </Box>
+        </Box>
+        <Button fullWidth>Checkout</Button>
+      </Box>
+  )
 }
 
 export default CartSummary;
