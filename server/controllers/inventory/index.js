@@ -4,7 +4,7 @@ const {
   getAllInventory,
   updateInventoryById,
   deleteInventoryById,
-  getInventoryByCategory
+  getInventoryByCategory,
 } = require('../../services/inventory');
 const { logger } = require('../../utils/logger.utils');
 
@@ -88,5 +88,5 @@ module.exports = {
   handleGetAllInventory,
   handleGetInventoryByCategory,
   handleUpdateInventoryById,
-  handleDeleteInventoryById
+  handleDeleteInventoryById,
 };

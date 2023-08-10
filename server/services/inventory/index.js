@@ -1,5 +1,5 @@
 // Imports
-const { Sequelize } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 const { models: { Inventory } } = require('../../models/index');
 const { Product } = require('../../models/product');
 const { logger } = require('../../utils/logger.utils');

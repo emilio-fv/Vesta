@@ -29,7 +29,7 @@ const Dashboard = () => {
         value={value}
         onChange={handleChangeTab}
         aria-label="Admin dashboard"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: 'divider', minWidth: '150px' }}
       >
         <Tab label="Favorites" />
         <Tab label="Account Info" />

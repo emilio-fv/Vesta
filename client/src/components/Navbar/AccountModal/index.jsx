@@ -9,9 +9,9 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-const AccountModal = ({ open, onClose }) => {
+const AccountModal = ({ open, onClose, initialValue }) => {
   // Tab helpers
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(initialValue);
 
   // Handle changing tabs
   const handleTabChange = (event, newValue) => {
