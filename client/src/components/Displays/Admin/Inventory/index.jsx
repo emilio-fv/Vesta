@@ -18,9 +18,9 @@ const headerStyling = {
   fontWeight: 'bold'
 };
 
-const Inventory = ({ inventory }) => {
+const Inventory = () => {
   // Fetch inventory
-  const { isSuccess } = useGetAllInventoryQuery(null, { refetchOnMountOrArgChange: true });
+  const { data, isSuccess } = useGetAllInventoryQuery(null, { refetchOnMountOrArgChange: true });
 
   // Update inventory 
   const [updateInventoryFormOpen, setUpdateInventoryFormOpen] = useState(false);
@@ -78,8 +78,8 @@ const Inventory = ({ inventory }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isSuccess && inventory.length > 0
-              ? inventory.map((item) => (
+            {isSuccess
+              ? data.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       {item.Product.name}
@@ -131,7 +131,7 @@ const Inventory = ({ inventory }) => {
 
 // Connect to Redux store
 const mapStateToProps = (state) => ({
-  inventory: state.inventory.inventory
+  // inventory: state.inventory.inventory
 })
 
 export default connect(

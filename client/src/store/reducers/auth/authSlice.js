@@ -5,6 +5,7 @@ import { authApi } from "../../api/authApi";
 // Initial state
 const initialState = {
     loggedInUser: null,
+    favorites: [],
     status: 'idle', // idle | loading | failed | success
     errors: null
 };
@@ -14,6 +15,13 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        addFavorite: (state, action) => {
+            state.favorites.push(action.payload);
+        },
+        removeFavorite: (state, action) => {
+            const index = state.favorites.findIndex((id) => parseInt(id) === parseInt(action.payload));
+            state.favorites.splice(index, 1);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -32,6 +40,12 @@ export const authSlice = createSlice({
             })
     }
 });
+
+// Actions
+export const {
+    addFavorite,
+    removeFavorite
+} = authSlice.actions;
 
 // Reducer
 export default authSlice.reducer;

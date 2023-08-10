@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { resetInventory } from '../../../store/reducers/inventory/inventorySlice';
 
 import Button from '@mui/material/Button';
+import { purgeData } from '../../../store/store';
 
 const LogoutButton = ({ loggedInUser, resetInventory }) => {
   // Helpers

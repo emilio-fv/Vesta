@@ -192,6 +192,7 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
       <AccountModal 
         open={accountOpen}
         onClose={handleAccountClose}
+        initialValue={0}
       />
     </>
   )

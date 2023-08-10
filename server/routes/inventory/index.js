@@ -6,7 +6,7 @@ const {
   handleGetAllInventory,
   handleUpdateInventoryById,
   handleDeleteInventoryById,
-  handleGetInventoryByCategory
+  handleGetInventoryByCategory,
  } = require('../../controllers/inventory');
 
 // Create router
