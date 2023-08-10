@@ -5,6 +5,8 @@ const {
   updateInventoryById,
   deleteInventoryById,
   getInventoryByCategory,
+  getInventoryByProductId,
+  getInventoryById
 } = require('../../services/inventory');
 const { logger } = require('../../utils/logger.utils');
 
@@ -54,6 +56,28 @@ const handleGetInventoryByCategory = async (req, res) => {
   }
 };
 
+const handleGetInventoryById = async (req, res) => {
+  logger.info('Controller: handleGetInventoryById');
+  try {
+    const response = await getInventoryById(req.params.id);
+    return res.status(200).json(response);
+  } catch (error) {
+    logger.error(error);
+    return res.status(400).json(error);
+  }
+}
+
+const handleGetInventoryByProductId = async (req, res) => {
+  logger.info('Controller: handleGetInventoryByProductId');
+  try {
+    const response = await getInventoryByProductId(req.params.id);
+    return res.status(200).json(response);
+  } catch (error) {
+    logger.error(error);
+    return res.status(400).json(error);
+  }
+};
+
 const handleUpdateInventoryById = async (req, res) => {
   logger.info('Controller: handleUpdateInventoryById');
   try {
@@ -89,4 +113,6 @@ module.exports = {
   handleGetInventoryByCategory,
   handleUpdateInventoryById,
   handleDeleteInventoryById,
+  handleGetInventoryById,
+  handleGetInventoryByProductId
 };

@@ -1,5 +1,4 @@
 // Imports
-const { Sequelize, Op } = require('sequelize');
 const { models: { Inventory } } = require('../../models/index');
 const { Product } = require('../../models/product');
 const { logger } = require('../../utils/logger.utils');
@@ -41,15 +40,28 @@ const getInventoryByCategory = async (category) => {
   return products;
 };
 
-const getInventoryByProductId = async (productId) => {
+const getInventoryByProductId = async (id) => {
   logger.info('Service: getInventoryByProductId');
-  const allInventory = await Inventory.findAll({
+  const inventory = await Product.findOne({
     where: {
-      productId: productId
-    }
+      id: id
+    },
+    attributes: ['id', 'name', 'category', 'price', 'description', 'src'],
+    include: ['inventory']
   });
 
-  return allInventory;
+  return inventory;
+};
+
+const getInventoryById = async (id) => {
+  logger.info('Service: getInventoryById');
+  const inventory = await Inventory.findOne({
+    where: {
+      id: id
+    },
+    include: 'Product'
+  });
+  return inventory;
 };
 
 const updateInventoryById = async (data, id) => {
@@ -84,6 +96,8 @@ module.exports = {
   getAllInventory,
   getInventoryByProductId,
   getInventoryByCategory,
+  getInventoryByProductId,
   updateInventoryById,
-  deleteInventoryById
+  deleteInventoryById,
+  getInventoryById
 }
