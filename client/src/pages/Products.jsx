@@ -1,18 +1,25 @@
-import React from 'react';
+// Imports
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { resetFilters } from '../store/reducers/inventory/inventorySlice';
+import { connect } from 'react-redux';
 import Layout from '../components/Layout';
 import SortProducts from '../components/Forms/SortProducts';
 import FilterProducts from '../components/Forms/FilterProducts';
-import { useParams } from 'react-router-dom';
 import ProductsDisplay from '../components/Displays/User/Products';
 
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-const Products = () => {
-  // Extract category from url
+const Products = ({ resetFilters }) => {
   const { category } = useParams();
-  
+
+  useEffect(() => {
+    // Reset filters when leaving page
+    return () => {resetFilters()}
+  })
+
   return (
     <Layout>
       <Container
@@ -52,4 +59,12 @@ const Products = () => {
   )
 };
 
-export default Products;
+// Connect to Redux store
+const mapDispatchToProps = {
+  resetFilters
+}
+
+export default connect(
+  null, 
+  mapDispatchToProps
+)(Products);

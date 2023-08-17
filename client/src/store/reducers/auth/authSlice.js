@@ -5,8 +5,7 @@ import { authApi } from "../../api/authApi";
 // Initial state
 const initialState = {
     loggedInUser: null,
-    favorites: [],
-    status: 'idle', // idle | loading | failed | success
+    status: 'idle',
     errors: null
 };
 
@@ -16,11 +15,14 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         addFavorite: (state, action) => {
-            state.favorites.push(action.payload);
+            if (!state.loggedInUser.favorites) {
+                state.loggedInUser.favorites = []
+            }
+            state.loggedInUser.favorites.push(action.payload);
         },
         removeFavorite: (state, action) => {
-            const index = state.favorites.findIndex((id) => parseInt(id) === parseInt(action.payload));
-            state.favorites.splice(index, 1);
+            const index = state.loggedInUser.favorites.findIndex((id) => parseInt(id) === parseInt(action.payload));
+            state.loggedInUser.favorites.splice(index, 1);
         },
     },
     extraReducers: (builder) => {
@@ -37,6 +39,9 @@ export const authSlice = createSlice({
                 state.loggedInUser = null
                 state.status = 'idle'
                 state.errors = null
+            })
+            .addMatcher(authApi.endpoints.updatedUser.matchFulfilled, (state, action) => {
+                state.loggedInUser = action.payload
             })
     }
 });

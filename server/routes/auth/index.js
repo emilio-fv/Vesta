@@ -6,8 +6,7 @@ const {
     handleLoginUser,
     handleLogoutUser,
     handleRefreshAccessToken,
-    handleGetAllUsers,
-    handleDeleteUserById
+    handleUpdateUserById
 } = require('../../controllers/auth');
 
 // Create router
@@ -18,8 +17,7 @@ router.post('/register', handleRegisterUser);
 router.post('/login', handleLoginUser); 
 router.post('/logout', handleLogoutUser);
 router.get('/refresh', handleRefreshAccessToken);
-router.get('/all', authenticate, handleGetAllUsers);
-router.delete('/:id/delete', authenticate, handleDeleteUserById);
+router.patch('/update', authenticate, handleUpdateUserById);
 
 // Exports 
 module.exports = {

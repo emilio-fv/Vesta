@@ -2,10 +2,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
-// import { sizes, sizeOptions, colorOptions, colors } from '../../../assets/selectOptions';
+import { colorDefaults, colors, priceRange, sizeDefaults, sizes } from '../../../assets/constants';
+import { setFilters, resetFilters } from '../../../store/reducers/inventory/inventorySlice';
 import CheckboxInput from '../../Inputs/Checkbox';
 import SliderInput from '../../Inputs/Slider';
-import { filter, resetFilter } from '../../../store/reducers/inventory/inventorySlice';
 
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Typography from '@mui/material/Typography';
@@ -16,26 +16,25 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
-// import { colorDefaults, sizeDefaults } from '../../../assets/filterOptions';
-import { colorDefaults, colors, priceRange, sizeDefaults, sizes } from '../../../assets/constants';
 
 const marks = [
-    {
-        value: 0,
-        label: '$0'
-    },
-    {
-        value: 500,
-        label: '$500'
-    }
+  {
+    value: 0,
+    label: '$0'
+  },
+  {
+    value: 500,
+    label: '$500'
+  }
 ];
 
-const FilterProducts = ({ filter, resetFilter }) => {
+const FilterProducts = ({ setFilters, resetFilters }) => {
   // Handle form changes and submit
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       ...sizeDefaults,
       ...colorDefaults,
+      price: priceRange
     }
   });
 
@@ -63,12 +62,13 @@ const FilterProducts = ({ filter, resetFilter }) => {
       }
     }
 
-    filter(filters);
+    setFilters(filters);
   }
 
-  const handleReset = () => {
+  // Handle reset button
+  const handleResetClick = () => {
     reset();
-    resetFilter();
+    resetFilters();
   };
 
   return (
@@ -139,8 +139,8 @@ const FilterProducts = ({ filter, resetFilter }) => {
             <SliderInput 
               control={control}
               name={'price'}
-              min={priceRange[0]}
-              max={priceRange[1]}
+              min={0}
+              max={500}
               step={1}
               ariaLabel={() => 'Price Range'}
               valueText={(value) => `$${value}`}
@@ -150,15 +150,15 @@ const FilterProducts = ({ filter, resetFilter }) => {
           </AccordionDetails>
       </Accordion> 
       <Button type='submit' sx={{ bgcolor: 'black', color: 'white',  }}>Apply</Button>
-      <Button onClick={() => handleReset()} sx={{ bgcolor: 'black', color: 'white',  }}>Reset</Button>
+      <Button onClick={() => handleResetClick()} sx={{ bgcolor: 'black', color: 'white',  }}>Reset</Button>
     </Box>
   )
 }
 
 // Connect to Redux store
 const mapDispatchToProps = {
-    filter,
-    resetFilter
+  setFilters,
+  resetFilters
 };
 
 export default connect(

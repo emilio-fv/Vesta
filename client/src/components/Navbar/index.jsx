@@ -1,10 +1,11 @@
 // Imports
 import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Logo from './Logo';
-import AccountModal from './AccountModal';
-import { resetInventory } from '../../store/reducers/inventory/inventorySlice';
+import AccountModal from '../Modals/Account';
+import { categories } from '../../assets/constants';
+import LogoLink from '../Links/Logo';
+import MenuLink from '../Links/Menu';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import AppBar from '@mui/material/AppBar';
@@ -12,7 +13,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -21,9 +21,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import { useTheme } from '@emotion/react';
 
-const categories = ['unisex', 'women', 'men'];
-
-const Navbar = ({ loggedInUser, resetInventory }) => {
+const Navbar = ({ loggedInUser }) => {
   // Helpers
   const theme = useTheme();
   const navigate = useNavigate();
@@ -34,11 +32,10 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
 
-  // Handle open account 
+  // Handle open account modal
   const handleAccountOpen = () => {
     if (loggedInUser) {
       if (loggedInUser.admin) {
-        resetInventory();
         navigate('/admin');
       } else {
         navigate('/account');
@@ -48,11 +45,8 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
     }
   };
 
-  // Handle close account modal
-  const handleAccountClose = () => setAccountOpen(false);
-
   // Favorites Button
-  const handleFavoritesButton = () => {
+  const handleFavoritesClick = () => {
     loggedInUser 
     ? loggedInUser.admin 
       ? navigate('/admin')
@@ -60,25 +54,13 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
     : setAccountOpen(true);
   };
 
-  // Shopping Cart Button
-  const handleShoppingCartButton = () => {
-    navigate('/cart');
-  };
-
   return (
     <>
       <AppBar position='static' >
         <Container maxWidth='xl' >
-          <Toolbar 
-            disableGutters 
-            sx={{ 
-              display: 'flex', 
-              justifyContent: 'space-between'
-            }} 
-          >
+          <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Logo (Desktop) */}
-            <Logo 
-              component={RouterLink}
+            <LogoLink 
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 color: 'primary.lightText',
@@ -121,22 +103,17 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
                     key={category}
                     onClick={handleCloseNavMenu}
                   >
-                    <Link 
-                      component={RouterLink}
+                    <MenuLink 
                       to={`/${category}/products`}
-                      underline='none'
-                      noWrap
                       sx={{ fontSize: '.85rem' }}
-                    >
-                      {category.toUpperCase()}
-                    </Link>
+                      text={category.toUpperCase()}
+                    />
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
             {/* Logo (Mobile) */}
-            <Logo 
-              component={RouterLink}
+            <LogoLink
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 fontSize: '1.5rem',
@@ -153,19 +130,14 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
               }}
             >
               {categories.map((category) => (
-                <Link 
-                  key={category}
-                  component={RouterLink}
+                <MenuLink 
                   to={`/${category}/products`}
-                  noWrap
-                  underline='none'
                   sx={{ 
                     color: 'primary.lightText', 
                     fontSize: '.85rem' 
                   }}
-                >
-                  {category.toUpperCase()}
-                </Link>
+                  text={category.toUpperCase()}
+                />
               ))}
             </Box>
             {/* Icons menu */}
@@ -176,12 +148,12 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
                 </IconButton>
               </Tooltip>
               <Tooltip title="Favorites">
-                <IconButton onClick={() => handleFavoritesButton()}>
+                <IconButton onClick={() => handleFavoritesClick()}>
                   <FavoriteBorderRoundedIcon fontSize='small' htmlColor={theme.palette.primary.lightText}/>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Shopping Cart">
-                <IconButton onClick={() => handleShoppingCartButton()}>
+                <IconButton onClick={() => navigate('/cart')}>
                   <ShoppingCartRoundedIcon fontSize='small' htmlColor={theme.palette.primary.lightText}/>
                 </IconButton>
               </Tooltip>
@@ -191,7 +163,7 @@ const Navbar = ({ loggedInUser, resetInventory }) => {
       </AppBar>
       <AccountModal 
         open={accountOpen}
-        onClose={handleAccountClose}
+        onClose={() => setAccountOpen(false)}
         initialValue={0}
       />
     </>
@@ -203,12 +175,7 @@ const mapStateToProps = (state) => ({
   loggedInUser: state.auth.loggedInUser
 })
 
-const mapDispatchToProps = {
-  resetInventory
-}
-
 // Exports
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(Navbar);

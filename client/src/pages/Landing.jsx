@@ -2,8 +2,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
-import CategoryBanners from '../components/Banners/CategoryBanners';
-import SaleBanner from '../components/Banners/SaleBanner';
+import CategoryBanners from '../components/Banners/Categories';
 import About from '../components/About';
 
 const Landing = () => {
@@ -12,7 +11,7 @@ const Landing = () => {
       <Hero />
       <CategoryBanners />
       <About />
-      {/* <SaleBanner /> */}
+      {/* TODO: Sale banner */}
     </Layout>
   )
 };

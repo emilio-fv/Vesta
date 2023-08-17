@@ -23,7 +23,6 @@ const Footer = () => {
         gap: 2
       }}
     >
-      {/* Product Links */}
       <Box 
         sx={{ 
           flexGrow: 1, 
@@ -39,10 +38,8 @@ const Footer = () => {
         <Typography variant='a'>Men</Typography>
         <Typography variant='a'>Sale</Typography>
       </Box>
-      {/* Support Links */}
       <Box 
         sx={{
-          // paddingY: 1, 
           flexGrow: 1, 
           display: 'flex',
           flexDirection: 'column',
@@ -73,10 +70,8 @@ const Footer = () => {
         <Typography variant='a'>Careers</Typography>
         <Typography variant='a'>Privacy Policy</Typography>
       </Box>
-      {/* Git & Professional Links */}
       <Box 
         sx={{ 
-          // paddingY: 1,
           flexGrow: 1,
           display: 'flex',
           justifyContent: 'space-evenly',

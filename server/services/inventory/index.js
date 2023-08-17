@@ -3,12 +3,9 @@ const { models: { Inventory } } = require('../../models/index');
 const { Product } = require('../../models/product');
 const { logger } = require('../../utils/logger.utils');
 
-const createInventory = async (data, productId) => {
+const createInventory = async (data) => {
   logger.info('Service: createInventory');
-  let newInventory = await Inventory.create({
-    ...data,
-    ProductId: productId
-  });
+  let newInventory = await Inventory.create(data);
 
   newInventory = await Inventory.findOne({
     where: {
@@ -27,17 +24,14 @@ const getAllInventory = async () => {
   return allInventory;
 };
 
-const getInventoryByCategory = async (category) => {
-  logger.info('Service: getInventoryByCategory');
-  const products = await Product.findAll({
-    where: {
-      category: category
-    },
+const getInventoryByProduct = async (id) => {
+  logger.info('Service: getInventoryByProduct');
+  const inventory = await Product.findAll({
     attributes: ['id', 'name', 'category', 'price', 'description', 'src'],
     include: ['inventory']
   });
 
-  return products;
+  return inventory;
 };
 
 const getInventoryByProductId = async (id) => {
@@ -49,20 +43,19 @@ const getInventoryByProductId = async (id) => {
     attributes: ['id', 'name', 'category', 'price', 'description', 'src'],
     include: ['inventory']
   });
-
   return inventory;
-};
-
-const getInventoryById = async (id) => {
-  logger.info('Service: getInventoryById');
-  const inventory = await Inventory.findOne({
+}
+const getInventoryByCategory = async (category) => {
+  logger.info('Service: getInventoryByCategory');
+  const inventory = await Product.findAll({
     where: {
-      id: id
+      category: category
     },
-    include: 'Product'
+    attributes: ['id', 'name', 'category', 'price', 'description', 'src'],
+    include: ['inventory']
   });
   return inventory;
-};
+}
 
 const updateInventoryById = async (data, id) => {
   logger.info('Service: updateInventoryById');
@@ -94,10 +87,9 @@ const deleteInventoryById = async (id) => {
 module.exports = {
   createInventory,
   getAllInventory,
+  getInventoryByProduct,
   getInventoryByProductId,
   getInventoryByCategory,
-  getInventoryByProductId,
   updateInventoryById,
   deleteInventoryById,
-  getInventoryById
 }

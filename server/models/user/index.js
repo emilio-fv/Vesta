@@ -69,6 +69,9 @@ const User = db.define('User', {
     admin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    favorites: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER)
     }
 }, 
 { 

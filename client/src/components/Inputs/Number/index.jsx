@@ -11,11 +11,12 @@ const NumberInput = ({ name, control, defaultValue, rules, label, inputProps }) 
       defaultValue={defaultValue}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <TextField  
+        <TextField
+        size='small'
+          variant='outlined'
           fullWidth
           id={name}
           label={label}
-          variant='standard'
           autoComplete='off'
           type='number'
           value={value}

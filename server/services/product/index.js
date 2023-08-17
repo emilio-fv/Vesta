@@ -14,7 +14,7 @@ const getAllProducts = async () => {
     return allProducts;
 }
 
-const updateProductById = async (data, id) => {
+const updateProductById = async (id, data) => {
     logger.info('Service: updateProductById')
     const updatedProduct = await Product.update(data, {
         where: {

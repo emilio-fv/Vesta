@@ -1,49 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { setSort } from '../../../store/reducers/inventory/inventorySlice';
+
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { connect } from 'react-redux';
-import { sortByPriceAsc, sortByPriceDesc } from '../../../store/reducers/inventory/inventorySlice';
 
-const SortProducts = ({ sortByPriceAsc, sortByPriceDesc }) => {
-  // Handle select value 
-  const [value, setValue] = useState(null);
-  // Reset sort category 
-  useEffect(() => {
-    return (() => {
-        setValue(null);
-    })
-  }, []);
+const SortProducts = ({ sort, setSort }) => {
+  // Handle selected value 
+  const [selectedValue, setSelectedValue] = useState(sort);
 
   // Handle Sort Select Changes
   const handleChanges = (event) => {
     const { value } = event.target;
-    setValue(value);
-
-    if (value === 'Asc') {
-      sortByPriceAsc();
-    }
-
-    if (value === 'Desc') {
-      sortByPriceDesc();
-    }
+    setSelectedValue(value);
+    setSort(value);
   }
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+    <Box sx={{ minWidth: 120, marginTop: 1 }}>
+      <FormControl fullWidth size='small'>
         <InputLabel id='sort-by-label'>Sort By</InputLabel>
         <Select
           labelId='sort-by-label'
           id='sort-by'
-          value={value}
+          value={selectedValue}
+          defaultValue={selectedValue}
           label='sort-category'
           onChange={(event) => handleChanges(event)}
         >
-          <MenuItem value={'Asc'}>Price: high to low</MenuItem>
-          <MenuItem value={'Desc'}>Price: low to high</MenuItem>
+          <MenuItem value={'Default'}>Default</MenuItem>
+          <MenuItem value={'ASC'}>Price: High to Low</MenuItem>
+          <MenuItem value={'DESC'}>Price: Low to High</MenuItem>
         </Select>
       </FormControl>
     </Box>
@@ -51,12 +41,15 @@ const SortProducts = ({ sortByPriceAsc, sortByPriceDesc }) => {
 }
 
 // Connect to Redux store
+const mapStateToProps = (state) => ({
+  sort: state.inventory.sort,
+});
+
 const mapDispatchToProps = {
-  sortByPriceAsc, 
-  sortByPriceDesc
+  setSort,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SortProducts);

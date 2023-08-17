@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { ThemeProvider } from '@mui/material/styles';
 import { PersistGate } from 'redux-persist/integration/react';
-import theme from './assets/mui';
+import theme from './assets/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

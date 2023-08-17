@@ -2,16 +2,15 @@
 const {
     createUser,
     getUserByEmail,
-    getAllUsers,
-    deleteUserById
+    updateUserById
 } = require('../../services/user');
 const {
     generateAccessToken,
     generateRefreshToken
 } = require('../../utils/jwt.utils');
+const { logger } = require('../../utils/logger.utils');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { logger } = require('../../utils/logger.utils');
 
 const handleRegisterUser = async (req, res) => {
     logger.info("Controller: handleRegisterUser");
@@ -54,7 +53,8 @@ const handleRegisterUser = async (req, res) => {
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             email: newUser.email,
-            admin: newUser.admin
+            admin: newUser.admin,
+            favorites: newUser.favorites
         });
     } catch (error) {
         logger.error(error);
@@ -65,7 +65,6 @@ const handleRegisterUser = async (req, res) => {
     }
 };
 
-// Login User
 const handleLoginUser = async (req, res) => {
     logger.info("Controller: handleLoginUser");
     try {
@@ -112,7 +111,8 @@ const handleLoginUser = async (req, res) => {
             firstName: foundUser.firstName,
             lastName: foundUser.lastName,
             email: foundUser.email,
-            admin: foundUser.admin
+            admin: foundUser.admin,
+            favorites: foundUser.favorites
         });
     } catch (error) {
         logger.error(error);
@@ -120,13 +120,11 @@ const handleLoginUser = async (req, res) => {
     }
 };
 
-// Logout User
 const handleLogoutUser = async (req, res) => {
     logger.info("Controller: handleLogoutUser");
     return res.clearCookie("accessToken").clearCookie("refreshToken").json("Logged out");
 };
 
-// TODO: Refresh access token
 const handleRefreshAccessToken = async (req, res) => {
     logger.info("Controller: handleRefreshAccessToken");
     try {
@@ -163,28 +161,25 @@ const handleRefreshAccessToken = async (req, res) => {
         logger.error(error);
         return res.status(400).json(error);
     }
-}
+};
 
-const handleGetAllUsers = async (req, res) => {
-    logger.info("Controller: handleGetAllUsers");
+const handleUpdateUserById = async (req, res) => {
+    logger.info('Controller: handleUpdateUserById');
     try {
-        const response = await getAllUsers();
-        return res.status(200).json(response);
+        const response = await updateUserById(req.decoded.id, req.body);
+        const userData = response[1][0];
+        return res.status(200).json({
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            admin: userData.admin,
+            favorites: userData.favorites
+        });
     } catch (error) {
         logger.error(error);
         return res.status(400).json(error);
     }
-}
-
-const handleDeleteUserById = async (req, res) => {
-    logger.info("Controller: handleDeleteUserById");
-    try {
-        const response = await deleteUserById(req.body.id);
-    } catch (error) {
-        logger.error(error);
-        return res.status(400).json(error); 
-    }
-}
+};
 
 // Exports
 module.exports = {
@@ -192,6 +187,5 @@ module.exports = {
     handleLoginUser,
     handleLogoutUser,
     handleRefreshAccessToken,
-    handleGetAllUsers,
-    handleDeleteUserById
+    handleUpdateUserById
 };

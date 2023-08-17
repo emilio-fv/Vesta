@@ -10,6 +10,7 @@ const { authRouter } = require('./routes/auth');
 const { productsRouter } = require('./routes/products');
 const { inventoryRouter } = require('./routes/inventory');
 const { logger } = require('./utils/logger.utils');
+const bodyParser = require('body-parser');
 
 // Create backend server
 const app = express();
@@ -24,6 +25,7 @@ app.use(cors({
     methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
     credentials: true
 }));
+app.use(bodyParser());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ 
@@ -40,7 +42,7 @@ const initializeApp = async () => {
     try {
         await db.authenticate();
         logger.info('Connected to db established successfully.')
-        await db.sync();
+        await db.sync({ alter: true });
         app.listen(port, () => {
             logger.info(`You are listening on port ${port} for requests to respond to.`)
         });

@@ -1,20 +1,20 @@
 // Imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useUpdateProductMutation } from '../../../store/api/productsApi';
-import { useEffect } from 'react';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { categories } from '../../../assets/constants';
 import TextInput from '../../Inputs/Text';
 import SelectInput from '../../Inputs/Select';
 import NumberInput from '../../Inputs/Number';
-import { Cloudinary } from '@cloudinary/url-gen';
 import ImageUploadWidget from '../../ImageUploadWidget';
+import { createSelectOptions } from '../../../utils/createSelectOptions';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { categories } from '../../../assets/constants';
-// import { categories } from '../../../assets/selectOptions';
+
 
 const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProductForm }) => {
   // Helpers
@@ -99,6 +99,7 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <TextInput 
             name={'name'}
             control={control}
+            variant={'outlined'}
             rules={{
               required: 'Name required.'
             }}
@@ -111,7 +112,7 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
               required: 'Category required.'
             }}
             label={'Category'}
-            options={categories}
+            options={createSelectOptions(categories)}
           />
           <NumberInput 
             name={'price'}
@@ -128,6 +129,7 @@ const UpdateProduct = ({ product, updateProductFormOpen, handleCloseUpdateProduc
           <TextInput 
             name={'description'}
             control={control}
+            variant={'outlined'}
             rules={{
               required: 'Description required.'
             }}

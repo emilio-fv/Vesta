@@ -2,16 +2,17 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useUpdateInventoryMutation } from '../../../store/api/inventoryApi';
+import { createSelectOptions } from '../../../utils/createSelectOptions';
+import SelectInput from '../../Inputs/Select';
+import NumberInput from '../../Inputs/Number';
+import CheckboxInput from '../../Inputs/Checkbox';
+import { colors, sizes } from '../../../assets/constants';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import SelectInput from '../../Inputs/Select';
-import NumberInput from '../../Inputs/Number';
-import CheckboxInput from '../../Inputs/Checkbox';
-import { colors, sizes } from '../../../assets/constants';
-// import { colors, sizes } from '../../../assets/selectOptions';
+
 
 const UpdateInventory = ({ item, updateInventoryFormOpen, handleCloseUpdateInventoryForm }) => {
   // Helpers
@@ -82,13 +83,13 @@ const UpdateInventory = ({ item, updateInventoryFormOpen, handleCloseUpdateInven
             name={'size'}
             control={control}
             label={'Size'}
-            options={sizes}
+            options={createSelectOptions(sizes)}
           />
           <SelectInput 
             name={'color'}
             control={control}
             label={'Color'}
-            options={colors}
+            options={createSelectOptions(colors)}
           />
           <NumberInput 
             name={'quantity'}

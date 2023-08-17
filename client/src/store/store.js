@@ -12,7 +12,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import authReducer from './reducers/auth/authSlice';
-import productsReducer from './reducers/products/productsSlice';
 import inventoryReducer from './reducers/inventory/inventorySlice';
 import cartReducer from './reducers/cart/cartSlice';
 import { authApi } from './api/authApi';
@@ -31,9 +30,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
-    products: productsReducer,
     [productsApi.reducerPath]: productsApi.reducer,
-    inventory: inventoryReducer,
+    inventory: inventoryReducer, // TODO: create hooks to remove
     [inventoryApi.reducerPath]: inventoryApi.reducer,
     cart: cartReducer
 })

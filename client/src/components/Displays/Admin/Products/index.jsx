@@ -1,9 +1,7 @@
 // Imports
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../../store/api/productsApi';
 import UpdateProduct from '../../../Forms/UpdateProduct';
-import { resetErrors } from '../../../../store/reducers/products/productsSlice';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,7 +18,7 @@ const headerStyling = {
   fontWeight: 'bold'
 }
 
-const ProductsTable = ({ products, errors, resetErrors }) => {
+const ProductsTable = () => {
   // Helpers
   const [updateProductFormOpen, setUpdateProductFormOpen] = useState(false);
   const handleOpenUpdateProductForm = () => setUpdateProductFormOpen(true);
@@ -29,10 +27,11 @@ const ProductsTable = ({ products, errors, resetErrors }) => {
     setSelectedProduct(null);
   };
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [deleteProduct] = useDeleteProductMutation();
+  const [deleteProduct, { isError }] = useDeleteProductMutation();
+  const [error, setError] = useState(null);
 
   // Fetch products
-  const { isSuccess } = useGetAllProductsQuery();
+  const { data, isSuccess } = useGetAllProductsQuery();
 
   // Handle update button click
   const handleUpdateClick = (product) => {
@@ -42,9 +41,14 @@ const ProductsTable = ({ products, errors, resetErrors }) => {
 
   // Handle delete button click
   const handleDeleteClick = (productId) => {
-    deleteProduct(productId);
+    deleteProduct(productId).unwrap().catch((error) => setError(error.data.message));
   };
 
+  let products;
+  
+  if (isSuccess) {
+    products = data;
+  }
   return (
     <TableContainer component={Paper} >
       <Table sx={{ minWidth: 850, maxWidth: 950 }}  stickyHeader aria-label='Products table'>
@@ -67,8 +71,7 @@ const ProductsTable = ({ products, errors, resetErrors }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isSuccess 
-            ? products.map((product) => (
+          {products?.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell>
                     {product.name}
@@ -90,8 +93,7 @@ const ProductsTable = ({ products, errors, resetErrors }) => {
                     <Button onClick={() => handleDeleteClick(product.id)}>Delete</Button>
                   </TableCell>
                 </TableRow>
-              )) 
-            : null
+              ))
           }
         </TableBody>
       </Table>
@@ -103,25 +105,12 @@ const ProductsTable = ({ products, errors, resetErrors }) => {
           /> 
         : null
       }
-      {errors
-        ? <Alert sx={{ position: 'fixed', bottom: 10, left: '50%', transform: 'translate(-50%, -50%)' }} severity='error' onClose={() => {resetErrors()}}>{errors}</Alert>
+      {isError
+        ? <Alert sx={{ position: 'fixed', bottom: 10, left: '50%', transform: 'translate(-50%, -50%)' }} severity='error' onClose={() => {setError(null)}}>{error}</Alert>
         : null 
       }
     </TableContainer>
   )
 };
 
-// Connect to Redux store
-const mapStateToProps = (state) => ({
-  products: state.products.products,
-  errors: state.products.errors
-});
-
-const mapDispatchToProps = {
-  resetErrors
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductsTable);
+export default ProductsTable;

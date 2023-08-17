@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Cloudinary } from '@cloudinary/url-gen';
+import { useCreateProductMutation } from '../../../store/api/productsApi';
+import { categories } from '../../../assets/constants';
 import TextInput from '../../Inputs/Text';
 import SelectInput from '../../Inputs/Select';
 import NumberInput from '../../Inputs/Number';
-import { useCreateProductMutation } from '../../../store/api/productsApi';
 import ImageUploadWidget from '../../ImageUploadWidget';
 
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { categories } from '../../../assets/constants';
 
 const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
   // Helpers
@@ -83,19 +83,20 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
           transform: 'translate(-50%, -50%)',
           bgcolor: 'background.paper',
           width: 300,
-          p: 5,
+          paddingX: 4,
+          paddingY: 3,
+          borderRadius: '2%',
         }}
       >
-        <Typography variant='h6' align='center'>Create Product</Typography>
+        <Typography variant='h6' align='center' marginBottom={2}>Create Product</Typography>
         <Box
           component='form'
           sx={{
-            // flex: 1,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: 1
+            gap: 2
           }}
           autoComplete='off'
           onSubmit={handleSubmit(handleCreateProduct)}
@@ -103,6 +104,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
           <TextInput 
             name={'name'}
             control={control}
+            variant={'outlined'}
             rules={{
               required: 'Name required.'
             }}
@@ -132,6 +134,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
           <TextInput 
             name={'description'}
             control={control}
+            variant={'outlined'}
             rules={{
               required: 'Description required.'
             }}
@@ -159,7 +162,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
             ? <Typography>{imgError}</Typography>
             : null
           }
-          <Button type='submit' variant='contained' size='small'>Submit</Button>
+          <Button sx={{ '&:hover': { opacity: .8 }}} type='submit' variant='contained' size='small'>Submit</Button>
         </Box>
       </Box>
     </Modal>

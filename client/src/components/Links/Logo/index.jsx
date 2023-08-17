@@ -1,10 +1,11 @@
 // Imports
 import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
-const Logo = ({ sx, component, variant }) => {
+const LogoLink = ({ sx, variant }) => {
   return (
     <Link
-      component={component}
+      component={RouterLink}
       to='/'
       underline='none'
       variant={variant}
@@ -16,4 +17,4 @@ const Logo = ({ sx, component, variant }) => {
   )
 };
 
-export default Logo;
+export default LogoLink;
