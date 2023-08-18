@@ -20,7 +20,7 @@ const port =  process.env.PORT || 8000;
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost'], // TODO: update for production
+    origin: '*', // TODO: update for production
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
     methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
     credentials: true
