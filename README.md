@@ -30,20 +30,24 @@ Backend:
 Database:
 - PostgreSQL
 
-## User Features
+## Features
+User
 - Register, login, logout
 - View products by category (Women, Men, Unisex)
 - Sort, and filter products by size, color, and price
 - Add & remove products from favorites
 - Add & remove from shopping cart
 
-## Admin Features
+Admin
 - Login, Logout 
 - Create, Update, Delete Products
 - Create, Update, Delete Inventory
 
+<<<<<<< Updated upstream
 ## Screenshots
 Coming soon!
+=======
+>>>>>>> Stashed changes
 
 ## Project Status
 Project is: _in progress_
