@@ -17,7 +17,6 @@ export const cartSlice = createSlice({
     },
     addToCart: (state, action) => {
       state.status = 'added'
-      console.log(action.payload);
       state.cart.push(action.payload);
     },
     removeFromCart: (state, action) => {

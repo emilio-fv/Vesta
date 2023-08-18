@@ -1,22 +1,31 @@
 // Imports
 import React, { useEffect } from 'react';
+import { colors, sizes } from '../../../assets/constants';
 import { useForm } from 'react-hook-form';
+import { useCreateInventoryMutation } from '../../../store/api/inventoryApi';
+import { useGetAllProductsQuery } from '../../../store/api/productsApi';
+import { createSelectOptions } from '../../../utils/createSelectOptions';
 import SelectInput from '../../Inputs/Select';
-import { connect } from 'react-redux';
-// import { sizes, colors } from '../../../assets/selectOptions.js';
+import NumberInput from '../../Inputs/Number';
+import CheckboxInput from '../../Inputs/Checkbox';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import NumberInput from '../../Inputs/Number';
-import CheckboxInput from '../../Inputs/Checkbox';
-import { useCreateInventoryMutation } from '../../../store/api/inventoryApi';
-import { colors, sizes } from '../../../assets/constants';
 
-const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products }) => {
+const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm,  }) => {
   // Helpers
   const [createInventory, { isSuccess }] = useCreateInventoryMutation();
+  const { products } = useGetAllProductsQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      products: data?.map((item) => (
+        { name: item.name, value: item.id}
+      ))
+    })
+  });
+
+  console.log(products);
 
   // Handle form changes & submit
   const { handleSubmit, control, reset } = useForm({
@@ -64,10 +73,12 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
           transform: 'translate(-50%, -50%)',
           bgcolor: 'background.paper',
           width: 300,
-          p: 5,
+          paddingX: 4,
+          paddingY: 3,
+          borderRadius: '2%',
         }}
       >
-        <Typography variant='h6'>Add Inventory</Typography>
+        <Typography variant='h6' align='center' marginBottom={2}>Add Inventory</Typography>
         <Box
           component='form'
           sx={{
@@ -75,7 +86,7 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: 1
+            gap: 2
           }}
           autoComplete='off'
           onSubmit={handleSubmit(handleCreateInventory)}
@@ -96,7 +107,7 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
               required: 'Size required.'
             }}
             label={'Size'}
-            options={sizes}
+            options={createSelectOptions(sizes)}
           />
           <SelectInput 
             name={'color'}
@@ -105,7 +116,7 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
               required: 'Color required.'
             }}
             label={'Color'}
-            options={colors}
+            options={createSelectOptions(colors)}
           />
           <NumberInput 
             name={'quantity'}
@@ -147,20 +158,4 @@ const CreateInventory = ({ inventoryFormOpen, handleCloseInventoryForm, products
   )
 };
 
-// Connect to Redux store
-const mapStateToProps = (state) => {
-  const { products } = state.products;
-  const options = products.map((product) => {
-    return {
-      option: product.name,
-      value: product.id
-    }
-  })
-  return {
-    products: options
-  }
-};
-
-export default connect(
-  mapStateToProps
-)(CreateInventory);
+export default CreateInventory;

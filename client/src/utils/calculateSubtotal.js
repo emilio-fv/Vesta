@@ -6,4 +6,4 @@ export const calculateSubtotal = (data) => {
   }
 
   return (Math.round(subtotal * 100) / 100);
-}
+};

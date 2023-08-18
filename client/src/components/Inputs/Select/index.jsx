@@ -13,12 +13,12 @@ const SelectInput = ({ name, control, rules, label, options, handleChange, disab
       control={control}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <FormControl sx={{ minWidth: 120 }} disabled={disabled}> 
+        <FormControl fullWidth disabled={disabled} size='small'> 
           <InputLabel>{label}</InputLabel>
           <Select
             value={value}
             label={label}
-            autoWidth
+            fullWidth
             onChange={event => {
               if (handleChange) {
                 handleChange(event.target.value);
@@ -28,11 +28,11 @@ const SelectInput = ({ name, control, rules, label, options, handleChange, disab
             error={!!error}
           >
             {options.map((option) => (
-              <MenuItem value={option}>{option}</MenuItem>
+              <MenuItem value={option.value}>{option.name}</MenuItem>
             ))}
           </Select>
           {error 
-            ? <FormHelperText>{error.message}</FormHelperText>
+            ? <FormHelperText sx={{ color: 'error.main'}}>{error.message}</FormHelperText>
             : null
           }
         </FormControl>

@@ -4,15 +4,13 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import CircleIcon from '@mui/icons-material/Circle';
-import Tooltip from '@mui/material/Tooltip';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Link } from '@mui/material';
 import AccountModal from '../../Modals/Account';
 import { useUpdatedUserMutation } from '../../../store/api/authApi';
 
-const ProductCard = ({ loggedInUser, product, favorites }) => {
+const FavoritesCard = ({ loggedInUser, product, favorites }) => {
   // Helpers
   const [favoriteStatus, setFavoriteStatus] = useState(favorites ? favorites?.includes(product.id) : false);
   const [accountOpen, setAccountOpen] = useState(false);
@@ -84,11 +82,11 @@ const ProductCard = ({ loggedInUser, product, favorites }) => {
           >
             <Typography fontSize={'.8rem'}>{product.name}</Typography>
             <Typography fontSize={'.8rem'}>${product.price}</Typography>
-            {product.inventory.map((item) => (
+            {/* {product.inventory.map((item) => (
               <Tooltip title={item.color}>
                 <CircleIcon fontSize='small' htmlColor={item.color}/>
               </Tooltip>
-            ))}
+            ))} */}
           </Box>
         </Box>
       <AccountModal 
@@ -103,9 +101,9 @@ const ProductCard = ({ loggedInUser, product, favorites }) => {
 // Connect to Redux store
 const mapStateToProps = (state) => ({
   loggedInUser: state.auth.loggedInUser,
-  favorites: state.auth.loggedInUser?.favorites
+  favorites: state.auth.loggedInUser.favorites
 });
 
 export default connect(
   mapStateToProps,
-)(ProductCard);
+)(FavoritesCard);

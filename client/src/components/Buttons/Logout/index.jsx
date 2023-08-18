@@ -2,19 +2,14 @@
 import React from 'react';
 import { useLogoutMutation } from "../../../store/api/authApi";
 import { connect } from 'react-redux';
-import { resetInventory } from '../../../store/reducers/inventory/inventorySlice';
 
 import Button from '@mui/material/Button';
-import { purgeData } from '../../../store/store';
 
-const LogoutButton = ({ loggedInUser, resetInventory }) => {
+const LogoutButton = ({ loggedInUser }) => {
   // Helpers
   const [logout] = useLogoutMutation();
 
   const handleLogoutClick = () => {
-    if (loggedInUser.admin) {
-      resetInventory();
-    }
     logout();
   }
 
@@ -42,11 +37,6 @@ const mapStateToProps = (state) => ({
   loggedInUser: state.auth.loggedInUser
 });
 
-const mapDispatchToProps = {
-  resetInventory
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(LogoutButton);

@@ -9,7 +9,7 @@ const Cart = ({ cart }) => {
   return (
     <Layout>
       <Container 
-        maxWidth='md' 
+        maxWidth='lg'
         sx={{
           display: 'flex',
           flexDirection: 'row',

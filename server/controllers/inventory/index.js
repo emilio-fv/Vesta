@@ -2,29 +2,18 @@
 const { 
   createInventory,
   getAllInventory,
+  getInventoryByProduct,
+  getInventoryByProductId,
+  getInventoryByCategory,
   updateInventoryById,
   deleteInventoryById,
-  getInventoryByCategory,
-  getInventoryByProductId,
-  getInventoryById
 } = require('../../services/inventory');
 const { logger } = require('../../utils/logger.utils');
 
 const handleCreateInventory = async (req, res) => {
   logger.info("Controller: handleCreateInventory");
   try {
-    const { size, color, quantity, onSale, discount, featured, productId } = req.body;
-    const data = {
-      size: size,
-      color: color,
-      quantity: quantity,
-      onSale: onSale,
-      discount: discount,
-      featured: featured
-    };
-
-    const newInventory = await createInventory(data, productId);
-
+    const newInventory = await createInventory(req.body);
     return res.status(200).json(newInventory);
   } catch (error) {
     logger.error(error);
@@ -32,8 +21,8 @@ const handleCreateInventory = async (req, res) => {
   }
 };
 
-const handleGetAllInventory = async (req, res) => {
-  logger.info('Controller: handleGetAllInventory');
+const handleGetAllInventoryAdmin = async (req, res) => {
+  logger.info('Controller: handleGetAllInventoryAdmin');
   try {
     const allInventory = await getAllInventory();
     return res.status(200).json(allInventory);
@@ -43,29 +32,29 @@ const handleGetAllInventory = async (req, res) => {
   }
 };
 
-const handleGetInventoryByCategory = async (req, res) => {
-  logger.info('Controller: handleGetInventoryByCategory');
+const handleGetAllInventory = async (req, res) => {
+  logger.info('Controller: handleGetAllInventory');
   try {
-    const category = req.params.category.charAt(0).toUpperCase() + req.params.category.slice(1);
-    const response = await getInventoryByCategory(category);
-
-    return res.status(200).json(response);
+    const allInventory = await getInventoryByProduct();
+    return res.status(200).json(allInventory);
   } catch (error) {
     logger.error(error);
     return res.status(400).json(error);
   }
 };
 
-const handleGetInventoryById = async (req, res) => {
-  logger.info('Controller: handleGetInventoryById');
+const handleGetAllInventoryByCategory = async (req, res) => {
+  logger.info('Controller: handleGetAllInventoryByCategory');
   try {
-    const response = await getInventoryById(req.params.id);
-    return res.status(200).json(response);
+    const category = req.params.category.charAt(0).toUpperCase() + req.params.category.slice(1);
+    console.log(category);
+    const allInventory = await getInventoryByCategory(category);
+    return res.status(200).json(allInventory);
   } catch (error) {
     logger.error(error);
     return res.status(400).json(error);
   }
-}
+};
 
 const handleGetInventoryByProductId = async (req, res) => {
   logger.info('Controller: handleGetInventoryByProductId');
@@ -109,10 +98,10 @@ const handleDeleteInventoryById = async (req, res) => {
 // Exports
 module.exports = {
   handleCreateInventory,
+  handleGetAllInventoryAdmin,
   handleGetAllInventory,
-  handleGetInventoryByCategory,
+  handleGetAllInventoryByCategory,
+  handleGetInventoryByProductId,
   handleUpdateInventoryById,
   handleDeleteInventoryById,
-  handleGetInventoryById,
-  handleGetInventoryByProductId
 };

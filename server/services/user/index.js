@@ -1,4 +1,5 @@
 // Imports
+const { Sequelize } = require('sequelize');
 const { models: { User } } = require('../../models/index');
 const { logger } = require('../../utils/logger.utils');
 
@@ -18,26 +19,22 @@ const getUserByEmail = async (email) => {
     return foundUser;
 };
 
-const getAllUsers = async() => {
-    logger.info('Service: getAllUsers');
-    const allUsers = await User.findAll();
-    return allUsers;
-};
-
-const deleteUserById = async (id) => {
-    logger.info('Service: deleteUserById');
-    const deletedUser = await User.destroy({
+const updateUserById = async (id, data) => {
+    logger.info('Service: updateUserById');
+    console.log(id, data);
+    const updatedUser = await User.update(data, {
         where: {
             id: id
-        }
-    })
-    return deletedUser;
+        },
+        returning: true
+    });
+
+    return updatedUser;
 };
 
 // Exports
 module.exports = {
     createUser,
     getUserByEmail,
-    getAllUsers,
-    deleteUserById
+    updateUserById
 };

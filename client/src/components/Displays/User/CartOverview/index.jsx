@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CartCard from '../../../Cards/CartCard';
@@ -16,9 +15,12 @@ const CartOverview = ({ cart }) => {
       }}
     >
       <Typography variant='h5' fontWeight='bold'>Shopping Cart</Typography>
-      {cart.map((item, key) => (
-        <CartCard product={item} index={key}/>
-      ))}
+      {cart.length > 0
+        ? cart.map((item, key) => (
+          <CartCard product={item} index={key}/>
+        ))
+        : <Typography align='center' marginTop={6}>Cart is empty!</Typography>
+      }
     </Box>
   )
 }

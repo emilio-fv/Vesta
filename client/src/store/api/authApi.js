@@ -33,10 +33,11 @@ export const authApi = createApi({
         method: 'GET'
       }),
     }),
-    getAllUsers: builder.query({
-      query: () => ({
-        url: '/auth/all',
-        method: 'GET'
+    updatedUser: builder.mutation({
+      query: (data) => ({
+        url: '/auth/update',
+        method: 'PATCH',
+        body: data
       })
     })
   })
@@ -48,5 +49,5 @@ export const {
   useLogoutMutation, 
   useRefreshMutation, 
   useRegisterMutation, 
-  useGetAllUsersQuery 
+  useUpdatedUserMutation
 } = authApi;

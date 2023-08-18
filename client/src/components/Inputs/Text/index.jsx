@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({ name, control, rules, label, multiline }) => {
+const TextInput = ({ name, control, rules, label, multiline, variant  }) => {
   return (
         <Controller 
             name={name}
@@ -13,7 +13,7 @@ const TextInput = ({ name, control, rules, label, multiline }) => {
                     fullWidth
                     id={name}
                     label={label}
-                    variant='standard'
+                    variant={variant || 'standard'}
                     margin='none' 
                     size='small'
                     autoComplete='off'

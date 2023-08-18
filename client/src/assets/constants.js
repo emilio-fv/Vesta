@@ -1,8 +1,8 @@
 // Categories
 export const categories = [
+  'Unisex',
   'Women',
   'Men',
-  'Unisex'
 ];
 
 // Sizes
@@ -41,6 +41,7 @@ export const sizeDefaults = {
   'X-Large': false
 };
 
+// Color Defaults
 export const colorDefaults = {
   'Black': false, 
   'White': false, 
@@ -54,4 +55,3 @@ export const colorDefaults = {
   'Yellow': false, 
   'Beige': false
 };
-

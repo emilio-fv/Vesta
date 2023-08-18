@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
-import ProductCard from '../../../Cards/ProductCard';
 import { Typography } from '@mui/material';
+import { useGetAllProductsQuery } from '../../../../store/api/productsApi';
+import FavoritesCard from '../../../Cards/FavoritesCard';
+import { useUpdatedUserMutation } from '../../../../store/api/authApi';
 
 const Favorites = ({ favorites }) => {
+  // Filter favorite products
+  const { data, isSuccess } = useGetAllProductsQuery(undefined, {
+    selectFromResult: ({data, isSuccess}) => ({
+      data: data?.filter((item) => favorites.includes(item.id)),
+      isSuccess
+    })
+  });
 
-  if (favorites.length === 0) {
-    return (
-      <Typography align='center'>No products added yet!</Typography>
-    )
+  let products;
+
+  if (isSuccess) {
+    products = data;
+    console.log(products);
   }
 
   return (
@@ -20,9 +30,11 @@ const Favorites = ({ favorites }) => {
         gap: '20px'
       }}
     >
-      {favorites.map((item) => (
-          <ProductCard key={item.id} product={item}/>
+      { products?.length !== 0
+      ? products?.map((item) => (
+          <FavoritesCard key={item.id} product={item}/>
         ))
+      : "No favorites yet!"
       }
     </Box>
   )
@@ -30,7 +42,7 @@ const Favorites = ({ favorites }) => {
 
 // Connect to Redux store
 const mapStateToDispatch = (state) => ({
-  favorites: state.auth.favorites
+  favorites: state.auth.loggedInUser.favorites
 });
 
 export default connect(

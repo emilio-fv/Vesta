@@ -8,15 +8,13 @@ const ImageUploadWidget = ({ cloud_name, upload_preset, onImageUpload }) => {
       {
         cloudName: cloud_name,
         uploadPreset: upload_preset, 
-        // sources: ['local', "url", 'camera']
       },
       function (error, result) {
         if (error) {
           console.log(error);
         }
         if (!error && result.event === 'success') {
-          console.log(result); // result check
-          onImageUpload(result.info.secure_url) // pass image upload data
+          onImageUpload(result.info.secure_url)
         }
       }
     );
@@ -24,7 +22,15 @@ const ImageUploadWidget = ({ cloud_name, upload_preset, onImageUpload }) => {
   };
 
   return (
-    <Button onClick={uploadImageWidget}>
+    <Button 
+      sx={{ 
+        '&:hover': {
+          backgroundColor: 'white',
+          textDecoration: 'underline'
+        }
+      }} 
+      onClick={uploadImageWidget}
+    >
       Upload Image
     </Button>
   )

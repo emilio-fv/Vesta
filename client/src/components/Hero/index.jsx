@@ -1,9 +1,23 @@
+// Imports
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeroImg from '../../assets/hero.jpg'
+import CategoryButton from '../Buttons/Category';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+
+const categoryButtonStyles = { 
+  border: '2px solid',
+  borderColor: 'primary.darkText',
+  fontSize: '.8rem',
+  minHeight: '2rem',
+  paddingX: 4,
+  '&:hover': {
+    bgcolor: 'primary.main',
+    color: 'primary.lightText',
+    borderColor: 'primary.main'
+  }
+}
 
 const Hero = () => {
   // Helpers
@@ -29,39 +43,21 @@ const Hero = () => {
           gap: 2,
         }}
       >
-        <Button 
-          onClick={() => navigate('/unisex/products')}
-          sx={{ 
-            border: '2px solid',
-            fontSize: '.8rem',
-            minHeight: '2rem',
-            paddingX: 4
-          }}
-        >
-          Unisex
-        </Button>
-        <Button 
-          onClick={() => navigate('/women/products')}
-          sx={{ 
-            border: '2px solid',
-            fontSize: '.8rem',
-            minHeight: '2rem',
-            paddingX: 4
-          }}
-        >
-          Women
-        </Button>
-        <Button 
-          onClick={() => navigate('/men/products')}
-          sx={{ 
-            border: '2px solid',
-            fontSize: '.8rem',
-            minHeight: '2rem',
-            paddingX: 4
-          }}
-        >
-          Men
-        </Button>
+        <CategoryButton 
+          handleClick={() => navigate('/unisex/products')}
+          sx={categoryButtonStyles}
+          text={'unisex'}
+        />
+        <CategoryButton 
+          handleClick={() => navigate('/women/products')}
+          sx={categoryButtonStyles}
+          text={'women'}
+        />
+        <CategoryButton 
+          handleClick={() => navigate('/men/products')}
+          sx={categoryButtonStyles}
+          text={'men'}
+        />
       </Box>
     </Box>
   )

@@ -1,7 +1,6 @@
 // Imports
 import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import { useDeleteInventoryMutation, useGetAllInventoryQuery } from '../../../../store/api/inventoryApi';
+import { useDeleteInventoryMutation, useGetAllInventoryAdminQuery } from '../../../../store/api/inventoryApi';
 import UpdateInventory from '../../../Forms/UpdateInventory';
 
 import Table from '@mui/material/Table';
@@ -20,7 +19,7 @@ const headerStyling = {
 
 const Inventory = () => {
   // Fetch inventory
-  const { data, isSuccess } = useGetAllInventoryQuery(null, { refetchOnMountOrArgChange: true });
+  const { data, isSuccess } = useGetAllInventoryAdminQuery(null, { refetchOnMountOrArgChange: true });
 
   // Update inventory 
   const [updateInventoryFormOpen, setUpdateInventoryFormOpen] = useState(false);
@@ -51,6 +50,11 @@ const Inventory = () => {
     deleteInventory(item.id); 
   };
 
+  let inventory;
+
+  if (isSuccess) {
+    inventory = data;
+  }
   return (
     <>
       <TableContainer component={Paper}>
@@ -78,8 +82,7 @@ const Inventory = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isSuccess
-              ? data.map((item) => (
+            {inventory?.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       {item.Product.name}
@@ -108,7 +111,6 @@ const Inventory = () => {
                     </TableCell>
                   </TableRow>
                 ))
-              : null
             }
           </TableBody>
         </Table>
@@ -129,11 +131,4 @@ const Inventory = () => {
   )
 };
 
-// Connect to Redux store
-const mapStateToProps = (state) => ({
-  // inventory: state.inventory.inventory
-})
-
-export default connect(
-  mapStateToProps
-)(Inventory);
+export default Inventory;
