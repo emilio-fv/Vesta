@@ -1,5 +1,5 @@
 # build environment
-FROM node:19
+FROM node:19 AS build
 
 RUN mkdir /app
 
@@ -7,16 +7,21 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install -g serve
-
 RUN npm install
 
 COPY . .
 
 RUN npm run build
 
-EXPOSE 3000
+# nginx server
+FROM nginx:alpine
 
-ENV NODE_ENV=production
+COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
 
-CMD ["npx", "serve", "build"]
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 3000 80
+
+ENTRYPOINT [ "nginx", "-g", "daemon off;"]
