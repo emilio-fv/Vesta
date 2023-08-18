@@ -7,3 +7,4 @@ Dockerfile.prod
 .dockerignore
 Dockerfile
 docker-compose.yml
+Vesta.pem
