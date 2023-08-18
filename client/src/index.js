@@ -1,32 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './assets/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { Provider } from 'react-redux';
-import { store } from './store';
-
-let theme = createTheme({
-  palette: {
-    primary: {
-      main: '#0e1111'
-    }
-  }
-})
-
-theme = responsiveFontSizes(theme);
+import { persistor, store } from './store/store';
+import { ThemeProvider } from '@mui/material/styles';
+import { PersistGate } from 'redux-persist/integration/react';
+import theme from './assets/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

@@ -1,0 +1,10 @@
+node_modules
+.env.development
+.env.production
+docker-compose.dev.yml
+Dockerfile.dev
+Dockerfile.prod
+.dockerignore
+Dockerfile
+docker-compose.yml
+Vesta.pem
