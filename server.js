@@ -10,7 +10,6 @@ const { authRouter } = require('./routes/auth');
 const { productsRouter } = require('./routes/products');
 const { inventoryRouter } = require('./routes/inventory');
 const { logger } = require('./utils/logger.utils');
-const bodyParser = require('body-parser');
 const path = require('path');
 
 // Create backend server
@@ -35,7 +34,6 @@ app.use(cors({
     methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
     credentials: true
 }));
-app.use(bodyParser());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ 
