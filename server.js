@@ -1,5 +1,5 @@
 // Configure environment variables
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}`});
+require('dotenv');
 
 // Imports
 const express = require('express');
@@ -11,6 +11,7 @@ const { productsRouter } = require('./routes/products');
 const { inventoryRouter } = require('./routes/inventory');
 const { logger } = require('./utils/logger.utils');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Create backend server
 const app = express();
@@ -18,9 +19,18 @@ const app = express();
 // Configure port #
 const port =  process.env.PORT || 8000;
 
+// Serve static content
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+}
+
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost'], // TODO: update for production
+    origin: [
+        'http://localhost:3000', 
+        'http://localhost',
+        // TODO: Update for deployment
+        ],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
     methods: ['POST', 'PUT', 'GET', 'PATCH', 'DELETE'],
     credentials: true
@@ -37,6 +47,10 @@ app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/inventory', inventoryRouter);
 
+// Catchall method
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
+  });
 
 const initializeApp = async () => {
     try {

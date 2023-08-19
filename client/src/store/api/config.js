@@ -1,3 +1,5 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 
-export const baseQuery = fetchBaseQuery({ baseUrl: 'http://localhost:8000/api', credentials: 'include' });
+const baseUrl = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000/api';
+
+export const baseQuery = fetchBaseQuery({ baseUrl, credentials: 'include' });

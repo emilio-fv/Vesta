@@ -4,6 +4,8 @@ RUN mkdir /app
 
 WORKDIR /app
 
+RUN npm i -g nodemon
+
 COPY package*.json ./
 
 RUN npm install 
@@ -12,4 +14,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["npm", "run", "start"]
+CMD ["nodemon", "server.js"]

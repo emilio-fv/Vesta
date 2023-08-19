@@ -1,13 +1,32 @@
 {
-  "name": "vesta",
+  "name": "server",
   "version": "1.0.0",
-  "description": "E-commerce web application for a fake designer.",
-  "scripts": {
-    "dev": "docker compose -f docker-compose.dev.yml up -d",
-    "dev-stop": "docker compose -f docker-compose.dev.yml down",
-    "start": "docker compose -f docker-compose.yml up -d",
-    "stop": "docker compose -f docker-compose.yml down"
+  "description": "An e-commerce web application for a fake fashion designer.",
+  "main": "server.js",
+  "engines": {
+    "node": "18.15.0",
+    "npm": "9.5.0"
   },
-  "author": "emiliofv.sd@gmail.com",
-  "license": "ISC"
+  "scripts": {
+    "dev": "docker compose -f docker-compose.yml up -d",
+    "dev-stop": "docker compose -f docker-compose.yml down",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodeman": "^1.1.2",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.31.1",
+    "winston": "^3.10.0"
+  }
 }
