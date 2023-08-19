@@ -43,18 +43,9 @@ Admin
 - Create, Update, Delete Products
 - Create, Update, Delete Inventory
 
-<<<<<<< Updated upstream
-## Screenshots
-Coming soon!
-=======
->>>>>>> Stashed changes
-
 ## Project Status
 Project is: _in progress_
 - Next sprint will include: checking out shopping cart
-
-## Room for Improvement
-- 
 
 ## Feedback
 I am always happy to get feedback so if you have a moment I'd greatly appreciate you filling out a <a href="https://forms.gle/4P6LzmPX25s2PUej7" target="_blank">feedback form</a>! Thanks!
