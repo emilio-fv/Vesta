@@ -3,6 +3,7 @@
 
 ## Table of Contents
 * [General Info](#general-information)
+<!-- * [Demo](#demo) -->
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
@@ -12,13 +13,16 @@
 * [Contact](#contact)
 
 ## General Info
-- This project is a part of my current software developer portfolio. The goal for this project was to recreate a user experience most people are familiar with - online shopping. I specifically designed this application for a smaller scale fashion designer that could use this to promote their products online. 
+- This project is a part of my current software developer portfolio. The inspiration for this project was to recreate a user experience most people are familiar with - online shopping. I specifically designed this application for a smaller scale fashion designer that could use this to promote their products online, which includes access an admin portal where the inventory of products can be managed directly. 
+
+<!-- ## Demo  -->
 
 ## Technologies Used
 Frontend:
 - React
 - Material UI
 - Redux
+- React-Router
 
 Backend:
 - Express
@@ -31,7 +35,7 @@ Database:
 - PostgreSQL
 
 ## Features
-User
+General User
 - Register, login, logout
 - View products by category (Women, Men, Unisex)
 - Sort, and filter products by size, color, and price
