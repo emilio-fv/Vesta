@@ -2,7 +2,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import CheckoutButton from '../../../Buttons/Checkout';
 import { calculateSubtotal } from '../../../../utils/calculateSubtotal';
 
 const CartSummary = ({ cart }) => {
@@ -27,7 +27,7 @@ const CartSummary = ({ cart }) => {
             <Typography align='right'>${calculateSubtotal(cart)}</Typography>
           </Box>
         </Box>
-        <Button fullWidth>Checkout</Button>
+        <CheckoutButton />
       </Box>
   )
 }

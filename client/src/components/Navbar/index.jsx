@@ -64,7 +64,10 @@ const Navbar = ({ loggedInUser }) => {
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 color: 'primary.lightText',
-                fontSize: '1.5rem'
+                fontSize: '1.5rem',
+                '&:hover': {
+                  textShadow: '0px 0px 5px white'
+                }
               }}
             />
             {/* Menu (mobile) */}
@@ -117,7 +120,10 @@ const Navbar = ({ loggedInUser }) => {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 fontSize: '1.5rem',
-                color: 'primary.lightText'
+                color: 'primary.lightText',
+                '&:hover': {
+                  textShadow: '0px 0px 5px white'
+                }
               }}
             />
             {/* Menu (Desktop) */}
@@ -134,7 +140,10 @@ const Navbar = ({ loggedInUser }) => {
                   to={`/${category}/products`}
                   sx={{ 
                     color: 'primary.lightText', 
-                    fontSize: '.85rem' 
+                    fontSize: '.85rem' ,
+                    '&:hover': {
+                      textShadow: '0px 0px 5px white'
+                    }
                   }}
                   text={category.toUpperCase()}
                 />
