@@ -1,16 +1,16 @@
 // Imports
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { addToCart } from '../../../store/reducers/cart/cartSlice';
+import { addToCart, resetStatus } from '../../../store/reducers/cart/cartSlice';
 import SelectInput from '../../Inputs/Select';
 import NumberInput from '../../Inputs/Number';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const AddToCartForm = ({ product, addToCart, status }) => {
+const AddToCartForm = ({ product, addToCart, status, resetStatus }) => {
   // Handle selected color
   const [selectedColor, setSelectedColor] = useState(null);
 
@@ -37,6 +37,13 @@ const AddToCartForm = ({ product, addToCart, status }) => {
       productId: product.id
     });
   }
+
+  // Handle resetting cart status
+  useEffect(() => {
+    return () => {
+      resetStatus();
+    }
+  }, [])
 
   return (
     <Box
@@ -107,7 +114,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  addToCart
+  addToCart,
+  resetStatus
 };
 
 export default connect(
