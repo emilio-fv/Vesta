@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { useCreateProductMutation } from '../../../store/api/productsApi';
-import { categories } from '../../../assets/constants';
+import { categoryOptions } from '../../../assets/constants';
 import TextInput from '../../Inputs/Text';
 import SelectInput from '../../Inputs/Select';
 import NumberInput from '../../Inputs/Number';
@@ -117,7 +117,7 @@ const CreateProduct = ({ productFormOpen, handleCloseProductForm }) => {
               required: 'Category required.'
             }}
             label={'Category'}
-            options={categories}
+            options={categoryOptions}
           />
           <NumberInput 
             name={'price'}

@@ -55,3 +55,19 @@ export const colorDefaults = {
   'Yellow': false, 
   'Beige': false
 };
+
+// Category options
+export const categoryOptions = [
+  {
+    name: 'Unisex',
+    value: 'Unisex'
+  },
+  {
+    name: 'Women',
+    value: 'Women'
+  },
+  {
+    name: 'Men',
+    value: 'Men'
+  },
+]
