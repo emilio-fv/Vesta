@@ -6,9 +6,10 @@ import CategoryBanners from '../components/Banners/Categories';
 import About from '../components/About';
 
 const Landing = () => {
+
   return (
     <Layout>
-      <Hero />
+      <Hero/>
       <CategoryBanners />
       <About />
     </Layout>
