@@ -11,7 +11,6 @@ const Landing = () => {
       <Hero />
       <CategoryBanners />
       <About />
-      {/* TODO: Sale banner */}
     </Layout>
   )
 };
