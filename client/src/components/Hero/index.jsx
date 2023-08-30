@@ -17,7 +17,7 @@ const categoryButtonStyles = {
     color: 'primary.lightText',
     borderColor: 'primary.main'
   }
-}
+};
 
 const Hero = () => {
   // Helpers
