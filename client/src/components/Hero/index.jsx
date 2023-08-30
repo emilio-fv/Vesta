@@ -1,11 +1,10 @@
 // Imports
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeroImg from '../../assets/hero.jpg'
 import CategoryButton from '../Buttons/Category';
 
 import Box from '@mui/material/Box';
-import LoadingScreen from '../LoadingScreen';
 
 const categoryButtonStyles = { 
   border: '2px solid',
@@ -18,42 +17,11 @@ const categoryButtonStyles = {
     color: 'primary.lightText',
     borderColor: 'primary.main'
   }
-}
+};
 
-
-  
 const Hero = () => {
   // Helpers
   const navigate = useNavigate();
-  const [ isLoading, setIsLoading ] = useState(true);
-
-  // Pre-load and cache images
-  useEffect(() => {
-    const images = [
-      HeroImg
-    ];
-
-  // Cache images
-  const cacheImages = async (images) => {
-    const promises = await images.map((src) => {
-      return new Promise(() => {
-          const img = new Image();
-          img.src = src;
-          // img.onload = resolve();
-        })
-      })
-
-      await setTimeout(() => {
-        Promise.all(promises).then(setIsLoading(false))
-      }, 3000);
-    };
-
-    cacheImages(images)
-  }, []);
-
-  if (isLoading) {
-    return <LoadingScreen />
-  }
 
   return (
     <Box sx={{ position: 'relative', marginBottom: -1 }}>
