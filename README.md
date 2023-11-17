@@ -1,23 +1,19 @@
 # Vesta
-> An e-commerce web application for a fake fashion designer built using React, Express, Node, and PostgreSQL. 
+An e-commerce web application for a fake fashion designer built using React, Express, Node, and PostgreSQL. 
 
 ## Table of Contents
 * [General Info](#general-information)
-<!-- * [Demo](#demo) -->
-* [Technologies Used](#technologies-used)
+* [Technologies](#technologies)
+* [Deployment](#deployment)
+* [Docs](#docs)
 * [Features](#features)
-* [Screenshots](#screenshots)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
 * [Feedback](#feedback)
 * [Contact](#contact)
 
 ## General Info
 - This project is a part of my current software developer portfolio. The inspiration for this project was to recreate a user experience most people are familiar with - online shopping. I specifically designed this application for a smaller scale fashion designer that could use this to promote their products online, which includes access an admin portal where the inventory of products can be managed directly. 
 
-<!-- ## Demo  -->
-
-## Technologies Used
+## Technologies
 Frontend:
 - React
 - Material UI
@@ -34,7 +30,16 @@ Backend:
 Database:
 - PostgreSQL
 
+## Deployment
+Coming soon!
+
+## Docs
+Documentation for this project can be found [here](https://garnet-bathtub-08d.notion.site/378416bd28534937ba97d8ba237e3c18?v=313ac9162c49432d85e93fee1523782a).
+
 ## Features
+Current
+
+Coming Soon
 General User
 - Register, login, logout
 - View products by category (Women, Men, Unisex)
@@ -47,12 +52,8 @@ Admin
 - Create, Update, Delete Products
 - Create, Update, Delete Inventory
 
-## Project Status
-Project is: _in progress_
-- Next sprint will include: checking out shopping cart
-
 ## Feedback
-I am always happy to get feedback so if you have a moment I'd greatly appreciate you filling out a <a href="https://forms.gle/4P6LzmPX25s2PUej7" target="_blank">feedback form</a>! Thanks!
+I am always happy to receive feedback so if you have a moment I'd greatly appreciate you filling out a [feedback form](https://forms.gle/4P6LzmPX25s2PUej7)! Thanks!
 
 ## Contact
 Created by [@emilio-fv](https://github.com/emilio-fv) - feel free to contact me!
