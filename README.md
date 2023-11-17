@@ -11,7 +11,7 @@ An e-commerce web application for a fake fashion designer built using React, Exp
 * [Contact](#contact)
 
 ## General Info
-- This project is a part of my current software developer portfolio. The inspiration for this project was to recreate a user experience most people are familiar with - online shopping. I specifically designed this application for a smaller scale fashion designer that could use this to promote their products online, which includes access an admin portal where the inventory of products can be managed directly. 
+This project is a part of my current software developer portfolio. The inspiration for this project was to recreate a user experience most people are familiar with - online shopping. I specifically designed this application for a smaller scale fashion designer that could use this to promote their products online, which includes access an admin portal where the inventory of products can be managed directly. 
 
 ## Technologies
 Frontend:
